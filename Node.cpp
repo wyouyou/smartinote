@@ -1,5 +1,5 @@
 /**
- This Node contail a general English word contaning explanation explanation.
+ This Node contail a general English word contaning value value.
  
  */
 
@@ -8,24 +8,48 @@
 
 using namespace std;
 
-Node::Node(string d,string c ,Node* n, time_t t): data(d), explanation(c),next(n), timeAdded(t)
+int Node::numOfNodes = 0;
+
+Node::Node(string d,string c ,Node* n, time_t t): key(d), value(c),next(n), timeAdded(t)
 {
+    index = ++numOfNodes;
+    
+    familiar_index = 0;
+    tm* timeInfo  = localtime(&timeAdded);
+    date.year2digits = timeInfo->tm_year % 100;
+    date.year4digits = 2000 + date.year2digits;
+    date.month = timeInfo->tm_mon + 1;
+    date.day_of_month = timeInfo->tm_mday;
+    date.day_of_week = timeInfo->tm_wday;
+    date.day_in_the_year = timeInfo->tm_yday;
+    date.hour = timeInfo->tm_hour;
+    date.minutes = timeInfo->tm_min;
+    date.seconds = timeInfo->tm_sec;
 }
 
-Node::Node(string d,string c ,Node* n) : data(d), explanation(c),next(n)
+int Node::get_index() const
 {
-    add_timeAdded();
+    return index;
+}
+
+short Node::get_familiar_index() const
+{
+    return familiar_index;
 }
 
 
-string Node::get_data() const
+Date Node::get_date() const
 {
-    return data;
+    return date;
+}
+string Node::get_key() const
+{
+    return key;
 }
 
-string Node::get_explanation() const
+string Node::get_value() const
 {
-    return explanation;
+    return value;
 }
 
 Node* Node::get_next() const
@@ -42,21 +66,19 @@ void Node::set_next(Node *ptr)
 {
     next = ptr;
 }
-void Node::add_explanation(string explanation)
+void Node::add_value(string value)
 {
-    explanation = explanation + ", " + explanation;
+    value = value + ", " + value;
 }
 
-void Node::add_timeAdded()
-{
-    time_t now_time;
-    now_time = time(NULL);
-    timeAdded = now_time;    
-}
 
 ostream& operator<< (ostream& out, const Node& obj)
 {
-    out << obj.get_data() << "|" << "   " << obj.get_explanation() << "|"  << "    " << obj.get_timeAdded() << "|" << endl << endl;
+    
+    out  << obj.get_key() << "|" << "   " << obj.get_value() << "|"  << "    " << obj.get_timeAdded() << "|" <<  endl << endl;
+
+    // Use after finish to do list.
+//    out << obj.get_index() << "     " << obj.get_key() << "|" << "   " << obj.get_value() << "|"  << "    " << obj.get_timeAdded() << "|" << "    " << obj.get_familiar_index() <<  endl << endl;
     return out;
 }
 

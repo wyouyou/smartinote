@@ -13,8 +13,12 @@ class List
 public:
     List();
     ~List();
-    void push(string item ,string c, time_t t = 1501467877);
-    void add_explanation(string explanation, Node* target);
+    /**
+     ********************************************************************
+     Adding a new node to the list.
+     */
+    void push(string item ,string c, time_t t );
+    void add_value(string value, Node* target);
     string pop();
     Node* get_top() const;
     bool remove(string item);

@@ -24,20 +24,20 @@ List::~List()
 
 void List::push(string item, string c, time_t t)
 {
-    Node* temp = new Node(item, c, top);
+    Node* temp = new Node(item, c, top, t);
     
     top = temp;
 }
 
-void List::add_explanation(string explanation, Node* target)
+void List::add_value(string value, Node* target)
 {
-    target->add_explanation(explanation);
+    target->add_value(value);
 }
 string List::pop()
 {
     Node* temp = top;
     top = top->get_next();
-    string value = temp->get_data();
+    string value = temp->get_key();
     delete temp;
     return value;
 }
@@ -57,14 +57,14 @@ bool List::remove(string item)
     
     Node* temp1 = top;
     Node* temp2;
-    if (top->get_data() == item)
+    if (top->get_key() == item)
     {
         top = top ->  get_next();
         delete temp1;
         return true;
     }
     
-    while(temp1->get_next()->get_data() != item)
+    while(temp1->get_next()->get_key() != item)
     {
         temp1 = temp1->get_next();
     }
@@ -80,9 +80,9 @@ Node*	List::find(string item) const
     Node* temp = top;
     while (temp != 0)
     {
-        if (temp->get_data() == item)
+        if (temp->get_key() == item)
         {
-            if (temp->get_explanation().size() < 1) // if there is no explanation definition, means the targer need to be updated, also means not found
+            if (temp->get_value().size() < 1) // if there is no value definition, means the targer need to be updated, also means not found
             {
                 return 0;
             }
@@ -96,7 +96,7 @@ Node*	List::find(string item) const
 
 bool List::remove_Last()
 {
-    //First, test if the Linked List is empty
+    //First, test if the Linked List is empty.
     if (top == NULL) return 0;
     
     if (top -> get_next()==NULL)

@@ -4,10 +4,38 @@
 #include <iomanip>
 #include "List.h"
 #include <string>
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ To do list
+ ************************************************************************
+
+ Adding Printing in FIFO manner by sorting the list.
+ 
+ Add 艾宾浩斯记忆曲线记忆模式
+    If the familiar index = 21, delete the node, and fix side effects.
+ 
+ ************************************************************************
+ Add 枚举类型【Unix,
+    在请求输入Key之前，请求“Enter the corresponding numbers to corresponding 
+ tag type
+                                        Key         Value
+        1. English_Dic                  单词|词组      解释
+        2. Film_Critic                  电影名字       影评
+        3. Diary                        日期          日记
+        4. Daliy_Sentence               问题或者标题    一句话
+ 
+        5. To_Do_Lists                  宏观目标     具体步骤1.2.3.4.5
+ ************************************************************************
+ 利用枚举输入 random 色彩
+ 
+ 
+ */
 
 /**
  ************************************************************************
- Print colorful context in Linux.
+ Print colorful context in Linux. 待定
  https://stackoverflow.com/a/17469726
  */
 namespace Color {
@@ -20,6 +48,8 @@ namespace Color {
         BG_GREEN    = 42,
         BG_BLUE     = 44,
         BG_DEFAULT  = 49
+        
+    
     };
     class Modifier {
         Code code;
@@ -53,11 +83,9 @@ void user_interactive(List& L);
 void creat_variable_number_of_files(List &L);
 void read_the_elment(string& element, ifstream& fin, const string& tag = "element");
 void write_new_node_to_file(fstream& fout, const List& L, const string& fileName = "/Applications/selfmade-product/dic-master/data/dic.md" );
+
 int main (void)
-
 {
-
-
     List my_dic;
     read_dic2List(my_dic);
     user_interactive(my_dic);
@@ -80,6 +108,7 @@ void user_interactive(List& L)
     string doubleCheckIfSpellRightBuffer = "111";
     char doubleCheckIfSpellRight = '1';
     fstream fout;
+    time_t now;
 
     while (1)
     {
@@ -93,31 +122,38 @@ void user_interactive(List& L)
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
         if (target == 0)
         {
-            cout << "\n.......Not found. 重新检查是否输入正确单词, 输入0如果认为你输入的单词有错误 ('Enter' key is the delimeter）: ";
+            cout << "\n.......Not found. 重新检查是否输入正确的Key, 输入0如果认为你输入的单词有错误 ('Enter' key is the delimeter）: ";
             getline(cin, doubleCheckIfSpellRightBuffer);
             doubleCheckIfSpellRight = doubleCheckIfSpellRightBuffer[0];
             cout << "\n";
         
-            if (doubleCheckIfSpellRight != '0')
+
+           if (doubleCheckIfSpellRight != '0')
             {
                 cout << "\nAdd it to the libray now, " << "Enter explaination: ";
-                
                 getline(cin,explaination);
                 
                 cout << "The explanation you entered is : " << "\"" << explaination  << "\"";
 
 
                 if (explaination == "q" || explaination =="Q") break;
-                L.push(word, explaination);
+                
+                now = time(0);
+                L.push(word, explaination, now);
                 write_new_node_to_file(fout,L); // Has default third arg for fileName
             }
-        }
+                   }
         // 如果找到，输出 单词 和 释义, Linux shell 输入解释的时候是红色
         else
         {
             Color::Modifier red(Color::FG_RED);
             Color::Modifier def(Color::FG_DEFAULT);
-            cout << "\n\n"  <<  word << ": \n" <<  red << target->get_explanation()<< def << "\n\n";
+            cout << "\n\n"  <<  word << ": \n" <<  red << target->get_value()<< def << "\n";
+            // print the time added
+            Date date = target->get_date();
+            cout << "Time Added:" << date.year2digits << "\\" << date.month << "\\" << date.day_of_month << " " << date.hour << ":" << date.minutes << ":" << date.seconds << "星期" << date.day_of_week << endl;
+            
+            
         }
         
         fout.close();
@@ -138,7 +174,6 @@ void user_interactive(List& L)
         
     }
 }
-
 
 
 
@@ -164,6 +199,7 @@ void read_the_element(string& element, ifstream& fin, const string& tag)
     fin >> buffer;
     
     size_t pos_end_of_the_element = buffer.find_first_of('|');
+
     //If it is not single word but a phrase
     // Or If the explanation is not short enough so that the temp is not a complete a explanation   ex: xx xx|
     if (pos_end_of_the_element == string::npos) // npos means no found
@@ -183,8 +219,7 @@ void read_the_element(string& element, ifstream& fin, const string& tag)
 /**
  ************************************************************************
  Pre condition: l is most likey a empity list to be insert nodes.
- Post condition: l will have as many nodes as the number of nodes in the 
- 
+ Post condition: l will have as many nodes as the number of nodes in the
  */
 void read_dic2List(List& l)
 {
@@ -195,19 +230,39 @@ void read_dic2List(List& l)
         exit(1);
     }
     
-    string wordOrPhrase = "true", explaination = "", directory = "xx";
+    int index;
+    string wordOrPhrase = "true", explaination = "", str_timeAdded ="";
+    time_t timeAdded;
+    short familiar_index;
+    
     
     while (fin.peek() != EOF)
     {
+        // 0. Read index
+//        fin >> index;
         
+        //1. Read key
         read_the_element(wordOrPhrase, fin, "wordOrPhrase");
         
-        if (l.find(wordOrPhrase) == 0) // Just in case the EOF error
+        if (l.find(wordOrPhrase) == 0) // Remove EOF duplicate error
         {
-            
+            //2. Read value
             read_the_element(explaination, fin, "explaination");
-    
-            l.push(wordOrPhrase, explaination);
+            
+            //3. Read timeAdded
+            read_the_element(str_timeAdded, fin, "timeAdded");
+            
+            // 4. Read familiar index
+//            fin >> familiar_index;
+            
+            // get current date/time
+            /**
+             The function atoll in stdlib.h convert a c-string to long 
+             long type.
+             */
+            timeAdded = (time_t)atoll(str_timeAdded.c_str());
+            
+            l.push(wordOrPhrase, explaination, timeAdded);
         }
         
     }
@@ -217,11 +272,15 @@ void read_dic2List(List& l)
 }
 
 
+/**
+ ************************************************************************
+ Append mode. If the file already exists, its contents are preserved and
+ all output is written to the end of the file. By default, this flag
+ causes the file to be created if it does not exist.
+ */
 void write_new_node_to_file(fstream& fout, const List& L, const string& fileName)
 {
-    /*
-     Append mode. If the file already exists, its contents are preserved and all output is written to the end of the file. By default, this flag causes the file to be created if it does not exist.
-     */
+
     
     fout.open(OUTPUT_PATH.c_str(),ios_base::app);
     
@@ -236,6 +295,7 @@ void write_new_node_to_file(fstream& fout, const List& L, const string& fileName
 
 
 /**
+ ************************************************************************
  Precondition: Nothing
  Postcondition: create variable number of outfile files.
  
