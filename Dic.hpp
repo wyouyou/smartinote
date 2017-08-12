@@ -49,6 +49,8 @@ public:
 
     void copyDatabaseToArg(const char arg[]) const;
     
+    
+    
 };
 
 #endif /* Dic_hpp */
