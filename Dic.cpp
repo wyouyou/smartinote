@@ -1,4 +1,4 @@
-//
+
 //  Dic.cpp
 //  dic
 //
@@ -11,36 +11,6 @@
 
 using namespace std;
 const string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data/dic.md";
-
-/**
- ************************************************************************
- Print colorful context in Linux. 待定
- https://stackoverflow.com/a/17469726
- */
-namespace Color {
-    enum Code {
-        FG_RED      = 31,
-        FG_GREEN    = 32,
-        FG_BLUE     = 34,
-        FG_DEFAULT  = 39,
-        BG_RED      = 41,
-        BG_GREEN    = 42,
-        BG_BLUE     = 44,
-        BG_DEFAULT  = 49
-        
-        
-    };
-    class Modifier {
-        Code code;
-    public:
-        Modifier(){};
-        Modifier(Code pCode) : code(pCode) {}
-        friend std::ostream&
-        operator<<(std::ostream& os, const Modifier& mod) {
-            return os << "\033[" << mod.code << "m";
-        }
-    };
-}
 
 
 
@@ -99,29 +69,31 @@ Dic::Dic(){
     }
     
     int index;
-    string wordOrPhrase = "true", explaination = "", str_timeAdded ="";
+    string key = "true", value = "", str_timeAdded ="";
     time_t timeAdded;
     short familiar_index;
     
-    
+/*
+     2     lap|   in someone's lap: as someone's responsibility|    1502067091|    0
+*/
     while (fin.peek() != EOF)
     {
         // 0. Read index
-        //        fin >> index;
+                fin >> index;
         
         //1. Read key
-        readOneElement(wordOrPhrase, fin, "wordOrPhrase");
+        readOneElement(key, fin, "wordOrPhrase");
         
-        if (dic.find(wordOrPhrase) == 0) // Remove EOF duplicate error
+        if (dic.find(key) == 0) // Remove EOF duplicate error
         {
             //2. Read value
-            readOneElement(explaination, fin, "explaination");
+            readOneElement(value, fin, "explaination");
             
             //3. Read timeAdded
             readOneElement(str_timeAdded, fin, "timeAdded");
             
             // 4. Read familiar index
-            //            fin >> familiar_index;
+            fin >> familiar_index;
             
             // get current date/time
             /**
@@ -130,7 +102,7 @@ Dic::Dic(){
              */
             timeAdded = (time_t)atoll(str_timeAdded.c_str());
             
-            dic.push(wordOrPhrase, explaination, timeAdded);
+            dic.pushFromFile( index, key, value, timeAdded, familiar_index);
         }
         
     }
@@ -141,15 +113,13 @@ Dic::Dic(){
 
 void Dic::userInteractive()
 {
-    string word = "word or a phrase", value = "n o-explaination";
-    string doubleCheckIfSpellRightBuffer = "111";
-    char doubleCheckIfSpellRight = '1';
+    string word = "word or a phrase", value = "no-explaination";
     fstream fout;
     time_t now;
     
     while (1)
     {
-//        cin.clear();
+        cin.ignore();
         // 请求一个单词，必须是正确的全拼写。
         cout << "\n***Enter key:(Enter 'q' or 'Q' to stop): ";
         getline(cin, word);
@@ -161,43 +131,40 @@ void Dic::userInteractive()
         if (target == 0)
         {
             cout << "Not found....Enter value: \n";
-            getline(cin,value,'|');
+            getline(cin,value);
             if (value == "q" || value =="Q")
-                
             {
                 cin.ignore();
                 continue;
-
             }
-
             now = time(0);
             dic.push(word, value, now);
             write_new_node_to_file(fout,dic);
             cout << "\"" << value  << "\" is added to the database......\n";
-            cin.ignore();
-
         }
-        // 如果找到，输出 单词 和 释义, Linux shell 输入解释的时候是红色
-        else
-        {
-            Color::Modifier red(Color::FG_RED);
-            Color::Modifier def(Color::FG_DEFAULT);
-            cout  << "\n" << red << target->get_value()<< def << "\n";
-            // print the time added
-            Date date = target->get_date();
-            cout << "Time Added:" << date.year2digits << "\\" << date.month << "\\" << date.day_of_month << " " << date.hour << ":" << date.minutes << ":" << date.seconds << "星期" << date.day_of_week << endl;
-            
-            
-        }
+        
+        else target->printNodeInfo();
     }
-    
     fout.close();
 
 }
 
 
+
 void Dic::copyDatabaseToArg(const char arg[]) const
 {
+    // Creat a copy of dic to deal with LIFO issue
+    List dicCopy;
+    
+    Node* temp = dic.get_top();
+    while (temp != 0)
+    {
+
+        dicCopy.pushFromNode(temp->get_index(),temp->get_key(), temp->get_value(), temp->get_timeAdded(), temp->get_date(),temp->get_familiar_index());
+        temp = temp->get_next();
+    }
+    
+    
     ofstream fout;
     fout.open(arg);
     if (!fout)
@@ -207,7 +174,7 @@ void Dic::copyDatabaseToArg(const char arg[]) const
         exit(1);
     }
     
-    fout << dic ;
+    fout << dicCopy ;
     fout.close();
 }
 

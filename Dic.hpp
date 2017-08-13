@@ -37,17 +37,23 @@ private:
 public:
     
     /**
-     ******************************************************************
+     ***************************************************************
      Retrive data from local database folder.
      */
     Dic();
     void userInteractive();
     /**
-     ******************************************************************
+     **************************************************************
      备份 database to the location where the arg is.
      */
-
     void copyDatabaseToArg(const char arg[]) const;
+    /**
+     ****************************************************************
+     */
+    void reviewByForgetiveCurve(const short& num)
+    {
+        dic.reviewList(num);
+    }
     
     
     

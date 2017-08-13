@@ -8,6 +8,38 @@
 
 using namespace std;
 
+/**
+ ************************************************************************
+ Print colorful context in Linux. 待定
+ https://stackoverflow.com/a/17469726
+ */
+namespace Color {
+    enum Code {
+        FG_RED      = 31,
+        FG_GREEN    = 32,
+        FG_BLUE     = 34,
+        FG_DEFAULT  = 39,
+        BG_RED      = 41,
+        BG_GREEN    = 42,
+        BG_BLUE     = 44,
+        BG_DEFAULT  = 49
+        
+        
+    };
+    class Modifier {
+        Code code;
+    public:
+        Modifier(){};
+        Modifier(Code pCode) : code(pCode) {}
+        friend std::ostream&
+        operator<<(std::ostream& os, const Modifier& mod) {
+            return os << "\033[" << mod.code << "m";
+        }
+    };
+}
+
+
+
 struct Date{
     int year2digits; //
     int year4digits; // >= 2000
@@ -29,7 +61,6 @@ struct Date{
 class Node
 {
     
-    static int numOfNodes;
     int index;
     string key;
     string value;
@@ -37,9 +68,32 @@ class Node
     Date date;
     short familiar_index;
     Node* next; //self-referential data structure.
+    void init_date();
     
 public:
-    Node (string d, string c, Node*n, time_t t );
+    static int numOfNodes;
+    /**
+     ********************************************************************
+     Adding a node, 增加数据时候使用
+     index class 内部自动更新
+     date is initalized based on timeAdded.
+     */
+    Node (string key, string value, Node*n, time_t t );
+    /**
+     ********************************************************************
+     Reading a node, used when retrive data from the local file.
+     index, key , value , timeAdded, are all read from the local file.
+     date is intialized based on timeAdded.
+     */
+    Node(const int& i, const string& k, const string& v, const time_t& t,const short& familiar_Index, Node* n );
+
+    /**
+     ********************************************************************
+     Copying/clone a node, used when make a copy of list so that every 
+     data member is passed in from outside.
+    */
+    Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d,const short& familiar_Index, Node* n );
+
     /**
      ********************************************************************
      Add 1 to the familiar index.
@@ -73,8 +127,40 @@ public:
      ********************************************************************
      Modify data member value.
      */
-    
     void add_value(string);
+    /**
+     ********************************************************************
+     */
+    void reviewNode()
+    {
+        char remember;
+        string validRemember = "YyNn";
+        cout << "\n\n认识这个key吗？--------->" << this->key << "\n\nPress 'Y' or 'y', press 'N' or 'n' 如果不认识: ";
+        cin >> remember;
+        
+        do{
+        if (remember == 'Y'  or remember == 'y')
+        {
+            familiar_index++;
+            cout << "Familar index + 1: " << familiar_index << endl;
+        }
+        else if (remember == 'N' or remember == 'n')
+        {
+            familiar_index--;
+            cout << "Familar index - 1: " << familiar_index << endl;
+
+        }
+            cout << "---------------------->" << value << "\n";
+        } while (validRemember.find(remember) == string::npos);
+    }
+    
+    void printIndexInfo() const;
+    void printkeyNValue() const;
+    void printTimeAdded() const;
+    void printFamilarIndexInfo() const;
+    void printNodeInfo() const;
+    
+    
 };
 
 

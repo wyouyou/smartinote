@@ -18,14 +18,33 @@ List::~List()
         temp = top;
     }
 }
-
-
 void List::push(string item, string c, time_t t)
 {
     Node* temp = new Node(item, c, top, t);
     
     top = temp;
 }
+
+void List::pushFromFile(const int& i, const string& k, const string& v, const time_t& t, const short& familiar_Index)
+{
+    Node* temp = new Node(i, k, v, t,familiar_Index, top);
+    
+    top = temp;
+}
+
+
+void List::pushFromNode(const int& i, const string& k, const string& v, const time_t& t, const Date& d, const short& familiar_Index)
+{
+    Node* temp = new Node(i, k, v, t, d,familiar_Index, top);
+    
+    top = temp;
+
+}
+
+
+
+
+
 
 void List::add_value(string value, Node* target)
 {
@@ -45,24 +64,24 @@ Node* List::get_top() const
     return top;
 }
 
-bool List::remove(string item)
+bool List::remove(const string& key)
 {
-    if(! find(item))
+    if(! find(key))
     {
-        cerr << item << "is not in the List" << endl;
+        cerr << key << "is not in the List" << endl;
         return false;
     }
     
     Node* temp1 = top;
     Node* temp2;
-    if (top->get_key() == item)
+    if (top->get_key() == key)
     {
         top = top ->  get_next();
         delete temp1;
         return true;
     }
     
-    while(temp1->get_next()->get_key() != item)
+    while(temp1->get_next()->get_key() != key)
     {
         temp1 = temp1->get_next();
     }
@@ -72,7 +91,8 @@ bool List::remove(string item)
     return true;
 }
 
-Node*	List::find(string item) const
+
+Node*	List::find(const string& item) const
 // very similar to the prstring function
 {
     Node* temp = top;
@@ -91,6 +111,23 @@ Node*	List::find(string item) const
     }
     return 0;
 }
+Node* List::find(const int& index) const
+// very similar to the prstring function
+{
+    Node* temp = top;
+    while (temp != 0)
+    {
+        if (temp->get_index() == index)
+        {
+            return temp;
+        }
+        temp = temp -> get_next();
+    }
+    return 0;
+}
+
+
+
 
 bool List::remove_Last()
 {
