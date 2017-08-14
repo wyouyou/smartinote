@@ -39,7 +39,7 @@ int main (void)
     
     do
     {
-        cout << "command tool Dic:";
+        cout << "command tool Dic:  ";
         cin >> choice;
         
         if (choice == "dic")
@@ -48,14 +48,14 @@ int main (void)
         }
         else if(choice == "review")
         {
-            myDictionary.reviewByForgetiveCurve(2);
+            myDictionary.reviewByForgetiveCurve(6);
         }
         
         else
         {
             break;
         }
-        myDictionary.copyDatabaseToArg("/Applications/selfmade-product/dic-master/data/dicCopy.md");
+        myDictionary.copyDatabaseToArg("/Applications/selfmade-product/dic-master/data/dic.md");
 
 
     } while (choice != "q" and choice != "Q");

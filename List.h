@@ -5,6 +5,7 @@
 
 #include "Node.h"
 
+
 class List
 {
     Node* top;
@@ -38,18 +39,28 @@ public:
         Node* temp = top;
         string key;
         int randNum;
-        /* initialize random seed: */
         srand (time(NULL));
         
         
+        cout << Node::numOfNodes << endl;
+        
         for (int i = 0 ; i< num; i++)
         {
-            randNum = rand()%(Node::numOfNodes);
-            temp = find(randNum);
-            if (temp == 0) cout << "List.h::revieList has bug: " << endl;
+            randNum = rand()%(Node::numOfNodes - 1) + 1;
             
+            cout << "Random max: " << Node::numOfNodes -1
+            << "random index: " << randNum << endl;
+            
+            temp = find(randNum);
+            
+            if (temp == 0)
+            {
+                cout << "List.h::revieList has bug: (temp is a \" bad \" address!!! The randNum is not valid! Ex: 0, or > Node::numofNodes " << endl;
+                exit(2);
+            }
             
             temp->reviewNode();
+            
             if (temp->get_familiar_index() == 21)
             {
                 remove(key);

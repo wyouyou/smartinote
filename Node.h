@@ -1,4 +1,8 @@
 
+/*
+ * File: Node.h
+ *
+ */
 
 #ifndef Node_h
 #define Node_h
@@ -65,22 +69,43 @@ class Node
     string key;
     string value;
     time_t timeAdded;
+    /**
+     * date is assigned whenever timeAdded is assigned.
+     * date get chance to be assigned value for any args only
+     * if copying/cloning node happens
+     */
     Date date;
+    /**
+     * familiar_index = Times user have commited that they have known key
+     *
+     */
     short familiar_index;
+    /**
+     * familiar_percent = familiar_index / 21;
+     * familiar_percent is assigned whenever familiar_index is assigned.
+     * familiar_percent get chance to be assigned value for any args only
+     * if copying/cloning node happens
+     */
+    double familiar_percent;
     Node* next; //self-referential data structure.
     void init_date();
     
 public:
+    
+    /**
+     * numofNodes will get incremented  when creating/adding a new node 
+     * and reading node from file.
+     *
+     * Will not change when coping/cloning node.
+     */
     static int numOfNodes;
     /**
-     ********************************************************************
-     Adding a node, 增加数据时候使用
-     index class 内部自动更新
-     date is initalized based on timeAdded.
+     * Adding a node, 增加数据时候使用
+     * index class 内部自动更新
+     * date is initalized based on timeAdded.
      */
     Node (string key, string value, Node*n, time_t t );
     /**
-     ********************************************************************
      Reading a node, used when retrive data from the local file.
      index, key , value , timeAdded, are all read from the local file.
      date is intialized based on timeAdded.
@@ -88,7 +113,6 @@ public:
     Node(const int& i, const string& k, const string& v, const time_t& t,const short& familiar_Index, Node* n );
 
     /**
-     ********************************************************************
      Copying/clone a node, used when make a copy of list so that every 
      data member is passed in from outside.
     */
@@ -135,7 +159,7 @@ public:
     {
         char remember;
         string validRemember = "YyNn";
-        cout << "\n\n认识这个key吗？--------->" << this->key << "\n\nPress 'Y' or 'y', press 'N' or 'n' 如果不认识: ";
+        cout << "\n\n认识: " << this->key << " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识: ";
         cin >> remember;
         
         do{
@@ -143,14 +167,15 @@ public:
         {
             familiar_index++;
             cout << "Familar index + 1: " << familiar_index << endl;
+            printNodeInfo();
         }
         else if (remember == 'N' or remember == 'n')
         {
             familiar_index--;
             cout << "Familar index - 1: " << familiar_index << endl;
+            printNodeInfo();
 
         }
-            cout << "---------------------->" << value << "\n";
         } while (validRemember.find(remember) == string::npos);
     }
     
@@ -160,6 +185,8 @@ public:
     void printFamilarIndexInfo() const;
     void printNodeInfo() const;
     
+    void ClearScreen() const;
+    void printAline() const;
     
 };
 
