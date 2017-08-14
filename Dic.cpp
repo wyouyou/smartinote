@@ -9,8 +9,60 @@
 #include "Dic.hpp"
 
 
-using namespace std;
 const string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data/dic.md";
+
+
+Dic::Dic(){
+    
+    ifstream fin(DATABASE_LOCATION.c_str());
+    if(!fin)
+    {
+        printf("Not logical value at line number %d in file %s\n", __LINE__, __FILE__);
+        cerr << "Unable to open: " << DATABASE_LOCATION << endl;
+        exit(1);
+    }
+    
+    int index;
+    string key = "true", value = "", str_timeAdded ="";
+    time_t timeAdded;
+    short familiar_index;
+    
+    /*
+     2     lap|   in someone's lap: as someone's responsibility|    1502067091|    0
+     */
+    while (fin.peek() != EOF)
+    {
+        // 0. Read index
+        fin >> index;
+        
+        //1. Read key
+        readOneElement(key, fin, "wordOrPhrase");
+        
+        if (dic.find(key) == 0) // Remove EOF duplicate error
+        {
+            //2. Read value
+            readOneElement(value, fin, "explaination");
+            
+            //3. Read timeAdded
+            readOneElement(str_timeAdded, fin, "timeAdded");
+            
+            // 4. Read familiar index
+            fin >> familiar_index;
+            
+            // get current date/time
+            /**
+             The function atoll in stdlib.h convert a c-string to long
+             long type.
+             */
+            timeAdded = (time_t)atoll(str_timeAdded.c_str());
+            
+            dic.pushFromFile( index, key, value, timeAdded, familiar_index);
+        }
+        
+    }
+    
+    fin.close();
+}
 
 
 
@@ -58,57 +110,6 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& fil
     fout << * (L.get_top());
 }
 
-
-Dic::Dic(){
-    ifstream fin(DATABASE_LOCATION.c_str());
-    if(!fin)
-    {
-        printf("Not logical value at line number %d in file %s\n", __LINE__, __FILE__);
-        cerr << "Unable to open: " << DATABASE_LOCATION << endl;
-        exit(1);
-    }
-    
-    int index;
-    string key = "true", value = "", str_timeAdded ="";
-    time_t timeAdded;
-    short familiar_index;
-    
-/*
-     2     lap|   in someone's lap: as someone's responsibility|    1502067091|    0
-*/
-    while (fin.peek() != EOF)
-    {
-        // 0. Read index
-                fin >> index;
-        
-        //1. Read key
-        readOneElement(key, fin, "wordOrPhrase");
-        
-        if (dic.find(key) == 0) // Remove EOF duplicate error
-        {
-            //2. Read value
-            readOneElement(value, fin, "explaination");
-            
-            //3. Read timeAdded
-            readOneElement(str_timeAdded, fin, "timeAdded");
-            
-            // 4. Read familiar index
-            fin >> familiar_index;
-            
-            // get current date/time
-            /**
-             The function atoll in stdlib.h convert a c-string to long
-             long type.
-             */
-            timeAdded = (time_t)atoll(str_timeAdded.c_str());
-            
-            dic.pushFromFile( index, key, value, timeAdded, familiar_index);
-        }
-        
-    }
-    
-    fin.close();
-}
 
 
 void Dic::userInteractive()

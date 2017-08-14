@@ -9,12 +9,10 @@
 #ifndef Dic_hpp
 #define Dic_hpp
 
-#include <stdio.h>
-#include <iostream>
 #include "List.h"
-#include <fstream>
-#include <cstdlib>
+#include <fstream> 
 
+ 
 class Dic
 {
 private:

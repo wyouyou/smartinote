@@ -4,11 +4,6 @@
  */
 
 #include "Node.h"
-#include <iostream>
-
-
-
-using namespace std;
 
 int Node::numOfNodes = 0;
 

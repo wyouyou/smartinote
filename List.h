@@ -4,7 +4,6 @@
 #define List_h
 
 #include "Node.h"
-#include <iostream>
 
 class List
 {

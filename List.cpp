@@ -2,7 +2,6 @@
 
 #include "List.h"
 
-using namespace std;
 
 List::List():top(0){
     
