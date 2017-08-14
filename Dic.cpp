@@ -15,6 +15,7 @@ const string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data
 Dic::Dic(){
     
     ifstream fin(DATABASE_LOCATION.c_str());
+    
     if(!fin)
     {
         printf("Not logical value at line number %d in file %s\n", __LINE__, __FILE__);
@@ -22,10 +23,10 @@ Dic::Dic(){
         exit(1);
     }
     
-    int index;
-    string key = "true", value = "", str_timeAdded ="";
-    time_t timeAdded;
-    short familiar_index;
+    int index = -1;
+    string key = "defalut-key", value = "default-value", str_timeAdded ="default-timeAddedStr";
+    time_t timeAdded = -1;
+    short familiar_index = -1;
     
     /*
      2     lap|   in someone's lap: as someone's responsibility|    1502067091|    0

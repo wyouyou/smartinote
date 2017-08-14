@@ -16,7 +16,8 @@ Node::Node(string d,string c ,Node* n, time_t t): key(d), value(c),next(n), time
 
 Node::Node(const int& i, const string& k, const string& v, const time_t& t,const short& familiar_Index, Node* n): index(i), key(k),value(v),timeAdded(t),familiar_index(familiar_Index),next(n)
 {
-    
+    init_date();
+ 
 }
 
 Node::Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d ,const short& familiar_Index, Node* n): index(i), key(k),value(v),timeAdded(t), date(d),familiar_index(familiar_Index), next(n)
