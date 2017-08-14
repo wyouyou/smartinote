@@ -42,8 +42,6 @@ namespace Color {
     };
 }
 
-
-
 struct Date{
     int year2digits; //
     int year4digits; // >= 2000
@@ -113,80 +111,86 @@ public:
     Node(const int& i, const string& k, const string& v, const time_t& t,const short& familiar_Index, Node* n );
 
     /**
-     Copying/clone a node, used when make a copy of list so that every 
-     data member is passed in from outside.
-    */
-    Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d,const short& familiar_Index, Node* n );
+     * Copying/clone a node, used when make a copy of list so that every
+     * data member is passed in from outside.
+     */
+    Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d,const short& familiar_Index,const double& famPercent, Node* n );
 
     /**
-     ********************************************************************
-     Add 1 to the familiar index.
-     
-     根据艾宾浩斯记忆曲线指数。
-     If the familiar_index == 21, delete the node and add it to a file to
-     save for later use.
+     * Add 1 to the familiar index.
+     *
+     * 根据艾宾浩斯记忆曲线指数。
+     * If the familiar_index == 21, delete the node and add it to a file
+     * to save for later use.
      */
-    void incre_familiar_index(const string& fileName);
+    void incre_familiar_index();
     
     /**
-     ********************************************************************
-     Subtract 1 from the familiar index.
-     
+     * Subtract 1 from the familiar index.
      */
     void decre_familiar_index();
     
     /**
-     ********************************************************************
-     Accessor functions
+     * Accessor functions
      */
     int get_index() const;
     string get_key() const;
     string get_value() const;
     time_t get_timeAdded() const;
     short get_familiar_index() const;
+    double get_familiar_percent() const;
     Date get_date() const;
     Node* get_next() const;
     void set_next(Node* ptr);
     /**
-     ********************************************************************
-     Modify data member value.
+     * Modify data member value.
      */
     void add_value(string);
     /**
-     ********************************************************************
+     *
      */
     void reviewNode()
     {
-        char remember;
+        string remember;
         string validRemember = "YyNn";
         cout << "\n\n认识: " << this->key << " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识: ";
         cin >> remember;
         
         do{
-        if (remember == 'Y'  or remember == 'y')
+        if (remember == "Y"  or remember == "y")
         {
             familiar_index++;
             cout << "Familar index + 1: " << familiar_index << endl;
             printNodeInfo();
         }
-        else if (remember == 'N' or remember == 'n')
+        else if (remember == "N" or remember == "n")
         {
             familiar_index--;
             cout << "Familar index - 1: " << familiar_index << endl;
             printNodeInfo();
-
         }
+        else if (remember.find("delete") != string::npos )
+        {
+            
+        }
+        else continue;
         } while (validRemember.find(remember) == string::npos);
     }
     
+    /** 
+     * console output functions
+     */
     void printIndexInfo() const;
-    void printkeyNValue() const;
+    void printkeyNValue(const short& width) const;
     void printTimeAdded() const;
     void printFamilarIndexInfo() const;
     void printNodeInfo() const;
     
+    /**
+     * console output formatting.
+     */
     void ClearScreen() const;
-    void printAline() const;
+    void printAline(const short& length) const;
     
 };
 

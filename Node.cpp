@@ -36,14 +36,14 @@ Node::Node(const int& i, const string& k, const string& v, const time_t& t,const
 {
     ++numOfNodes;
     init_date();
-    familiar_percent = familiar_index/21.;
+    familiar_percent = 100*(familiar_index/21.);
 }
 
 /**
  * copying/cloning node form another node...
  * every data member is intialized by the args.
  */
-Node::Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d ,const short& familiar_Index, Node* n): index(i), key(k),value(v),timeAdded(t), date(d),familiar_index(familiar_Index), next(n)
+Node::Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d ,const short& familiar_Index, const double& famPercent, Node* n): index(i), key(k),value(v),timeAdded(t), date(d),familiar_index(familiar_Index),familiar_percent(famPercent), next(n)
 {
 }
 
@@ -65,11 +65,6 @@ void Node::init_date()
 int Node::get_index() const
 {
     return index;
-}
-
-short Node::get_familiar_index() const
-{
-    return familiar_index;
 }
 
 
@@ -97,6 +92,16 @@ time_t Node::get_timeAdded() const
     return timeAdded;
 }
 
+short Node::get_familiar_index() const
+{
+    return familiar_index;
+}
+
+double Node::get_familiar_percent() const
+{
+    return familiar_percent;
+}
+
 void Node::set_next(Node *ptr)
 {
     next = ptr;
@@ -106,17 +111,34 @@ void Node::add_value(string value)
     value = value + ", " + value;
 }
 
+void Node::incre_familiar_index()
+{
+    ++familiar_index;
+}
+
+void Node::decre_familiar_index()
+{
+    --familiar_index;
+}
 
 void Node::printIndexInfo() const
 {
     cout << key << " is the " << index << " word in the dic.md.\n";
 }
-void Node::printkeyNValue() const
+void Node::printkeyNValue(const short& width) const
 {
     Color::Modifier red(Color::FG_RED);
     Color::Modifier def(Color::FG_DEFAULT);
-    cout  << red << value << def << "\n";
+//    cout  <<  red << "Key: " << key << def << "\n";
+    cout  <<  red << "Key: " << key << endl;
     
+    for (int i = 0; i<value.size(); i++)
+    {
+        if (i % width == 0) cout << "\n";
+        
+        cout << value[i];
+    }
+    cout << def << "\n";
 }
 void Node::printTimeAdded() const
 {
@@ -126,37 +148,39 @@ void Node::printTimeAdded() const
 void Node::printFamilarIndexInfo() const
 {
     
-    cout << "Familiar index: " << familiar_index << ":";
     if (familiar_index < 7)
     {
-        cout << "Notice! this word is a stranger to you!" <<familiar_percent << "% familiar...\n";
+        cout << "Notice! this word is a stranger to you!";
     }
     else if (familiar_index > 7 && familiar_index < 14)
     {
-        cout << "Good! this word is a acquaintance to you!" <<familiar_percent << "% familiar...\n";
+        cout << "Good! this word is a acquaintance to you!";
     }
     else if (familiar_index > 14)
     {
-        cout << "Great! this word is gonna be your friend!" <<familiar_percent << "% familiar...\n";
+        cout << "Great! this word is gonna be your friend!";
     }
+    cout << familiar_index << "/21:" <<  familiar_percent << "% familiar.\n";
+
 }
 
 void Node::printNodeInfo() const
 {
+    short width = 60;
     ClearScreen();
     
-    printAline();
+    printAline(width);
     printIndexInfo();
     
-    printAline();
-    printkeyNValue();
+    printAline(width);
+    printkeyNValue(width);
     
-    printAline();
+    printAline(width);
     printFamilarIndexInfo();
     
-    printAline();
+    printAline(width);
     printTimeAdded();
-    printAline();
+//    printAline();
 }
 
 void Node::ClearScreen() const
@@ -164,9 +188,10 @@ void Node::ClearScreen() const
     cout << string( 100, '\n' );
 }
 
-void Node::printAline() const
+void Node::printAline(const short& length) const
 {
-    cout << "---------------------------------------------------------\n";
+    for (int i = 0; i< length; i++) cout << "-";
+    cout << "\n";
 }
 
 

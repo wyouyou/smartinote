@@ -33,32 +33,30 @@ int main (void)
     
     
     Dic myDictionary;
-    string choice;
-    
-
+    string command;
     
     do
     {
         cout << "command tool Dic:  ";
-        cin >> choice;
+        cin >> command;
         
-        if (choice == "dic")
+        if (command == "dic")
         {
             myDictionary.userInteractive();
         }
-        else if(choice == "review")
+        else if(command == "review")
         {
-            myDictionary.reviewByForgetiveCurve(6);
+            
+            myDictionary.reviewListRandomly(10);
         }
-        
         else
         {
-            break;
+            cout << "fatal : " << command << " is not found.\n"; 
         }
         myDictionary.copyDatabaseToArg("/Applications/selfmade-product/dic-master/data/dic.md");
 
 
-    } while (choice != "q" and choice != "Q");
+    } while (command != "q" and command != "Q");
     
     cout << "program is done....." << endl;
 

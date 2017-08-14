@@ -1,4 +1,7 @@
-
+/*
+ * File: List.cpp
+ *
+ */
 
 #include "List.h"
 
@@ -32,23 +35,19 @@ void List::pushFromFile(const int& i, const string& k, const string& v, const ti
 }
 
 
-void List::pushFromNode(const int& i, const string& k, const string& v, const time_t& t, const Date& d, const short& familiar_Index)
+void List::pushFromNode(const int& i, const string& k, const string& v, const time_t& t, const Date& d, const short& familiar_Index,const double& famPercent)
 {
-    Node* temp = new Node(i, k, v, t, d,familiar_Index, top);
+    Node* temp = new Node(i, k, v, t, d,familiar_Index,famPercent, top);
     
     top = temp;
 
 }
 
-
-
-
-
-
 void List::add_value(string value, Node* target)
 {
     target->add_value(value);
 }
+
 string List::pop()
 {
     Node* temp = top;
@@ -63,6 +62,12 @@ Node* List::get_top() const
     return top;
 }
 
+/**
+ * Remove node from the current linked list.
+ * Side effect: state of all continous index hierarchy of all nodes is
+ * break.
+ * @ ToDo: remove side effect
+ */
 bool List::remove(const string& key)
 {
     if(! find(key))
@@ -86,18 +91,19 @@ bool List::remove(const string& key)
     }
     temp2 = temp1 -> get_next();
     temp1 -> set_next(temp2->get_next());
+    
     delete temp2;
     return true;
 }
 
 
-Node*	List::find(const string& item) const
-// very similar to the prstring function
+
+Node*	List::find(const string& key) const
 {
     Node* temp = top;
     while (temp != 0)
     {
-        if (temp->get_key() == item)
+        if (temp->get_key() == key)
         {
             if (temp->get_value().size() < 1) // if there is no value definition, means the targer need to be updated, also means not found
             {
@@ -110,8 +116,9 @@ Node*	List::find(const string& item) const
     }
     return 0;
 }
+
+
 Node* List::find(const int& index) const
-// very similar to the prstring function
 {
     Node* temp = top;
     while (temp != 0)
@@ -124,9 +131,6 @@ Node* List::find(const int& index) const
     }
     return 0;
 }
-
-
-
 
 bool List::remove_Last()
 {
@@ -152,6 +156,37 @@ bool List::remove_Last()
     return true;
 }
 
+void List::reviewListRandomly(const short& num)
+{
+    Node* temp = top;
+    int randomIndex;
+    srand (time(NULL));
+    
+    for (int i = 0 ; i< num; i++)
+    {
+        randomIndex = rand()%(Node::numOfNodes - 1) + 1;
+        cout << "Random max: " << Node::numOfNodes -1
+        << "random index: " << randomIndex << endl;
+        
+        temp = find(randomIndex);
+        
+        if (temp == 0)
+        {
+            cout << "List.h::revieList has bug: (temp is a \" bad \" address!!! The randNum is not valid! Ex: 0, or > Node::numofNodes " << endl;
+            exit(2);
+        }
+        
+        temp->reviewNode();
+        deleteNodeIfFamiliarEnough(temp);
+        temp = temp->get_next();
+    }
+    
+}
+
+void List::reviewListScientificly()
+{
+    
+}
 
 ostream& operator<< (ostream& out , const List& object)
 {
