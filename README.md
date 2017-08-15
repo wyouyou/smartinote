@@ -7,13 +7,13 @@
 
 
 Line Number Count:
-cloc|github.com/AlDanial/cloc v 1.72  T=0.07 s (114.4 files/s, 13783.5 lines/s)
+cloc|github.com/AlDanial/cloc v 1.72  T=0.07 s (113.2 files/s, 16818.9 lines/s)
 --- | ---
 
 Language|files|blank|comment|code
 :-------|-------:|-------:|-------:|-------:
-C++|4|154|89|377
-C/C++ Header|3|60|110|168
-Markdown|1|3|0|3
+C++|4|172|94|489
+C/C++ Header|3|68|187|160
+Markdown|1|6|0|13
 --------|--------|--------|--------|--------
-SUM:|8|217|199|548
+SUM:|8|246|281|662
