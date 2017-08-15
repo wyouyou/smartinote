@@ -10,6 +10,7 @@
 
 
 const string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data/dic.md";
+const char HTML_OUT_LOCATION [] = "/Applications/selfmade-product/dic-master/data/dic.html";
 
 
 void Dic::readOneElement(string& element, ifstream& fin, const string& tag)
@@ -143,18 +144,32 @@ void Dic::userInteractive()
 
 }
 
+void Dic::makeArgReverse(List& dicCopy) const
+{
+    Node* temp = dic.get_top();
+    while (temp != 0)
+    {
+        
+        dicCopy.pushFromNode(temp->get_index(),temp->get_key(), temp->get_value(), temp->get_timeAdded(), temp->get_date(),temp->get_familiar_index(), temp->get_familiar_percent());
+        temp = temp->get_next();
+    }
+
+}
+
 void Dic::copyDatabaseToArg(const char arg[]) const
 {
     // Creat a copy of dic to deal with LIFO issue
     List dicCopy;
     
-    Node* temp = dic.get_top();
-    while (temp != 0)
-    {
-
-        dicCopy.pushFromNode(temp->get_index(),temp->get_key(), temp->get_value(), temp->get_timeAdded(), temp->get_date(),temp->get_familiar_index(), temp->get_familiar_percent());
-        temp = temp->get_next();
-    }
+    makeArgReverse(dicCopy);
+    
+//    Node* temp = dic.get_top();
+//    while (temp != 0)
+//    {
+//
+//        dicCopy.pushFromNode(temp->get_index(),temp->get_key(), temp->get_value(), temp->get_timeAdded(), temp->get_date(),temp->get_familiar_index(), temp->get_familiar_percent());
+//        temp = temp->get_next();
+//    }
     
     
     ofstream fout;
@@ -173,6 +188,13 @@ void Dic::copyDatabaseToArg(const char arg[]) const
 void Dic::reviewListRandomly(const short &num)
 {
     dic.reviewListRandomly(num);
+}
+
+void Dic::reportHtmlFile() const
+{
+    List dicCopy;
+    makeArgReverse(dicCopy);
+    dicCopy.report2HtmlFile();
 }
 
 

@@ -193,7 +193,46 @@ void Node::printAline(const short& length) const
     for (int i = 0; i< length; i++) cout << "-";
     cout << "\n";
 }
+void Node::report2HtmlFile(ofstream& fout) const
+{
+    write2Html1RowOfTb(fout);
+}
 
+void Node::write2HtmlTableHeading(ofstream& fout)
+{
+    fout << "<!DOCTYPE html>\n" << "<html>\n" << "<head>\n" << "<style>\n"
+    << "table { font-family: arial, sans-serif; border-collapse: collapse; width: 100%;}" << "td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}\n" << "tr:nth-child(even) {background-color: #dddddd;}</style></head><body><table>" << endl
+    << "<tr>\n"
+    << "<th>" << "编号" << "</th>\n"
+    << "<th>" << "单词" << "</th>\n"
+    << "<th>" << "定义" << "</th>\n"
+    << "<th>" << "熟悉指数" << "</th>\n"
+    << "<th>" << "熟悉比例" << "</th>\n"
+    << "<th>" << "诞生时间" << "</th>\n"
+
+    << "</tr>\n";
+
+
+}
+
+void Node::write2Html1RowOfTb(ofstream& fout) const
+{
+    fout<< "<tr>\n"
+        << "<td width=\"8%\">" << index << "</td>\n"
+        << "<td width=\"28%\">" << key << "</td>\n"
+        << "<td width=\"40%\">" << value << "</td>\n"
+        << "<td width=\"8%\">" << familiar_index << "</td>\n"
+        << "<td width=\"8%\">" << familiar_percent << "</td>\n"
+        << "<td width=\"8%\">" << date.month << ":" << date.day_of_month << ":" << date.year2digits << "</td>\n"
+        << "</tr>\n";
+
+}
+
+
+void Node::write2HtmlTableTail(ofstream& fout)
+{
+    fout << "</table>\n</body>\n</html>\n" << endl;
+}
 
 ostream& operator<< (ostream& out, const Node& obj)
 {

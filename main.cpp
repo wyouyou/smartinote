@@ -35,10 +35,16 @@ int main (void)
     Dic myDictionary;
     string command;
     
+
+    
     do
     {
         cout << "command tool Dic:  ";
         cin >> command;
+        
+        myDictionary.copyDatabaseToArg("/Applications/selfmade-product/dic-master/data/dic.md");
+        myDictionary.reportHtmlFile();
+
         
         if (command == "dic")
         {
@@ -49,14 +55,19 @@ int main (void)
             
             myDictionary.reviewListRandomly(10);
         }
+        else if (command == "q" || command == "Q")
+        {
+            break;
+        }
         else
         {
             cout << "fatal : " << command << " is not found.\n"; 
         }
-        myDictionary.copyDatabaseToArg("/Applications/selfmade-product/dic-master/data/dic.md");
+        
 
 
-    } while (command != "q" and command != "Q");
+    } while(1);
+    
     
     cout << "program is done....." << endl;
 

@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+
 
 using namespace std;
 
@@ -191,6 +193,28 @@ public:
      */
     void ClearScreen() const;
     void printAline(const short& length) const;
+    /**
+     *
+     */
+    void report2HtmlFile(ofstream& fout) const;
+    
+    /**
+     * write html table heading
+     */
+    static void write2HtmlTableHeading(ofstream& fout);
+    
+    /**
+     * write html table tail.
+     */
+    static void write2HtmlTableTail(ofstream& fout);
+    
+    /**
+     * write one row html of table.
+     */
+    void write2Html1RowOfTb(ofstream& fout) const;
+
+    
+    
     
 };
 

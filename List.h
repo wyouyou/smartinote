@@ -94,6 +94,16 @@ public:
      */
     void reviewListScientificly();
     
+    /**
+     * reportHtmlFile
+     * report list to a html file on the location:
+     * Dic.cpp HTML_OUT_LOCATION
+     *
+     */
+    void report2HtmlFile() const;
+    
+    
+    
 };
 
 std::ostream& operator << (std::ostream&, const List&);

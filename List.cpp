@@ -5,6 +5,7 @@
 
 #include "List.h"
 
+const char HTML_OUT_LOCATION [] = "/Applications/selfmade-product/dic-master/data/dic.html";
 
 List::List():top(0){
     
@@ -202,4 +203,29 @@ ostream& operator<< (ostream& out , const List& object)
     return out;
 }
 
+void List::report2HtmlFile() const
+{
+    ofstream fout;
+    fout.open(HTML_OUT_LOCATION);
+    if (!fout)
+    {
+        printf("Not logical value at line number %d in file %s\n", __LINE__, __FILE__);
+        cerr << "Unable to open: " << HTML_OUT_LOCATION << endl;
+        exit(1);
+    }
+    Node::write2HtmlTableHeading(fout);
+
+    Node* temp = this->get_top();
+    while (temp!=0)
+    {
+        temp->report2HtmlFile(fout);
+
+        temp = temp->get_next();
+    }
+    Node::write2HtmlTableTail(fout);
+
+    
+    fout.close();
+    
+}
 

@@ -10,7 +10,6 @@
 #define Dic_hpp
 
 #include "List.h"
-#include <fstream> 
 
  
 class Dic
@@ -36,6 +35,13 @@ private:
      * flag causes the file to be created if it does not exist.
      */
     void write_new_node_to_file(fstream& fout, const List& L, const string& fileName = "/Applications/selfmade-product/dic-master/data/dic.md" );
+    
+    /**
+     * Make arg a reverse order copy of dic.
+     *
+     */
+    void makeArgReverse(List& dicCopy) const ;
+    
 
 public:
     
@@ -63,6 +69,8 @@ public:
     /**
      *
      */
+    void reportHtmlFile() const;
+    
     
     
     
