@@ -43,17 +43,11 @@ void Dic::readOneElement(string& element, ifstream& fin, const string& tag)
 }
 
 
-void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& fileName)
+void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& item)
 {
-    
-    fout.open(DATABASE_LOCATION.c_str(),ios_base::app);
-    
-    if(!fout)
-    {
-        cerr << "Invalid directory: " << DATABASE_LOCATION;
-    }
-    
     fout << * (L.get_top());
+    cout << "\"" << item  << "\" is added to the database......\n";
+
 }
 
 
@@ -115,6 +109,13 @@ void Dic::userInteractive()
 {
     string word = "word or a phrase", value = "no-explaination";
     fstream fout;
+    fout.open(DATABASE_LOCATION.c_str(),ios_base::app);
+    
+    if(!fout)
+    {
+        printf("Unable to open file at line number %d in file %s\n", __LINE__, __FILE__);
+        exit(2);
+    }
     cin.ignore();
     
     while (1)
@@ -134,8 +135,8 @@ void Dic::userInteractive()
             if (value == "q" || value =="Q") continue;
             
             dic.push(word, value, time(0));
-            write_new_node_to_file(fout,dic);
-            cout << "\"" << value  << "\" is added to the database......\n";
+            write_new_node_to_file(fout,dic, value);
+
         }
         
         else target->printNodeInfo();
@@ -162,14 +163,6 @@ void Dic::copyDatabaseToArg(const char arg[]) const
     List dicCopy;
     
     makeArgReverse(dicCopy);
-    
-//    Node* temp = dic.get_top();
-//    while (temp != 0)
-//    {
-//
-//        dicCopy.pushFromNode(temp->get_index(),temp->get_key(), temp->get_value(), temp->get_timeAdded(), temp->get_date(),temp->get_familiar_index(), temp->get_familiar_percent());
-//        temp = temp->get_next();
-//    }
     
     
     ofstream fout;

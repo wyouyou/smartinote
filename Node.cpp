@@ -201,30 +201,30 @@ void Node::report2HtmlFile(ofstream& fout) const
 void Node::write2HtmlTableHeading(ofstream& fout)
 {
     fout << "<!DOCTYPE html>\n" << "<html>\n" << "<head>\n" << "<style>\n"
-    << "table { font-family: arial, sans-serif; border-collapse: collapse; width: 100%;}" << "td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}\n" << "tr:nth-child(even) {background-color: #dddddd;}</style></head><body><table>" << endl
-    << "<tr>\n"
-    << "<th>" << "编号" << "</th>\n"
-    << "<th>" << "单词" << "</th>\n"
-    << "<th>" << "定义" << "</th>\n"
-    << "<th>" << "熟悉指数" << "</th>\n"
-    << "<th>" << "熟悉比例" << "</th>\n"
-    << "<th>" << "诞生时间" << "</th>\n"
+    << "table \n{\tfont-family: arial, sans-serif;\n\tborder-collapse: collapse;\n\twidth: 100%;\n}" << "\n\ntd, th \n{\nborder: 1px solid #dddddd;text-align: left;padding: 8px;\n}\n\n" << "tr:nth-child(even) \n{\nbackground-color: #dddddd;\n}\n\n</style>\n</head>\n<body>\n<table>\n" << endl
+    << "\t<tr>\n"
+    << "\t\t<th>" << "编号" << "</th>\n"
+    << "\t\t<th>" << "单词" << "</th>\n"
+    << "\t\t<th>" << "定义" << "</th>\n"
+    << "\t\t<th>" << "熟悉指数" << "</th>\n"
+    << "\t\t<th>" << "熟悉比例" << "</th>\n"
+    << "\t\t<th>" << "诞生时间" << "</th>\n"
 
-    << "</tr>\n";
+    << "\t</tr>\n";
 
 
 }
 
 void Node::write2Html1RowOfTb(ofstream& fout) const
 {
-    fout<< "<tr>\n"
-        << "<td width=\"8%\">" << index << "</td>\n"
-        << "<td width=\"28%\">" << key << "</td>\n"
-        << "<td width=\"40%\">" << value << "</td>\n"
-        << "<td width=\"8%\">" << familiar_index << "</td>\n"
-        << "<td width=\"8%\">" << familiar_percent << "</td>\n"
-        << "<td width=\"8%\">" << date.month << ":" << date.day_of_month << ":" << date.year2digits << "</td>\n"
-        << "</tr>\n";
+    fout<< "\t<tr>\n"
+        << "\t\t<td width=\"8%\">" << index << "</td>\n"
+        << "\t\t<td width=\"15%\">" << key << "</td>\n"
+        << "\t\t<td width=\"53%\">" << value << "</td>\n"
+        << "\t\t<td width=\"8%\">" << familiar_index << "</td>\n"
+        << "\t\t<td width=\"8%\">" << familiar_percent << "</td>\n"
+        << "\t\t<td width=\"8%\">" << date.month << ":" << date.day_of_month << ":" << date.year2digits << "</td>\n"
+        << "\t</tr>\n";
 
 }
 

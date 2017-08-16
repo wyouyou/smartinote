@@ -18,7 +18,7 @@ class List
      */
     void deleteNodeIfFamiliarEnough(Node* theNode)
     {
-        if (theNode->get_familiar_index() == 21)
+        if (theNode->get_familiar_index() >=  21)
         {
             remove(theNode->get_key());
             if (find(theNode->get_key())== 0)

@@ -28,23 +28,14 @@
 
 
 int main (void)
-{
-    
-    
-    
+{ 
     Dic myDictionary;
     string command;
-    
-
     
     do
     {
         cout << "command tool Dic:  ";
         cin >> command;
-        
-        myDictionary.copyDatabaseToArg("/Applications/selfmade-product/dic-master/data/dic.md");
-        myDictionary.reportHtmlFile();
-
         
         if (command == "dic")
         {
@@ -63,15 +54,17 @@ int main (void)
         {
             cout << "fatal : " << command << " is not found.\n"; 
         }
-        
-
 
     } while(1);
     
     
+    myDictionary.copyDatabaseToArg("/Applications/selfmade-product/dic-master/data/dic.md");
+    myDictionary.reportHtmlFile();
+
     cout << "program is done....." << endl;
 
 }
+
 
 
 

@@ -34,7 +34,7 @@ private:
      * and all output is written to the end of the file. Bydefault,this
      * flag causes the file to be created if it does not exist.
      */
-    void write_new_node_to_file(fstream& fout, const List& L, const string& fileName = "/Applications/selfmade-product/dic-master/data/dic.md" );
+    void write_new_node_to_file(fstream& fout, const List& L, const string& message = " ");
     
     /**
      * Make arg a reverse order copy of dic.
