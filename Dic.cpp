@@ -47,7 +47,7 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& ite
 {
     fout << * (L.get_top());
     cout << "\"" << item  << "\" is added to the database......\n";
-
+    
 }
 
 
@@ -86,7 +86,7 @@ void Dic::retriveDataFromFile(ifstream& fin)
         }
         
     }
-
+    
 }
 
 Dic::Dic()
@@ -125,6 +125,7 @@ void Dic::userInteractive()
         getline(cin, word);
         if (word == "q" || word =="Q") break;
         
+        
         // List member function 的返回值作为搜索结果
         Node* target = dic.find(word);
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
@@ -133,16 +134,22 @@ void Dic::userInteractive()
             cout << "Not found....Enter value: ";
             getline(cin,value);
             if (value == "q" || value =="Q") continue;
+            else if (value == "clear")
+            {
+                clear();
+            }
+            else
+            {
+                
+                dic.push(word, value, time(0));
+                write_new_node_to_file(fout,dic, value);
+            }
             
-            dic.push(word, value, time(0));
-            write_new_node_to_file(fout,dic, value);
-
         }
-        
         else target->printNodeInfo();
     }
     fout.close();
-
+    
 }
 
 void Dic::makeArgReverse(List& dicCopy) const
@@ -154,7 +161,7 @@ void Dic::makeArgReverse(List& dicCopy) const
         dicCopy.pushFromNode(temp->get_index(),temp->get_key(), temp->get_value(), temp->get_timeAdded(), temp->get_date(),temp->get_familiar_index(), temp->get_familiar_percent());
         temp = temp->get_next();
     }
-
+    
 }
 
 void Dic::copyDatabaseToArg(const char arg[]) const
@@ -188,6 +195,44 @@ void Dic::reportHtmlFile() const
     List dicCopy;
     makeArgReverse(dicCopy);
     dicCopy.report2HtmlFile();
+}
+
+void Dic::dicCore()
+{
+    string command;
+    while(1)
+    {
+        cout << "command tool Dic:";
+        cin >> command;
+        
+        if (command == "dic")
+        {
+            userInteractive();
+        }
+        else if(command == "review")
+        {
+            
+            reviewListRandomly(10);
+        }
+        else if (command == "q" || command == "Q")
+        {
+            break;
+        }
+        else if (command == "delete")
+        {
+            deleteActivity();
+        }
+        else if (command == "clear")
+        {
+            clear();
+        }
+        else
+        {
+            cout << "fatal : " << command << " is not found.\n";
+        }
+        
+    }
+    
 }
 
 

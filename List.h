@@ -68,7 +68,7 @@ public:
     /**
      * return the address of the node with the same index as arg.
      * return 0 if not found.
-     */
+     */ 
     Node* find(const int& index) const;
     
     /**

@@ -166,9 +166,8 @@ void Node::printFamilarIndexInfo() const
 
 void Node::printNodeInfo() const
 {
+    clear();
     short width = 60;
-    ClearScreen();
-    
     printAline(width);
     printIndexInfo();
     
@@ -183,10 +182,6 @@ void Node::printNodeInfo() const
 //    printAline();
 }
 
-void Node::ClearScreen() const
-{
-    cout << string( 100, '\n' );
-}
 
 void Node::printAline(const short& length) const
 {

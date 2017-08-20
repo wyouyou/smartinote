@@ -11,6 +11,7 @@
 #include <string>
 #include <fstream>
 
+#define clear() printf("\033[H\033[J")
 
 using namespace std;
 
@@ -119,7 +120,7 @@ public:
     Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d,const short& familiar_Index,const double& famPercent, Node* n );
 
     /**
-     * Add 1 to the familiar index.
+      * Add 1 to the familiar index.
      *
      * 根据艾宾浩斯记忆曲线指数。
      * If the familiar_index == 21, delete the node and add it to a file
@@ -188,10 +189,6 @@ public:
     void printFamilarIndexInfo() const;
     void printNodeInfo() const;
     
-    /**
-     * console output formatting.
-     */
-    void ClearScreen() const;
     void printAline(const short& length) const;
     /**
      *

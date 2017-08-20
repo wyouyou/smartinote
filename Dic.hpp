@@ -11,7 +11,7 @@
 
 #include "List.h"
 
- 
+
 class Dic
 {
 private:
@@ -36,13 +36,7 @@ private:
      */
     void write_new_node_to_file(fstream& fout, const List& L, const string& message = " ");
     
-    /**
-     * Make arg a reverse order copy of dic.
-     *
-     */
-    void makeArgReverse(List& dicCopy) const ;
     
-
 public:
     
     /**
@@ -70,6 +64,39 @@ public:
      *
      */
     void reportHtmlFile() const;
+    /**
+     * Make arg a reverse order copy of dic.
+     *
+     */
+    void makeArgReverse(List& dicCopy) const ;
+    
+    /**
+     * deleteActivity member function Deleting node manually.
+     * Deleting mode: by index, key.
+     *
+     */
+    void deleteActivity()
+    {
+        string target;
+        
+        while (1)
+        {
+            cout << "Enter a key: ";
+            cin >> target;
+            if (target == "q" || target == "Q") break;
+            dic.remove(target);
+            if (!dic.find(target)) cout << "Node with key: " << target << " has been deleted.";
+            
+            
+        }
+        
+    }
+    /**
+     * run
+     */
+    void dicCore();
+    
+    
     
     
     
