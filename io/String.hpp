@@ -25,6 +25,18 @@ const std::string DATA_LOCATION = "/Applications/selfmade-product/dic-master/dat
 void appendSpace(std::string& prompt);
 
 /*
+ * Function: getLine
+ * Usage: string line = getLine(prompt);
+ * -------------------------------------
+ * Reads a line of text from <code>cin</code> and returns that line
+ * as a string.  The newline character that terminates the input is
+ * not stored as part of the return value.  If supplied, the optional
+ * <code>prompt</code> string is printed before reading the value.
+ */
+std::string getLine(const std::string& prompt = "");
+
+
+/*
  * Alternate version of getLine that accepts a prompt and fills a given output
  * variable with its result.
  */

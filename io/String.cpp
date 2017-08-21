@@ -38,3 +38,7 @@ void getLine(const std::string& prompt,
     getline(std::cin, out);
 }
 
+void getLine(std::istream& input,
+             std::string& out) {
+    getline(input, out);
+}
