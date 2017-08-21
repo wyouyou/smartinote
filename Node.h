@@ -7,9 +7,12 @@
 #ifndef Node_h
 #define Node_h
 
+
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "String.hpp"
+
 
 #define clear() printf("\033[H\033[J")
 
