@@ -121,6 +121,16 @@ void Node::decre_familiar_index()
     --familiar_index;
 }
 
+void Node::incrementIndex()
+{
+    index++;
+}
+
+void Node::decrementIndex()
+{
+    index--;
+}
+
 void Node::printIndexInfo() const
 {
     cout << key << " is the " << index << " word in the dic.md.\n";

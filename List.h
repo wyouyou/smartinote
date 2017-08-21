@@ -59,6 +59,12 @@ public:
      */
     bool remove(const string& key);
     
+    
+    /**
+     * Remove node with the same index as the arg.
+     */
+    bool remove(const int& index);
+    
     /**
      * return the address of the node with the same key as arg.
      * return 0 if not found.
@@ -101,6 +107,13 @@ public:
      *
      */
     void report2HtmlFile() const;
+    
+    /**
+     * keepIndexContinous to keep all the nodes in an continous order.
+     *
+     * Usage: called whenever remove funtions get called.
+     */
+    void keepIndexContinous(Node* );
     
     
     

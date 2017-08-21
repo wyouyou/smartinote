@@ -124,6 +124,7 @@ void Dic::userInteractive()
         cout << "\n***Enter key:(Enter 'q' or 'Q' to stop): ";
         getline(cin, word);
         if (word == "q" || word =="Q") break;
+    
         
         
         // List member function 的返回值作为搜索结果

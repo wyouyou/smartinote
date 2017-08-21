@@ -145,6 +145,10 @@ public:
     Date get_date() const;
     Node* get_next() const;
     void set_next(Node* ptr);
+    
+    void decrementIndex();
+    void incrementIndex();
+
     /**
      * Modify data member value.
      */

@@ -77,17 +77,23 @@ public:
      */
     void deleteActivity()
     {
-        string target;
+        string Index;
         
         while (1)
         {
-            cout << "Enter a key: ";
-            cin >> target;
-            if (target == "q" || target == "Q") break;
-            dic.remove(target);
-            if (!dic.find(target)) cout << "Node with key: " << target << " has been deleted.";
+            cout << "Enter a index: ";
+            cin >> Index;
+            if (Index == "q" || Index == "Q") break;
             
+            else if (Index == "clear") clear();
             
+            else
+            {
+                
+                if(dic.remove(stoi(Index)))
+                    cout << "Node with index: " << Index << " has been deleted.\n";
+            }
+
         }
         
     }

@@ -63,15 +63,18 @@ Node* List::get_top() const
     return top;
 }
 
+
+
 /**
- * Remove node from the current linked list.
- * Side effect: state of all continous index hierarchy of all nodes is
- * break.
- * @ ToDo: remove side effect
+ * If there is no node with same key as arg
+ *      prompt message and return false.
+ * If there is
+ *      remove the node
+        keepIndexContinous
  */
 bool List::remove(const string& key)
 {
-    if(! find(key))
+    if(!find(key))
     {
         cerr << key << "is not in the List" << endl;
         return false;
@@ -81,7 +84,7 @@ bool List::remove(const string& key)
     Node* temp2;
     if (top->get_key() == key)
     {
-        top = top ->  get_next();
+        top = top -> get_next();
         delete temp1;
         return true;
     }
@@ -93,14 +96,69 @@ bool List::remove(const string& key)
     temp2 = temp1 -> get_next();
     temp1 -> set_next(temp2->get_next());
     
+    keepIndexContinous(temp1->get_next());
+    
     delete temp2;
     return true;
+}
+
+/**
+ * If there is no node with same index as arg
+ *      prompt message and return false.
+ * If there is
+ *      remove the node
+        keepIndexContinous
+ */
+bool List::remove(const int& index)
+{
+    if(!find(index))
+    {
+        cerr << index << "is not in the List" << endl;
+        return false;
+    }
     
+    Node* temp1 = top;
+    Node* temp2;
+    if (top->get_index() == index)
+    {
+        top = top -> get_next();
+        delete temp1;
+        return true;
+    }
+    
+    while(temp1->get_next()->get_index() != index)
+    {
+        temp1 = temp1->get_next();
+    }
+    temp2 = temp1 -> get_next();
+    temp1 -> set_next(temp2->get_next());
+    
+    keepIndexContinous(temp1->get_next());
+    
+    delete temp2;
+    return true;
+}
+/**
+ * Starting poisition at top.
+ * decrement Index from the top location until the ptr position.
+ *
+ */
+void List::keepIndexContinous(Node* ptr)
+{
+
+    Node* start = top;
+    while (start != ptr)
+    {
+        start->decrementIndex();
+        start = start->get_next();
+    }
 }
 
 
 
-Node*	List::find(const string& key) const
+
+
+Node* List::find(const string& key) const
 {
     Node* temp = top;
     while (temp != 0)
@@ -157,6 +215,7 @@ bool List::remove_Last()
     
     return true;
 }
+
 
 void List::reviewListRandomly(const short& num)
 {
