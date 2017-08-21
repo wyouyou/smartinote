@@ -21,6 +21,19 @@ List::~List()
         temp = top;
     }
 }
+
+void List::deleteNodeIfFamiliarEnough(Node* theNode)
+{
+    if (theNode->get_familiar_index() >=  21)
+    {
+        remove(theNode->get_key());
+        if (find(theNode->get_key())== 0)
+            cout << "Node with key: " << theNode->get_key()
+            << " has been deleted. " << endl;
+    }
+}
+
+
 void List::push(string item, string c, time_t t)
 {
     Node* temp = new Node(item, c, top, t);

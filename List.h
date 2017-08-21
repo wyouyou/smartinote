@@ -16,17 +16,7 @@ class List
      * If the familiar_index = 21 delete the node.
      * And print a message. 
      */
-    void deleteNodeIfFamiliarEnough(Node* theNode)
-    {
-        if (theNode->get_familiar_index() >=  21)
-        {
-            remove(theNode->get_key());
-            if (find(theNode->get_key())== 0)
-            cout << "Node with key: " << theNode->get_key()
-                << " has been deleted. " << endl;
-        }
-    }
-    
+    void deleteNodeIfFamiliarEnough(Node* theNode);
 
 public:
     List();

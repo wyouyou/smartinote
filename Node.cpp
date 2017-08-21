@@ -61,6 +61,35 @@ void Node::init_date()
     date.seconds = timeInfo->tm_sec;
 }
 
+void Node::reviewNode()
+{
+    string remember;
+    string validRemember = "YyNn";
+    cout << "\n\n认识: " << this->key << " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识: ";
+    cin >> remember;
+    
+    do{
+        if (remember == "Y"  or remember == "y")
+        {
+            familiar_index++;
+            cout << "Familar index + 1: " << familiar_index << endl;
+            printNodeInfo();
+        }
+        else if (remember == "N" or remember == "n")
+        {
+            familiar_index--;
+            cout << "Familar index - 1: " << familiar_index << endl;
+            printNodeInfo();
+        }
+        else if (remember.find("delete") != string::npos )
+        {
+            
+        }
+        else continue;
+    } while (validRemember.find(remember) == string::npos);
+}
+
+
 
 int Node::get_index() const
 {
