@@ -236,4 +236,26 @@ void Dic::dicCore()
     
 }
 
+void Dic::deleteActivity()
+{
+    string Index;
+    
+    while (1)
+    {
+        cout << "Enter a index: ";
+        cin >> Index;
+        if (Index == "q" || Index == "Q") break;
+        
+        else if (Index == "clear") clear();
+        
+        else
+        {
+            
+            if(dic.remove(stoi(Index)))
+                cout << "Node with index: " << Index << " has been deleted.\n";
+        }
+        
+    }
+    
+}
 

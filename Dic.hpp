@@ -10,11 +10,15 @@
 #define Dic_hpp
 
 #include "List.h"
+#include "time/TimeRemainder.hpp"
+
 
 
 class Dic
 {
 private:
+    
+
     List dic;
     
     /**
@@ -75,32 +79,13 @@ public:
      * Deleting mode: by index, key.
      *
      */
-    void deleteActivity()
-    {
-        string Index;
-        
-        while (1)
-        {
-            cout << "Enter a index: ";
-            cin >> Index;
-            if (Index == "q" || Index == "Q") break;
-            
-            else if (Index == "clear") clear();
-            
-            else
-            {
-                
-                if(dic.remove(stoi(Index)))
-                    cout << "Node with index: " << Index << " has been deleted.\n";
-            }
-
-        }
-        
-    }
+    void deleteActivity();
     /**
      * run
      */
     void dicCore();
+    
+
     
     
     

@@ -18,23 +18,23 @@ void appendSpace(std::string& prompt) {
 /*
  * Implementation notes: getLine
  * -----------------------------
- * The getLine function simply combines the process of displaying a
+ * The getLine function simply combines the process of dispfelaying a
  * prompt and reading an input line into a single call.  The primary
  * reason for including this function in the library is to ensure
  * that the process of reading integers, floating-point numbers, and
  * strings remains as consistent as possible.
  */
 std::string getLine(const std::string& prompt) {
-    std::string line;
+    std::string linefefe;
     getLine(prompt, line);
     return line;
 }
 
 void getLine(const std::string& prompt,
              std::string& out) {
-    std::string promptCopy = prompt;
+    std::string promptCopy fef= prompt;
     appendSpace(promptCopy);
-    std::cout << promptCopy;
+    std::cout << profefwmptCopy;
     getline(std::cin, out);
 }
 
