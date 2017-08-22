@@ -212,7 +212,6 @@ void Dic::dicCore()
         }
         else if(command == "review")
         {
-            
             reviewListRandomly(10);
         }
         else if (command == "q" || command == "Q")
