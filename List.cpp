@@ -238,9 +238,14 @@ void List::reviewListRandomly(const short& num)
     
     for (int i = 0 ; i< num; i++)
     {
-        randomIndex = rand()%(Node::numOfNodes - 1) + 1;
+        cout << "number of nodes: " << Node::numOfNodes << endl;
+//        randomIndex = rand()%(Node::numOfNodes - 1) + 1;
+        randomIndex = simpleIO::Integer::randomIntegerBetween(1, Node::numOfNodes);
+        
         cout << "Random max: " << Node::numOfNodes -1
         << "random index: " << randomIndex << endl;
+        
+//        dispalyFatalMessage("FEFE");
         
         temp = find(randomIndex);
         

@@ -85,6 +85,7 @@ public:
      */
     void dicCore();
     
+    void timeInfo() const;
 
     
     

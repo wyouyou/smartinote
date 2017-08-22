@@ -205,8 +205,8 @@ void Node::printFamilarIndexInfo() const
 
 void Node::printNodeInfo() const
 {
-    clear();
-    short width = 60;
+//    clear();
+    short width = 80;
     printAline(width);
     printIndexInfo();
     
@@ -262,7 +262,6 @@ void Node::write2Html1RowOfTb(ofstream& fout) const
 
 }
 
-
 void Node::write2HtmlTableTail(ofstream& fout)
 {
     fout << "</table>\n</body>\n</html>\n" << endl;
@@ -274,5 +273,59 @@ ostream& operator<< (ostream& out, const Node& obj)
     out << obj.get_index() << "     " << obj.get_key() << "|" << "   " << obj.get_value() << "|"  << "    " << obj.get_timeAdded() << "|" << "    " << obj.get_familiar_index() <<  endl << endl;
     return out;
 }
+
+//using namespace simpleIO;
+//
+///**
+// * This is how rand() works:
+// * v1 = rand() % 100;         // v1 in the range 0 to 99
+// * v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
+// */
+//int simpleIO::Integer::randomIntegerBetween(const int &min, const int &max)
+//{
+//    return rand()% (max - min + 1) + min;
+//}
+//
+//
+///*****************************************************************/
+//
+//void String::dispalyFatalMessage(const std::string& commandInfo)
+//{
+//    std::cout << "fatal: " << commandInfo << " is not found.\n";
+//}
+//
+///*
+// * Implementation notes: getLine
+// * -----------------------------
+// * The getLine function simply combines the process of displaying a
+// * prompt and reading an input line into a single call.  The primary
+// * reason for including this function in the library is to ensure
+// * that the process of reading integers, floating-point numbers, and
+// * strings remains as consistent as possible.
+// */
+//std::string String::getLine(const std::string& prompt) {
+//    std::string line;
+//    getLine(prompt, line);
+//    return line;
+//}
+//
+//
+//void String::getLine(const std::string& prompt,
+//                     std::string& out) {
+//    std::string promptCopy = prompt;
+//    String::appendSpace(promptCopy);
+//    std::cout << promptCopy;
+//    getline(std::cin, out);
+//}
+//
+//
+//void String::appendSpace(std::string& prompt)
+//{
+//    if (!prompt.empty() && !isspace(prompt[prompt.length() - 1])) {
+//        prompt += ' ';
+//    }
+//}
+//
+//
 
 

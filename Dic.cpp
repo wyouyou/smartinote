@@ -158,7 +158,6 @@ void Dic::makeArgReverse(List& dicCopy) const
     Node* temp = dic.get_top();
     while (temp != 0)
     {
-        
         dicCopy.pushFromNode(temp->get_index(),temp->get_key(), temp->get_value(), temp->get_timeAdded(), temp->get_date(),temp->get_familiar_index(), temp->get_familiar_percent());
         temp = temp->get_next();
     }
@@ -222,6 +221,10 @@ void Dic::dicCore()
         {
             deleteActivity();
         }
+        else if (command == "time")
+        {
+            timeInfo();
+        }
         else if (command == "clear")
         {
             clear();
@@ -233,6 +236,13 @@ void Dic::dicCore()
         
     }
     
+}
+
+void Dic::timeInfo() const
+{
+    tr::TimeRemainder timeLeft_tillFallBegin(9,25,2017,0,0,0,1, "距离Fall quater 2017 begin");
+    
+    cout << timeLeft_tillFallBegin << endl;
 }
 
 void Dic::deleteActivity()
@@ -249,9 +259,10 @@ void Dic::deleteActivity()
         
         else
         {
-            
+            Node copy = * dic.find(stoi(Index));
             if(dic.remove(stoi(Index)))
-                cout << "Node with index: " << Index << " has been deleted.\n";
+                copy.printNodeInfo();
+                
         }
         
     }
