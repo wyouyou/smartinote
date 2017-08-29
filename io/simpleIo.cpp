@@ -12,14 +12,22 @@ using namespace Color;
 
 
 
+std::string String::trim(const std::string& arg)
+{
+    
+    std::string argCopy = arg;
+    size_t posStart = arg.find_first_not_of(' ');
+    size_t posEnd = arg.find_last_not_of(' ');
+    argCopy = arg.substr(posStart, posEnd-posStart+1);
+    return argCopy;
+}
+
+
 void simpleIO::stdIO::printAline(const short& length)
 {
-//    for (int i = 0; i< length; i++)
-//        std::cout << "-";
-//    std::cout << "\n";
-//        
-//    
-    
+    for (int i = 0; i< length; i++)
+        std::cout << "-";
+    std::cout << "\n";
 
 }
 

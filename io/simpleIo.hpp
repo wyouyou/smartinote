@@ -84,10 +84,14 @@ namespace simpleIO{
         
     public:
         
+        /**
+         * return a copy of arg but with leading and trailing whitespace removed.
+         */
+        static std::string trim(const std::string& arg);
         
         static void appendSpace(std::string& prompt);
         
-        /*
+        /**
          * Function: getLine
          * Usage: string line = simpleIo::String::getLine(prompt);
          * -------------------------------------
@@ -98,7 +102,7 @@ namespace simpleIO{
         static std::string getLine(const std::string& prompt, Color::Code = Color::BG_DEFAULT);
         
         
-        /*
+        /**
          * Alternate version of getLine that accepts a prompt and fills a given output
          * variable with its result.
          */

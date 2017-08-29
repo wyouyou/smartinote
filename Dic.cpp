@@ -253,9 +253,11 @@ void Dic::timeInfo() const
 void Dic::deleteActivity(string info)
 {
     
-    size_t posStart = info.find_first_not_of(' ');
-    size_t posEnd = info.find_last_not_of(' ');
-    info = info.substr(posStart, posEnd-posStart+1);
+//    size_t posStart = info.find_first_not_of(' ');
+//    size_t posEnd = info.find_last_not_of(' ');
+//    info = info.substr(posStart, posEnd-posStart+1);
+    
+    info = simpleIO::String::trim(info);
     
     exit(10);
     
