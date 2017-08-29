@@ -19,87 +19,6 @@
 
 using namespace std;
 
-//namespace simpleIO{
-//    
-//    class Integer{
-//    public:
-//        /*
-//         * Function: randomIntegerBetween
-//         * Usage: int n = randomIntegerBetween(min, max);
-//         *
-//         * return a number between min and max, Inclusive.
-//         */
-//        
-//        static int randomIntegerBetween(const int& min, const int& max);
-//        
-//    };
-//    
-//    class String{
-//        
-//    public:
-//        static void appendSpace(std::string& prompt);
-//        
-//        /**
-//         * Display fatal message with info specified by the arg: commandInfo.
-//         *
-//         * Usage simpleIo::String::dispalyFatalMessage(arg);
-//         */
-//        static void dispalyFatalMessage(const std::string& commandInfo);
-//        
-//        /*
-//         * Function: getLine
-//         * Usage: string line = simpleIo::String::getLine(prompt);
-//         * -------------------------------------
-//         * Reads a line of text from cin and returns that line
-//         * as a string.  The newline character that terminates the input is
-//         * not stored as part of the return value.
-//         */
-//        static std::string getLine(const std::string& prompt);
-//        
-//        /*
-//         * Alternate version of getLine that accepts a prompt and fills a given output
-//         * variable with its result.
-//         */
-//        static void getLine(const std::string& prompt,
-//                            std::string& out);
-//        
-//
-//        
-//    };
-//    
-//}
-
-
-/**
- ************************************************************************
- Print colorful context in Linux. 待定
- https://stackoverflow.com/a/17469726
- */
-namespace Color {
-    enum Code {
-        FG_RED      = 31,
-        FG_GREEN    = 32,
-        FG_BLUE     = 34,
-        FG_DEFAULT  = 39,
-        BG_RED      = 41,
-        BG_GREEN    = 42,
-        BG_BLUE     = 44,
-        BG_DEFAULT  = 49
-        
-        
-    };
-    class Modifier {
-        Code code;
-    public:
-        Modifier(){};
-        Modifier(Code pCode) : code(pCode) {}
-        friend std::ostream&
-        operator<<(std::ostream& os, const Modifier& mod) {
-            return os << "\033[" << mod.code << "m";
-        }
-    };
-}
-
 
 
 struct Date{
@@ -113,6 +32,8 @@ struct Date{
     int minutes; //[0,59]
     int seconds;//[0,59]
 };
+
+
 
 
 /**
@@ -149,6 +70,11 @@ class Node
     void init_date();
     
 public:
+    
+    /**
+     * Usage: when remove node happen, call this.
+     */
+    static void decrementNumOfNodes();
     
     /**
      * numofNodes will get incremented  when creating/adding a new node 
@@ -213,18 +139,23 @@ public:
     /**
      *
      */
-    void reviewNode();
+    bool reviewNode();
     
     /** 
      * console output functions
      */
     void printIndexInfo() const;
-    void printkeyNValue(const short& width) const;
+    void printValue(const short& width,Color::Code = Color::BG_DEFAULT) const;
     void printTimeAdded() const;
     void printFamilarIndexInfo() const;
-    void printNodeInfo() const;
     
-    void printAline(const short& length) const;
+    /**
+     * print node in a specified width and color,
+     *
+     * default case: no parameter, print in default setting color.
+     */
+    void printNodeInfo(const int& width , Color::Code = Color::BG_DEFAULT) const;
+    
     /**
      *
      */

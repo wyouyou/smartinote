@@ -6,6 +6,8 @@
 
 int Node::numOfNodes = 0;
 
+void Node::decrementNumOfNodes() { numOfNodes--;}
+
 /**
  * creating/adding node...
  * key + value + timeAdded are intialized from the user input.
@@ -25,7 +27,7 @@ Node::Node(string theKey, string theValue, Node*n, time_t t ): key(theKey), valu
 
 /**
  * reading node from file...
- * index + key + value + timeAdded + familiar_index are intialized from 
+ * index + key + value + timeAdded + familiar_index are intialized from
  * the input file corresponding data filed.
  *
  * numOfNodes is incremented whenever a node is read from file.
@@ -61,32 +63,33 @@ void Node::init_date()
     date.seconds = timeInfo->tm_sec;
 }
 
-void Node::reviewNode()
+bool Node::reviewNode()
 {
+    bool reviewed = true;
+    char deleteNode;
     string remember;
-    string validRemember = "YyNn";
-    cout << "\n\n认识: " << this->key << " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识: ";
-    cin >> remember;
+    string prompt = "\n\n认识: " + this->key + " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识, 'D' or 'd' to delete:";
+//    simpleIO::UnixIO::printInColor(" ☞"
     
-    do{
-        if (remember == "Y"  or remember == "y")
-        {
-            familiar_index++;
-            cout << "Familar index + 1: " << familiar_index << endl;
-            printNodeInfo();
-        }
-        else if (remember == "N" or remember == "n")
-        {
-            familiar_index--;
-            cout << "Familar index - 1: " << familiar_index << endl;
-            printNodeInfo();
-        }
-        else if (remember.find("delete") != string::npos )
-        {
-            
-        }
-        else continue;
-    } while (validRemember.find(remember) == string::npos);
+    simpleIO::UnixIO::printInColor("\n ☞ ", Color::FG_GREEN);
+    
+    remember = simpleIO::String::getLine(this->key+ ": ");
+    
+    if (remember[0] == 'Y'  or remember[0] == 'y')
+    {
+        familiar_index++;
+        printNodeInfo(80, Color::FG_LIGHT_Cyan);
+        
+    }
+    else if (remember[0] == 'N' or remember[0] == 'n')
+    {
+        familiar_index--;
+        printNodeInfo(80, Color::FG_RED);
+    }
+    else if (remember == "clear" ) clear();
+    else simpleIO::String::dispalyFatalMessage("command");
+    
+    return reviewed;
 }
 
 
@@ -95,7 +98,6 @@ int Node::get_index() const
 {
     return index;
 }
-
 
 Date Node::get_date() const
 {
@@ -164,20 +166,29 @@ void Node::printIndexInfo() const
 {
     cout << key << " is the " << index << " word in the dic.md.\n";
 }
-void Node::printkeyNValue(const short& width) const
+void Node::printValue(const short& width, Color::Code pCode) const
 {
-    Color::Modifier red(Color::FG_RED);
-    Color::Modifier def(Color::FG_DEFAULT);
-//    cout  <<  red << "Key: " << key << def << "\n";
-    cout  <<  red << "Key: " << key << endl;
+//    Color::Modifier red(Color::FG_RED);
+//    Color::Modifier def(Color::FG_DEFAULT);
     
-    for (int i = 0; i<value.size(); i++)
-    {
-        if (i % width == 0) cout << "\n";
-        
-        cout << value[i];
-    }
-    cout << def << "\n";
+    
+//    simpleIO::UnixIO::printInColor(value, 60, Color::FG_GREEN);
+    simpleIO::UnixIO::printInColor(value, width, pCode);
+    
+    
+    
+//        cout  <<  red << "Key: " << key << def << "\n";
+    // To do, creat a static function: arg1: width, arg2: color
+    
+    
+//    cout << red;
+//    for (int i = 0; i<value.size(); i++)
+//    {
+//        if (i % width == 0) cout << "\n";
+//        
+//        cout << value[i];
+//    }
+//    cout << def << "\n";
 }
 void Node::printTimeAdded() const
 {
@@ -200,33 +211,32 @@ void Node::printFamilarIndexInfo() const
         cout << "Great! this word is gonna be your friend!";
     }
     cout << familiar_index << "/21:" <<  familiar_percent << "% familiar.\n";
-
+    
 }
 
-void Node::printNodeInfo() const
+/*
+ *
+ */
+void Node::printNodeInfo(const int& width, Color::Code pCode) const
 {
-//    clear();
-    short width = 80;
-    printAline(width);
-    printIndexInfo();
+    //    clear();
+//    printAline(width);
+//    printIndexInfo();
     
-    printAline(width);
-    printkeyNValue(width);
+//    printAline(width);
+//    printFamilarIndexInfo();
     
-    printAline(width);
-    printFamilarIndexInfo();
+//    width = width < 80? width : 80;
+    simpleIO::stdIO::printAline(value.size() < 80 ? value.size() : width);
+    printValue(width, pCode);
     
-    printAline(width);
-    printTimeAdded();
-//    printAline();
+    
+//    printAline(width);
+//    printTimeAdded();
+    //    printAline();
 }
 
 
-void Node::printAline(const short& length) const
-{
-    for (int i = 0; i< length; i++) cout << "-";
-    cout << "\n";
-}
 void Node::report2HtmlFile(ofstream& fout) const
 {
     write2Html1RowOfTb(fout);
@@ -243,23 +253,23 @@ void Node::write2HtmlTableHeading(ofstream& fout)
     << "\t\t<th>" << "熟悉指数" << "</th>\n"
     << "\t\t<th>" << "熟悉比例" << "</th>\n"
     << "\t\t<th>" << "诞生时间" << "</th>\n"
-
+    
     << "\t</tr>\n";
-
-
+    
+    
 }
 
 void Node::write2Html1RowOfTb(ofstream& fout) const
 {
     fout<< "\t<tr>\n"
-        << "\t\t<td width=\"8%\">" << index << "</td>\n"
-        << "\t\t<td width=\"15%\">" << key << "</td>\n"
-        << "\t\t<td width=\"53%\">" << value << "</td>\n"
-        << "\t\t<td width=\"8%\">" << familiar_index << "</td>\n"
-        << "\t\t<td width=\"8%\">" << familiar_percent << "</td>\n"
-        << "\t\t<td width=\"8%\">" << date.month << ":" << date.day_of_month << ":" << date.year2digits << "</td>\n"
-        << "\t</tr>\n";
-
+    << "\t\t<td width=\"8%\">" << index << "</td>\n"
+    << "\t\t<td width=\"15%\">" << key << "</td>\n"
+    << "\t\t<td width=\"53%\">" << value << "</td>\n"
+    << "\t\t<td width=\"8%\">" << familiar_index << "</td>\n"
+    << "\t\t<td width=\"8%\">" << familiar_percent << "</td>\n"
+    << "\t\t<td width=\"8%\">" << date.month << ":" << date.day_of_month << ":" << date.year2digits << "</td>\n"
+    << "\t</tr>\n";
+    
 }
 
 void Node::write2HtmlTableTail(ofstream& fout)
@@ -274,58 +284,5 @@ ostream& operator<< (ostream& out, const Node& obj)
     return out;
 }
 
-//using namespace simpleIO;
-//
-///**
-// * This is how rand() works:
-// * v1 = rand() % 100;         // v1 in the range 0 to 99
-// * v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
-// */
-//int simpleIO::Integer::randomIntegerBetween(const int &min, const int &max)
-//{
-//    return rand()% (max - min + 1) + min;
-//}
-//
-//
-///*****************************************************************/
-//
-//void String::dispalyFatalMessage(const std::string& commandInfo)
-//{
-//    std::cout << "fatal: " << commandInfo << " is not found.\n";
-//}
-//
-///*
-// * Implementation notes: getLine
-// * -----------------------------
-// * The getLine function simply combines the process of displaying a
-// * prompt and reading an input line into a single call.  The primary
-// * reason for including this function in the library is to ensure
-// * that the process of reading integers, floating-point numbers, and
-// * strings remains as consistent as possible.
-// */
-//std::string String::getLine(const std::string& prompt) {
-//    std::string line;
-//    getLine(prompt, line);
-//    return line;
-//}
-//
-//
-//void String::getLine(const std::string& prompt,
-//                     std::string& out) {
-//    std::string promptCopy = prompt;
-//    String::appendSpace(promptCopy);
-//    std::cout << promptCopy;
-//    getline(std::cin, out);
-//}
-//
-//
-//void String::appendSpace(std::string& prompt)
-//{
-//    if (!prompt.empty() && !isspace(prompt[prompt.length() - 1])) {
-//        prompt += ' ';
-//    }
-//}
-//
-//
 
 

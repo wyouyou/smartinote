@@ -8,6 +8,50 @@
 
 #include "simpleIo.hpp"
 using namespace simpleIO;
+using namespace Color;
+
+
+
+void simpleIO::stdIO::printAline(const short& length)
+{
+//    for (int i = 0; i< length; i++)
+//        std::cout << "-";
+//    std::cout << "\n";
+//        
+//    
+    
+
+}
+
+void UnixIO::printInColor(const std::string& value,const int& width, Color::Code pCode)
+{
+    Color::Modifier color(pCode);
+    Color::Modifier defFG(Color::FG_DEFAULT);
+
+    std::cout << color;
+    
+    for (int i = 0; i<value.size(); i++)
+    {
+        if (i != 0 && i % width == 0) std::cout << "\n";
+        std::cout << value[i];
+    }
+    
+    std::cout << defFG << "\n";
+}
+
+
+void UnixIO::printInColor(const std::string& str, Color::Code pCode)
+{
+    Color::Modifier color(pCode);
+    Color::Modifier defFG(Color::FG_DEFAULT);
+    std::cout << color << str << defFG;
+}
+
+
+
+
+/*----------------------------------------------------------------*/
+
 
 /**
  * This is how rand() works:
@@ -27,6 +71,8 @@ void String::dispalyFatalMessage(const std::string& commandInfo)
     std::cout << "fatal: " << commandInfo << " is not found.\n";
 }
 
+
+
 /*
  * Implementation notes: getLine
  * -----------------------------
@@ -36,18 +82,22 @@ void String::dispalyFatalMessage(const std::string& commandInfo)
  * that the process of reading integers, floating-point numbers, and
  * strings remains as consistent as possible.
  */
-std::string String::getLine(const std::string& prompt) {
+std::string String::getLine(const std::string& prompt,Color::Code pCode) {
     std::string line;
-    getLine(prompt, line);
+    getLine(prompt, line, pCode);
     return line;
 }
 
 
 void String::getLine(const std::string& prompt,
-             std::string& out) {
+             std::string& out,Color::Code pCode )
+{
     std::string promptCopy = prompt;
     String::appendSpace(promptCopy);
-    std::cout << promptCopy;
+    
+    
+    UnixIO::printInColor(prompt, pCode);
+//    std::cout << promptCopy;
     getline(std::cin, out);
 }
 

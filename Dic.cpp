@@ -9,8 +9,7 @@
 #include "Dic.hpp"
 
 
-const string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data/dic.md";
-const char HTML_OUT_LOCATION [] = "/Applications/selfmade-product/dic-master/data/dic.html";
+const string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data/test.md";
 
 
 void Dic::readOneElement(string& element, ifstream& fin, const string& tag)
@@ -47,7 +46,6 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& ite
 {
     fout << * (L.get_top());
     cout << "\"" << item  << "\" is added to the database......\n";
-    
 }
 
 
@@ -107,6 +105,7 @@ Dic::Dic()
 
 void Dic::userInteractive()
 {
+    
     string word = "word or a phrase", value = "no-explaination";
     fstream fout;
     fout.open(DATABASE_LOCATION.c_str(),ios_base::app);
@@ -121,19 +120,22 @@ void Dic::userInteractive()
     while (1)
     {
         // 请求一个单词，必须是正确的全拼写。
-        cout << "\n***Enter key:(Enter 'q' or 'Q' to stop): ";
-        getline(cin, word);
-        if (word == "q" || word =="Q") break;
-    
         
+        simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
+        simpleIO::String::getLine("***Enter key:(Enter 'q' or 'Q' to stop):", word);
+        //        cout << "\n***Enter key:(Enter 'q' or 'Q' to stop): ";
+        //        getline(cin, word);
+        if (word == "q" || word =="Q") break;
         
         // List member function 的返回值作为搜索结果
         Node* target = dic.find(word);
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
         if (target == 0)
         {
-            cout << "Not found....Enter value: ";
-            getline(cin,value);
+            //            cout << "Not found....Enter value: ";
+            //            getline(cin,value);
+            simpleIO::String::getLine("Not found....Enter value:", value);
+            
             if (value == "q" || value =="Q") continue;
             else if (value == "clear")
             {
@@ -141,16 +143,15 @@ void Dic::userInteractive()
             }
             else
             {
-                
                 dic.push(word, value, time(0));
                 write_new_node_to_file(fout,dic, value);
             }
             
+            
         }
-        else target->printNodeInfo();
+        else target->printNodeInfo(80, Color::FG_LIGHT_Cyan);
     }
     fout.close();
-    
 }
 
 void Dic::makeArgReverse(List& dicCopy) const
@@ -171,7 +172,6 @@ void Dic::copyDatabaseToArg(const char arg[]) const
     
     makeArgReverse(dicCopy);
     
-    
     ofstream fout;
     fout.open(arg);
     if (!fout)
@@ -183,6 +183,10 @@ void Dic::copyDatabaseToArg(const char arg[]) const
     
     fout << dicCopy ;
     fout.close();
+    
+    //    cout << "Number Of nodes dic: " << dic.getNumOfNodes();
+    //    cout << "Number Of nodes dicCopy: " << dicCopy.getNumOfNodes();
+    
 }
 
 void Dic::reviewListRandomly(const short &num)
@@ -200,10 +204,11 @@ void Dic::reportHtmlFile() const
 void Dic::dicCore()
 {
     string command;
+    
     while(1)
     {
-        cout << "command tool Dic:";
-        cin >> command;
+        simpleIO::UnixIO::printInColor("➜ ", Color::FG_GREEN);
+        simpleIO::String::getLine("Command Dic: ",command,Color::FG_LIGHT_Cyan);
         
         if (command == "dic")
         {
@@ -217,9 +222,9 @@ void Dic::dicCore()
         {
             break;
         }
-        else if (command == "delete")
+        else if (command.substr(0,2) == "rm")
         {
-            deleteActivity();
+            deleteActivity(command.substr(3));
         }
         else if (command == "time")
         {
@@ -229,10 +234,7 @@ void Dic::dicCore()
         {
             clear();
         }
-        else
-        {
-            cout << "fatal : " << command << " is not found.\n";
-        }
+        else simpleIO::String::dispalyFatalMessage(command);
         
     }
     
@@ -240,32 +242,28 @@ void Dic::dicCore()
 
 void Dic::timeInfo() const
 {
-    tr::TimeRemainder timeLeft_tillFallBegin(9,25,2017,0,0,0,1, "距离Fall quater 2017 begin");
+    tr::TimeRemainder t1(9,25,2017,0,0,0,1, "距离Fall quater 2017 begin");
+    tr::TimeRemainder t2(8,17,2017,00,00,00,00, "距离上上一次...");
+    tr::TimeRemainder t3(8,28,2017,00,00,00,00, "距离上一次...");
     
-    cout << timeLeft_tillFallBegin << endl;
+    
+    cout << t1 << endl << t2 << t3 << endl;
 }
 
-void Dic::deleteActivity()
+void Dic::deleteActivity(string info)
 {
-    string Index;
     
-    while (1)
-    {
-        cout << "Enter a index: ";
-        cin >> Index;
-        if (Index == "q" || Index == "Q") break;
-        
-        else if (Index == "clear") clear();
-        
-        else
-        {
-            Node copy = * dic.find(stoi(Index));
-            if(dic.remove(stoi(Index)))
-                copy.printNodeInfo();
-                
-        }
-        
-    }
+    size_t posStart = info.find_first_not_of(' ');
+    size_t posEnd = info.find_last_not_of(' ');
+    info = info.substr(posStart, posEnd-posStart+1);
+    
+    exit(10);
+    
+    Node copy = * dic.find(stoi(info));
+    
+    if(dic.remove(stoi(info)))
+        copy.printNodeInfo(80, Color::FG_RED);
+    simpleIO::UnixIO::printInColor(" is removed", Color::FG_RED);
     
 }
 

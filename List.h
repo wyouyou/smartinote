@@ -11,6 +11,7 @@
 
 class List
 {
+    int NumOfNodes;
     Node* top;
     /**
      * If the familiar_index = 21 delete the node.
@@ -19,6 +20,7 @@ class List
     void deleteNodeIfFamiliarEnough(Node* theNode);
 
 public:
+    
     List();
     ~List();
     /**
@@ -47,6 +49,8 @@ public:
     /**
      * Remove node with the same key as the arg.
      */
+    
+    int getNumOfNodes() const;
     bool remove(const string& key);
     
     

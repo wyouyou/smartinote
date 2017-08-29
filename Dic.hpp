@@ -18,7 +18,7 @@ class Dic
 {
 private:
     
-
+    
     List dic;
     
     /**
@@ -79,9 +79,9 @@ public:
      * Deleting mode: by index, key.
      *
      */
-    void deleteActivity();
+    void deleteActivity(std::string info);
     /**
-     * run
+     * The core feature menus of the Dic application.
      */
     void dicCore();
     

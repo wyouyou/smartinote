@@ -5,9 +5,15 @@
 
 #include "List.h"
 
+
+
+
 const char HTML_OUT_LOCATION [] = "/Applications/selfmade-product/dic-master/data/dic.html";
 
-List::List():top(0){
+
+
+
+List::List():top(0), NumOfNodes(0){
     
 }
 
@@ -18,6 +24,7 @@ List::~List()
     {
         top = top->get_next();
         delete temp;
+        --NumOfNodes;
         temp = top;
     }
 }
@@ -30,30 +37,32 @@ void List::deleteNodeIfFamiliarEnough(Node* theNode)
         if (find(theNode->get_key())== 0)
             cout << "Node with key: " << theNode->get_key()
             << " has been deleted. " << endl;
+        NumOfNodes--;
     }
+    
 }
 
 
 void List::push(string item, string c, time_t t)
 {
     Node* temp = new Node(item, c, top, t);
-    
     top = temp;
+    NumOfNodes++;
 }
 
 void List::pushFromFile(const int& i, const string& k, const string& v, const time_t& t, const short& familiar_Index)
 {
     Node* temp = new Node(i, k, v, t,familiar_Index, top);
-    
     top = temp;
+    NumOfNodes++;
 }
 
 
 void List::pushFromNode(const int& i, const string& k, const string& v, const time_t& t, const Date& d, const short& familiar_Index,const double& famPercent)
 {
     Node* temp = new Node(i, k, v, t, d,familiar_Index,famPercent, top);
-    
     top = temp;
+    NumOfNodes++;
 
 }
 
@@ -110,8 +119,9 @@ bool List::remove(const string& key)
     temp1 -> set_next(temp2->get_next());
     
     keepIndexContinous(temp1->get_next());
-    
     delete temp2;
+    --NumOfNodes;
+    
     return true;
 }
 
@@ -147,8 +157,9 @@ bool List::remove(const int& index)
     temp1 -> set_next(temp2->get_next());
     
     keepIndexContinous(temp1->get_next());
-    
     delete temp2;
+    
+    --NumOfNodes;
     return true;
 }
 /**
@@ -225,7 +236,7 @@ bool List::remove_Last()
     }
     delete temp->get_next();
     temp->set_next(0);
-    
+
     return true;
 }
 
@@ -238,19 +249,14 @@ void List::reviewListRandomly(const short& num)
     
     for (int i = 0 ; i< num; i++)
     {
-        cout << "number of nodes: " << Node::numOfNodes << endl;
-//        randomIndex = rand()%(Node::numOfNodes - 1) + 1;
         randomIndex = simpleIO::Integer::randomIntegerBetween(1, Node::numOfNodes);
-        
-        cout << "Random max: " << Node::numOfNodes -1
-        << "random index: " << randomIndex << endl;
-        
-//        dispalyFatalMessage("FEFE");
-        
+
         temp = find(randomIndex);
         
         if (temp == 0)
         {
+            cout << "number of nodes: " << Node::numOfNodes << endl;
+            cout << "Random max: " << Node::numOfNodes -1 << "random index: " << randomIndex << endl;
             cout << "List.h::revieList has bug: (temp is a \" bad \" address!!! The randNum is not valid! Ex: 0, or > Node::numofNodes " << endl;
             exit(2);
         }
@@ -305,5 +311,11 @@ void List::report2HtmlFile() const
     
     fout.close();
     
+}
+
+
+int List::getNumOfNodes() const
+{
+    return NumOfNodes;
 }
 
