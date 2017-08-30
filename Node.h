@@ -12,7 +12,11 @@
 #include <string>
 #include <fstream>
 #include "io/simpleIo.hpp"
+//#include "io/simpleIo.cpp"
+
 #include "time/TimeRemainder.hpp"
+//#include "time/TimeRemainder.cpp"
+
 
 
 #define clear() printf("\033[H\033[J")

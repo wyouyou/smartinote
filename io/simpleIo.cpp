@@ -7,9 +7,39 @@
 //
 
 #include "simpleIo.hpp"
+
 using namespace simpleIO;
 using namespace Color;
 
+
+static std::vector<std::string> getTokens(const std::string& arg)
+{
+    std::string argCopy, temp;
+    std::vector<std::string> tokens(0);
+    argCopy = simpleIO::String::trim(arg);
+    size_t posStart = 0;
+    size_t posEnd  = argCopy.size()-1;
+    
+    // getting tokens if posStart and ther is still content at argCopy
+    while (posStart < posEnd && argCopy.size() > 0)
+    {
+        posStart = argCopy.find_first_not_of(' ');
+        posEnd = argCopy.find_first_of(' ');
+        if (posStart < argCopy.size() && posEnd < argCopy.size())
+        {
+            temp =  argCopy.substr(posStart, posEnd - posStart);
+            argCopy = simpleIO::String::trim(argCopy.substr(posEnd));
+            tokens.push_back(temp);
+        }
+        else // the last tokens
+        {
+            tokens.push_back(argCopy);
+            break;
+        }
+    }
+    return tokens;
+    
+}
 
 
 std::string String::trim(const std::string& arg)
@@ -31,7 +61,7 @@ void simpleIO::stdIO::printAline(const short& length)
 
 }
 
-void UnixIO::printInColor(const std::string& value,const int& width, Color::Code pCode)
+void UnixIO::printInColor(const std::string& value,const int& width, Color::Code pCode )
 {
     Color::Modifier color(pCode);
     Color::Modifier defFG(Color::FG_DEFAULT);
@@ -107,6 +137,8 @@ void String::getLine(const std::string& prompt,
     UnixIO::printInColor(prompt, pCode);
 //    std::cout << promptCopy;
     getline(std::cin, out);
+
+    out = trim(out);
 }
 
 

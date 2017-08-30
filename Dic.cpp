@@ -115,7 +115,6 @@ void Dic::userInteractive()
         printf("Unable to open file at line number %d in file %s\n", __LINE__, __FILE__);
         exit(2);
     }
-    cin.ignore();
     
     while (1)
     {
@@ -123,33 +122,26 @@ void Dic::userInteractive()
         
         simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
         simpleIO::String::getLine("***Enter key:(Enter 'q' or 'Q' to stop):", word);
-        //        cout << "\n***Enter key:(Enter 'q' or 'Q' to stop): ";
-        //        getline(cin, word);
         if (word == "q" || word =="Q") break;
-        
-        // List member function 的返回值作为搜索结果
-        Node* target = dic.find(word);
-        // 如果没有找到，请求输入解释，并且加入List 和 dic file
-        if (target == 0)
-        {
-            //            cout << "Not found....Enter value: ";
-            //            getline(cin,value);
-            simpleIO::String::getLine("Not found....Enter value:", value);
-            
-            if (value == "q" || value =="Q") continue;
-            else if (value == "clear")
+        else if (word == "clear") clear();
+        else{
+            // List member function 的返回值作为搜索结果
+            Node* target = dic.find(word);
+            // 如果没有找到，请求输入解释，并且加入List 和 dic file
+            if (target == 0)
             {
-                clear();
+                simpleIO::String::getLine("Not found....Enter value:", value);
+                
+                if (value == "q" || value =="Q") continue;
+                else if (value == "clear") clear();
+                else
+                {
+                    dic.push(word, value, time(0));
+                    write_new_node_to_file(fout,dic, value);
+                }
             }
-            else
-            {
-                dic.push(word, value, time(0));
-                write_new_node_to_file(fout,dic, value);
-            }
-            
-            
+            else target->printNodeInfo(80, Color::FG_PINK);
         }
-        else target->printNodeInfo(80, Color::FG_LIGHT_Cyan);
     }
     fout.close();
 }
@@ -207,7 +199,7 @@ void Dic::dicCore()
     
     while(1)
     {
-        simpleIO::UnixIO::printInColor("➜ ", Color::FG_GREEN);
+        simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
         simpleIO::String::getLine("Command Dic: ",command,Color::FG_LIGHT_Cyan);
         
         if (command == "dic")
@@ -224,7 +216,8 @@ void Dic::dicCore()
         }
         else if (command.substr(0,2) == "rm")
         {
-            deleteActivity(command.substr(3));
+//            if(command.size() )
+            deleteActivity(command.substr(2));
         }
         else if (command == "time")
         {
@@ -246,26 +239,41 @@ void Dic::timeInfo() const
     tr::TimeRemainder t2(8,17,2017,00,00,00,00, "距离上上一次...");
     tr::TimeRemainder t3(8,28,2017,00,00,00,00, "距离上一次...");
     
-    
     cout << t1 << endl << t2 << t3 << endl;
 }
 
 void Dic::deleteActivity(string info)
 {
-    
-//    size_t posStart = info.find_first_not_of(' ');
-//    size_t posEnd = info.find_last_not_of(' ');
-//    info = info.substr(posStart, posEnd-posStart+1);
-    
     info = simpleIO::String::trim(info);
     
-    exit(10);
-    
-    Node copy = * dic.find(stoi(info));
-    
-    if(dic.remove(stoi(info)))
-        copy.printNodeInfo(80, Color::FG_RED);
-    simpleIO::UnixIO::printInColor(" is removed", Color::FG_RED);
-    
+    if(info.size() < 1) simpleIO::UnixIO::printInColor("Too few arguments");
+    else{
+        
+        vector<string> tokens = simpleIO::String::getTokensWhatTheHellTheOtherOneDoesNotWork(info);
+
+        vector<string> keys(0);
+        
+        for ( int i = 0; i < tokens.size(); i++)
+        {
+            int index = stoi(tokens.at(i));
+            Node* ptr = dic.find(index);
+            if (ptr) keys.push_back((ptr->get_key()));
+            else cout << "Invalid index: " << index << endl;
+        
+        }
+
+        for ( int i = 0; i < keys.size(); i++)
+        {
+            Node copy = * dic.find(keys.at(i));
+            if(dic.remove(keys.at(i)))
+            {
+                cout << "   ";
+                simpleIO::UnixIO::printInColor("➠  ", Color::FG_RED);
+                cout  << copy.get_key();
+                simpleIO::UnixIO::printInColor(" is removed\n", Color::FG_YELLOW);
+            }
+        }
+
+    }
 }
 
