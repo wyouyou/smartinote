@@ -18,6 +18,13 @@ namespace CONST{
     
     const int NUM_NODES_TO_REVIEW = 10;
     
+    const std::string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data/dic.md";
+    
+    const char HTML_OUT_LOCATION [] = "/Applications/selfmade-product/dic-master/data/dic.html";
+    
+    const std::string DATABASE_COPY_LOCATION = "/Applications/selfmade-product/dic-master/data/dicCopy.md";
+
+    
     
 }
 
