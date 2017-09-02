@@ -63,10 +63,9 @@ void Node::init_date()
     date.seconds = timeInfo->tm_sec;
 }
 
-bool Node::reviewNode()
+bool Node::review()
 {
     bool reviewed = true;
-    char deleteNode;
     string remember;
     string prompt = "\n\n认识: " + this->key + " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识, 'D' or 'd' to delete:";
 //    simpleIO::UnixIO::printInColor(" ☞"
@@ -166,30 +165,6 @@ void Node::printIndexInfo() const
 {
     cout << key << " is the " << index << " word in the dic.md.\n";
 }
-void Node::printValue(const short& width, Color::Code pCode) const
-{
-//    Color::Modifier red(Color::FG_RED);
-//    Color::Modifier def(Color::FG_DEFAULT);
-    
-    
-//    simpleIO::UnixIO::printInColor(value, 60, Color::FG_GREEN);
-    simpleIO::UnixIO::printInColor(value, width, pCode);
-    
-    
-    
-//        cout  <<  red << "Key: " << key << def << "\n";
-    // To do, creat a static function: arg1: width, arg2: color
-    
-    
-//    cout << red;
-//    for (int i = 0; i<value.size(); i++)
-//    {
-//        if (i % width == 0) cout << "\n";
-//        
-//        cout << value[i];
-//    }
-//    cout << def << "\n";
-}
 void Node::printTimeAdded() const
 {
     cout << "Time Added:" << date.year2digits << "\\" << date.month << "\\" << date.day_of_month << " " << date.hour << ":" << date.minutes << ":" << date.seconds << "星期" << date.day_of_week << endl;
@@ -228,7 +203,8 @@ void Node::printNodeInfo(const int& width, Color::Code pCode) const
     
 //    width = width < 80? width : 80;
     simpleIO::stdIO::printAline(value.size() < 80 ? value.size() : width);
-    printValue(width, pCode);
+    simpleIO::UnixIO::printInColor(value, width, pCode);
+
     
     
 //    printAline(width);
@@ -275,6 +251,48 @@ void Node::write2Html1RowOfTb(ofstream& fout) const
 void Node::write2HtmlTableTail(ofstream& fout)
 {
     fout << "</table>\n</body>\n</html>\n" << endl;
+}
+
+bool Node::isBornedToday() const
+{
+    time_t currentTime = time(0);
+    Date now;
+    tm* timeInfo  = localtime(&currentTime);
+    now.set_Date(timeInfo);
+    
+    
+    
+    if (this->get_date().year4digits == now.year4digits
+        && this->get_date().day_in_the_year == now.day_in_the_year)
+        return true;
+    else
+        return 0;
+}
+
+bool Node::is124711DaysAgo() const
+{
+    time_t currentTime = time(0);
+    Date now;
+    tm* timeInfo  = localtime(&currentTime);
+    now.set_Date(timeInfo);
+    if (this->get_date().year4digits != now.year4digits)
+        return false;
+    
+    int dayDiff = now.day_in_the_year - this->get_date().day_in_the_year;
+    int scentificDayDiff[] = {1, 2, 4 , 7, 11};
+    
+    // get array lengeth
+    int len = sizeof(scentificDayDiff) / sizeof(int);
+    
+//    cout << "dayDiff:" << dayDiff << endl;
+    
+    for (int i = 0; i < len; i++)
+    {
+        
+        if (dayDiff == scentificDayDiff[i])
+            return true;
+    }
+    return false;
 }
 
 ostream& operator<< (ostream& out, const Node& obj)

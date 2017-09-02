@@ -7,12 +7,6 @@
 
 
 
-
-const char HTML_OUT_LOCATION [] = "/Applications/selfmade-product/dic-master/data/dic.html";
-
-
-
-
 List::List():top(0), NumOfNodes(0){
     
 }
@@ -29,7 +23,7 @@ List::~List()
     }
 }
 
-void List::deleteNodeIfFamiliarEnough(Node* theNode)
+void List::autoRmoveCheck(Node* theNode)
 {
     if (theNode->get_familiar_index() >=  21)
     {
@@ -63,7 +57,7 @@ void List::pushFromNode(const int& i, const string& k, const string& v, const ti
     Node* temp = new Node(i, k, v, t, d,familiar_Index,famPercent, top);
     top = temp;
     NumOfNodes++;
-
+    
 }
 
 void List::add_value(string value, Node* target)
@@ -92,13 +86,13 @@ Node* List::get_top() const
  *      prompt message and return false.
  * If there is
  *      remove the node
-        keepIndexContinous
+ keepIndexContinous
  */
 bool List::remove(const string& key)
 {
     if(!find(key))
     {
-        cerr << key << "is not in the List" << endl;
+        cerr << key << " is not in the List" << endl;
         return false;
     }
     
@@ -107,6 +101,7 @@ bool List::remove(const string& key)
     if (top->get_key() == key)
     {
         top = top -> get_next();
+        rm_message(temp1);
         delete temp1;
         return true;
     }
@@ -119,6 +114,7 @@ bool List::remove(const string& key)
     temp1 -> set_next(temp2->get_next());
     
     keepIndexContinous(temp1->get_next());
+    rm_message(temp2);
     delete temp2;
     --NumOfNodes;
     
@@ -130,7 +126,7 @@ bool List::remove(const string& key)
  *      prompt message and return false.
  * If there is
  *      remove the node
-        keepIndexContinous
+ keepIndexContinous
  */
 bool List::remove(const int& index)
 {
@@ -145,6 +141,7 @@ bool List::remove(const int& index)
     if (top->get_index() == index)
     {
         top = top -> get_next();
+        rm_message(temp1);
         delete temp1;
         return true;
     }
@@ -157,9 +154,11 @@ bool List::remove(const int& index)
     temp1 -> set_next(temp2->get_next());
     
     keepIndexContinous(temp1->get_next());
-    delete temp2;
+    rm_message(temp2);
     
+    delete temp2;
     --NumOfNodes;
+    
     return true;
 }
 /**
@@ -169,7 +168,7 @@ bool List::remove(const int& index)
  */
 void List::keepIndexContinous(Node* ptr)
 {
-
+    
     Node* start = top;
     while (start != ptr)
     {
@@ -177,8 +176,6 @@ void List::keepIndexContinous(Node* ptr)
         start = start->get_next();
     }
 }
-
-
 
 
 
@@ -194,7 +191,7 @@ Node* List::find(const string& key) const
                 return 0;
             }
             return temp;
-
+            
         }
         temp = temp -> get_next();
     }
@@ -236,21 +233,23 @@ bool List::remove_Last()
     }
     delete temp->get_next();
     temp->set_next(0);
-
+    
+    keepIndexContinous(temp->get_next());
+    --NumOfNodes;
     return true;
 }
 
 
-void List::reviewListRandomly(const short& num)
+void List::reviewRandomly(const short& num)
 {
     Node* temp = top;
     int randomIndex;
-    srand (time(NULL));
+    srand (static_cast<unsigned>(time(NULL)));
     
     for (int i = 0 ; i< num; i++)
     {
         randomIndex = simpleIO::Integer::randomIntegerBetween(1, Node::numOfNodes);
-
+        
         temp = find(randomIndex);
         
         if (temp == 0)
@@ -261,16 +260,49 @@ void List::reviewListRandomly(const short& num)
             exit(2);
         }
         
-        temp->reviewNode();
-        deleteNodeIfFamiliarEnough(temp);
+        temp->review();
+        autoRmoveCheck(temp);
         temp = temp->get_next();
     }
     
 }
 
-void List::reviewListScientificly()
+void List::reviewScientificly(const short& num)
 {
     
+    Node * temp =  top;
+    int i = 0;
+    
+    while (temp!=0)
+    {
+        if (i == num)
+            break;
+        
+        if (temp->is124711DaysAgo())
+        {
+            temp->review();
+            i++;
+        }
+        temp = temp->get_next();
+    }
+    
+}
+
+void List::reviewToday(const short& num) const
+{
+    Node * temp =  top;
+    int i = 0;
+    
+    while (temp!=0)
+    {
+        if (i == num)
+            break;
+        
+        if (temp->isBornedToday())
+            temp->review();
+        temp = temp->get_next();
+        i++;
+    }
 }
 
 ostream& operator<< (ostream& out , const List& object)
@@ -287,29 +319,38 @@ ostream& operator<< (ostream& out , const List& object)
     return out;
 }
 
-void List::report2HtmlFile() const
+void List::report2HtmlFile(const string& location) const
 {
     ofstream fout;
-    fout.open(HTML_OUT_LOCATION);
+    fout.open(location);
     if (!fout)
     {
         printf("Not logical value at line number %d in file %s\n", __LINE__, __FILE__);
-        cerr << "Unable to open: " << HTML_OUT_LOCATION << endl;
+        cerr << "Unable to open: " << location << endl;
         exit(1);
     }
     Node::write2HtmlTableHeading(fout);
-
+    
     Node* temp = this->get_top();
     while (temp!=0)
     {
         temp->report2HtmlFile(fout);
-
+        
         temp = temp->get_next();
     }
     Node::write2HtmlTableTail(fout);
-
+    
     
     fout.close();
+    
+}
+
+void List::rm_message(Node* node) const
+{
+    cout << "   ";
+    simpleIO::UnixIO::printInColor("➠  ", Color::FG_RED);
+    cout  << node->get_key();
+    simpleIO::UnixIO::printInColor(" is removed\n", Color::FG_YELLOW);
     
 }
 

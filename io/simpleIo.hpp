@@ -14,6 +14,14 @@
 #include <string>
 #include <vector>
 
+namespace CONST{
+    
+    const int NUM_NODES_TO_REVIEW = 10;
+    
+    
+}
+
+
 /*
  * Refer:https://stackoverflow.com/a/2616912/8023309
  */
@@ -62,8 +70,11 @@ namespace simpleIO{
     class UnixIO
     {
     public:
-        static void printInColor(const std::string& str,const int& width, Color::Code pCode = Color::BG_DEFAULT);
+        static void printInColor(const std::string& str,const int& width, Color::Code pCode = Color::BG_DEFAULT, const std::string& optStr = "");
         static void printInColor(const std::string& str, Color::Code pCode = Color::BG_DEFAULT);
+        static void geeklePrompt();
+        static void displayMessage(const std::string& message);
+        
     };
     
     class stdIO
@@ -126,11 +137,18 @@ namespace simpleIO{
             
         }
         /**
-         * return an ptr to array of strings tokenizeb based on the arg.
+         * return a vector of tokens tokenized,delimited by
+         * the second argument, default is whitespace.
          *
          */
-        static std::vector<std::string> getTokens(const std::string& arg);
-
+        static std::vector<std::string> getTokens(const std::string& arg, const std::string& delimiter = " ");
+        
+        /**
+         * return the first token of the argment string delimited by
+         * the second argument, default is whitespace.
+         */
+        
+        static std::string getToken(const std::string& line, const std::string& delimiter = " ");
         
         /**
          * return a copy of arg but with leading and trailing whitespace removed.

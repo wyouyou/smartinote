@@ -9,7 +9,6 @@
 #include "Dic.hpp"
 
 
-const string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data/test.md";
 
 
 void Dic::readOneElement(string& element, ifstream& fin, const string& tag)
@@ -45,7 +44,8 @@ void Dic::readOneElement(string& element, ifstream& fin, const string& tag)
 void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& item)
 {
     fout << * (L.get_top());
-    cout << "\"" << item  << "\" is added to the database......\n";
+    //    cout << "\"" << item  << "\" is added to the database......\n";
+    simpleIO::UnixIO::printInColor(item, 80, Color::FG_PINK, "is added to the dataabse...");
 }
 
 
@@ -87,7 +87,7 @@ void Dic::retriveDataFromFile(ifstream& fin)
     
 }
 
-Dic::Dic()
+Dic::Dic(const string& DATABASE_LOCATION): FileLocation(DATABASE_LOCATION)
 {
     
     ifstream fin(DATABASE_LOCATION.c_str());
@@ -106,42 +106,59 @@ Dic::Dic()
 void Dic::userInteractive()
 {
     
-    string word = "word or a phrase", value = "no-explaination";
+    string key = "word or a phrase", value = "no-explaination";
     fstream fout;
-    fout.open(DATABASE_LOCATION.c_str(),ios_base::app);
-    
+    Node * copy = nullptr;
+    fout.open(FileLocation.c_str(),ios_base::app);
     if(!fout)
     {
         printf("Unable to open file at line number %d in file %s\n", __LINE__, __FILE__);
         exit(2);
     }
-    
     while (1)
     {
         // 请求一个单词，必须是正确的全拼写。
+        simpleIO::UnixIO::geeklePrompt();
+        simpleIO::String::getLine(": ", key);
+        // List member function 的返回值作为搜索结果
+        Node* target = dic.find(key);
         
-        simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
-        simpleIO::String::getLine("***Enter key:(Enter 'q' or 'Q' to stop):", word);
-        if (word == "q" || word =="Q") break;
-        else if (word == "clear") clear();
-        else{
-            // List member function 的返回值作为搜索结果
-            Node* target = dic.find(word);
-            // 如果没有找到，请求输入解释，并且加入List 和 dic file
-            if (target == 0)
-            {
-                simpleIO::String::getLine("Not found....Enter value:", value);
-                
-                if (value == "q" || value =="Q") continue;
-                else if (value == "clear") clear();
-                else
-                {
-                    dic.push(word, value, time(0));
-                    write_new_node_to_file(fout,dic, value);
-                }
-            }
-            else target->printNodeInfo(80, Color::FG_PINK);
+        if (key == "q" || key =="Q") break;
+        else if (key == "clear") clear();
+        else if (target)
+        {
+            target->printNodeInfo(80, Color::FG_PINK);
+            copy = target;
         }
+        // rm means rmove the last added node, useful when the last input accidently entered sth wrong but node has been added.
+        else if (key == "rm last")
+        {
+            if (copy!=nullptr)
+                dic.remove(copy->get_key());
+            else
+                break;
+        }
+        else if(key.substr(0,2) == "rv")
+            review(key.substr(2));
+        else if (key.substr(0,2) == "rm")
+            deleteActivity(key.substr(2));
+        else if (key == "time")
+            timeInfo();
+        // 如果没有找到，请求输入解释，并且加入List 和 dic file
+        else if (!target)
+        {
+            simpleIO::String::getLine(":", value);
+            if (value == "q" || value =="Q") continue;
+            else if (value.rfind("--q") != std::string::npos) continue;
+            else if (value == "clear") clear();
+            else
+            {
+                dic.push(key, value, time(0));
+                copy = dic.find(key);
+                write_new_node_to_file(fout,dic, value);
+            }
+        }
+        else simpleIO::String::dispalyFatalMessage(key);
     }
     fout.close();
 }
@@ -169,7 +186,7 @@ void Dic::copyDatabaseToArg(const char arg[]) const
     if (!fout)
     {
         printf("Not logical value at line number %d in file %s\n", __LINE__, __FILE__);
-        cerr << "Unable to open: " << DATABASE_LOCATION << endl;
+        cerr << "Unable to open: " << FileLocation << endl;
         exit(1);
     }
     
@@ -181,57 +198,41 @@ void Dic::copyDatabaseToArg(const char arg[]) const
     
 }
 
-void Dic::reviewListRandomly(const short &num)
+
+/*
+ line format: rd/st/td number
+ */
+void Dic::review(const std::string& line)
 {
-    dic.reviewListRandomly(num);
+    std::string lineCopy = line;
+    std::vector<std::string> tokens = simpleIO::String::getTokens(lineCopy);
+    size_t length = tokens.size();
+    
+    int numNodesUserWantToreview = length >= 2? stoi(tokens.at(1)) : CONST::NUM_NODES_TO_REVIEW;
+    
+    
+    if (length < 1)
+        simpleIO::UnixIO::displayMessage("Fatal: rd/sc/rd is not entered");
+    else if (tokens.at(0) == "rd")
+        dic.reviewRandomly(numNodesUserWantToreview);
+    else if (tokens.at(0) == "st")
+        dic.reviewScientificly(numNodesUserWantToreview);
+    else if (tokens.at(0) == "td")
+        dic.reviewToday(numNodesUserWantToreview);
+    else
+        simpleIO::String::dispalyFatalMessage("Command ");
+        
+
+
 }
 
-void Dic::reportHtmlFile() const
+void Dic::reportHtmlFile(const string& location) const
 {
     List dicCopy;
     makeArgReverse(dicCopy);
-    dicCopy.report2HtmlFile();
+    dicCopy.report2HtmlFile(location);
 }
 
-void Dic::dicCore()
-{
-    string command;
-    
-    while(1)
-    {
-        simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
-        simpleIO::String::getLine("Command Dic: ",command,Color::FG_LIGHT_Cyan);
-        
-        if (command == "dic")
-        {
-            userInteractive();
-        }
-        else if(command == "review")
-        {
-            reviewListRandomly(10);
-        }
-        else if (command == "q" || command == "Q")
-        {
-            break;
-        }
-        else if (command.substr(0,2) == "rm")
-        {
-//            if(command.size() )
-            deleteActivity(command.substr(2));
-        }
-        else if (command == "time")
-        {
-            timeInfo();
-        }
-        else if (command == "clear")
-        {
-            clear();
-        }
-        else simpleIO::String::dispalyFatalMessage(command);
-        
-    }
-    
-}
 
 void Dic::timeInfo() const
 {
@@ -250,7 +251,7 @@ void Dic::deleteActivity(string info)
     else{
         
         vector<string> tokens = simpleIO::String::getTokensWhatTheHellTheOtherOneDoesNotWork(info);
-
+        
         vector<string> keys(0);
         
         for ( int i = 0; i < tokens.size(); i++)
@@ -259,21 +260,16 @@ void Dic::deleteActivity(string info)
             Node* ptr = dic.find(index);
             if (ptr) keys.push_back((ptr->get_key()));
             else cout << "Invalid index: " << index << endl;
-        
+            
         }
-
+        
         for ( int i = 0; i < keys.size(); i++)
         {
             Node copy = * dic.find(keys.at(i));
-            if(dic.remove(keys.at(i)))
-            {
-                cout << "   ";
-                simpleIO::UnixIO::printInColor("➠  ", Color::FG_RED);
-                cout  << copy.get_key();
-                simpleIO::UnixIO::printInColor(" is removed\n", Color::FG_YELLOW);
-            }
+            dic.remove(keys.at(i));
+            
         }
-
+        
     }
 }
 

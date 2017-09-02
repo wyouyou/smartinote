@@ -17,7 +17,7 @@ class List
      * If the familiar_index = 21 delete the node.
      * And print a message. 
      */
-    void deleteNodeIfFamiliarEnough(Node* theNode);
+    void autoRmoveCheck(Node* theNode);
 
 public:
     
@@ -81,7 +81,7 @@ public:
      * Printing out num of nodes to console.
      * Every node's familiar_index get updated.
      */
-    void reviewListRandomly(const short& num);
+    void reviewRandomly(const short& num);
     
     /**
      * Review List according to the forgetness curve.
@@ -92,7 +92,14 @@ public:
      * 4 天前的nodes
      * 7 天前的nodes.
      */
-    void reviewListScientificly();
+    void reviewScientificly(const short& num);
+    
+    
+    /**
+     * review today's nodes
+     */
+    
+    void reviewToday(const short& num) const;
     
     /**
      * reportHtmlFile
@@ -100,7 +107,7 @@ public:
      * Dic.cpp HTML_OUT_LOCATION
      *
      */
-    void report2HtmlFile() const;
+    void report2HtmlFile(const string& location) const;
     
     /**
      * keepIndexContinous to keep all the nodes in an continous order.
@@ -108,6 +115,10 @@ public:
      * Usage: called whenever remove funtions get called.
      */
     void keepIndexContinous(Node* );
+    /**
+     * prompt after any node get removed.
+     */
+    void rm_message(Node* ) const;
     
     
     

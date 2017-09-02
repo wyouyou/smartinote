@@ -22,6 +22,7 @@ private:
     
     
     List dic;
+    string FileLocation;
     
     /**
      * Retrive all nodes from local file:
@@ -49,14 +50,14 @@ public:
      * Constructor
      * Retrive data from local database folder.
      */
-    Dic();
+    Dic(const string& DATABASE_LOCATION);
     
     /**
      *
      */
     void userInteractive();
     /**
-     *
+     * The core feature menus of the Dic application.
      * 备份 database to the location where the arg is.
      * 或者 更新数据库
      */
@@ -65,11 +66,11 @@ public:
     /**
      *
      */
-    void reviewListRandomly(const short& num);
+    void review(const std::string& line);
     /**
      *
      */
-    void reportHtmlFile() const;
+    void reportHtmlFile(const string& location) const;
     /**
      * Make arg a reverse order copy of dic.
      *
@@ -82,10 +83,6 @@ public:
      *
      */
     void deleteActivity(std::string info);
-    /**
-     * The core feature menus of the Dic application.
-     */
-    void dicCore();
     
     void timeInfo() const;
 

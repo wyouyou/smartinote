@@ -35,6 +35,19 @@ struct Date{
     int hour; // [0,24]
     int minutes; //[0,59]
     int seconds;//[0,59]
+    
+    void set_Date(tm* timeInfo)
+    {
+        year2digits = timeInfo->tm_year % 100;
+        year4digits = 2000 + year2digits;
+        month = timeInfo->tm_mon + 1;
+        day_of_month = timeInfo->tm_mday;
+        day_of_week = timeInfo->tm_wday;
+        day_in_the_year = timeInfo->tm_yday;
+        hour = timeInfo->tm_hour;
+        minutes = timeInfo->tm_min;
+        seconds = timeInfo->tm_sec;
+    }
 };
 
 
@@ -71,10 +84,14 @@ class Node
      */
     double familiar_percent;
     Node* next; //self-referential data structure.
-    void init_date();
     
 public:
     
+    /**
+     * intialize a data struct
+     */
+    void init_date();
+
     /**
      * Usage: when remove node happen, call this.
      */
@@ -143,13 +160,12 @@ public:
     /**
      *
      */
-    bool reviewNode();
+    bool review();
     
     /** 
      * console output functions
      */
     void printIndexInfo() const;
-    void printValue(const short& width,Color::Code = Color::BG_DEFAULT) const;
     void printTimeAdded() const;
     void printFamilarIndexInfo() const;
     
@@ -179,6 +195,14 @@ public:
      * write one row html of table.
      */
     void write2Html1RowOfTb(ofstream& fout) const;
+    
+    bool isBornedToday() const;
+    
+    bool is124711DaysAgo() const;
+    
+    
+    
+    
 
     
     

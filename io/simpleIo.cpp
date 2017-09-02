@@ -12,7 +12,20 @@ using namespace simpleIO;
 using namespace Color;
 
 
-static std::vector<std::string> getTokens(const std::string& arg)
+/*
+ *
+ */
+std::string String::getToken(const std::string& line, const std::string& delimiter )
+{
+    std::string token;
+    std::vector<std::string> tokens = getTokens(line, delimiter);
+    
+    token = tokens.size() >= 1 ? tokens.at(1) : "";
+    return token;
+}
+
+
+std::vector<std::string> String::getTokens(const std::string& arg, const std::string& delimiter )
 {
     std::string argCopy, temp;
     std::vector<std::string> tokens(0);
@@ -20,11 +33,11 @@ static std::vector<std::string> getTokens(const std::string& arg)
     size_t posStart = 0;
     size_t posEnd  = argCopy.size()-1;
     
-    // getting tokens if posStart and ther is still content at argCopy
+    // getting tokens if posStart and there is still content at argCopy
     while (posStart < posEnd && argCopy.size() > 0)
     {
-        posStart = argCopy.find_first_not_of(' ');
-        posEnd = argCopy.find_first_of(' ');
+        posStart = argCopy.find_first_not_of(delimiter);
+        posEnd = argCopy.find_first_of(delimiter);
         if (posStart < argCopy.size() && posEnd < argCopy.size())
         {
             temp =  argCopy.substr(posStart, posEnd - posStart);
@@ -44,11 +57,28 @@ static std::vector<std::string> getTokens(const std::string& arg)
 
 std::string String::trim(const std::string& arg)
 {
+    /*
+     @ 08/31  Added exception handling when only the Enter key get passed / empty string:
+     libc++abi.dylib: terminating with uncaught exception of type std::out_of_range: basic_string
+     [1]    10832 abort      ./dic
+     
+     */
     
     std::string argCopy = arg;
-    size_t posStart = arg.find_first_not_of(' ');
-    size_t posEnd = arg.find_last_not_of(' ');
-    argCopy = arg.substr(posStart, posEnd-posStart+1);
+    try
+    {
+        if (argCopy.size() == 0)
+            throw argCopy;
+        size_t posStart = arg.find_first_not_of(' ');
+        size_t posEnd = arg.find_last_not_of(' ');
+        argCopy = arg.substr(posStart, posEnd-posStart+1);
+
+    }
+//    catch(std::string str)  // catch specific message.
+    catch(...) // catch general error messages
+    {
+        std::cout << "Empty string exception.";
+    }
     return argCopy;
 }
 
@@ -61,18 +91,48 @@ void simpleIO::stdIO::printAline(const short& length)
 
 }
 
-void UnixIO::printInColor(const std::string& value,const int& width, Color::Code pCode )
+
+
+void UnixIO::geeklePrompt()
 {
+    // A nice prompt for geek ~
+    
+    simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
+    simpleIO::UnixIO::printInColor("G", Color::FG_RED);
+    simpleIO::UnixIO::printInColor("e", Color::FG_YELLOW);
+    simpleIO::UnixIO::printInColor("e", Color::FG_GREEN);
+    simpleIO::UnixIO::printInColor("k", Color::FG_LIGHT_Cyan);
+    simpleIO::UnixIO::printInColor("l", Color::FG_PINK);
+    simpleIO::UnixIO::printInColor("e", Color::FG_GREEN);
+
+}
+
+
+
+
+void UnixIO::displayMessage(const std::string& message)
+{
+    simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
+    std::cout << message;
+}
+
+
+void UnixIO::printInColor(const std::string& str,const int& width, Color::Code pCode,const std::string& optStr)
+{
+    std::string strCopy = str + optStr;
+    
     Color::Modifier color(pCode);
     Color::Modifier defFG(Color::FG_DEFAULT);
 
     std::cout << color;
     
-    for (int i = 0; i<value.size(); i++)
+    for (int i = 0; i<strCopy.size(); i++)
     {
         if (i != 0 && i % width == 0) std::cout << "\n";
-        std::cout << value[i];
+        std::cout << strCopy[i];
     }
+    
+
     
     std::cout << defFG << "\n";
 }
@@ -135,10 +195,9 @@ void String::getLine(const std::string& prompt,
     
     
     UnixIO::printInColor(prompt, pCode);
-//    std::cout << promptCopy;
     getline(std::cin, out);
 
-    out = trim(out);
+
 }
 
 
