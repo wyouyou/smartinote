@@ -11,10 +11,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "io/simpleIo.hpp"
+#include "lib/io/simpleIo.hpp"
 //#include "io/simpleIo.cpp"
 
-#include "time/TimeRemainder.hpp"
+#include "lib/time/TimeRemainder.hpp"
 //#include "time/TimeRemainder.cpp"
 
 

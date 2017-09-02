@@ -1,4 +1,4 @@
-#include "Dic.hpp"
+#include "main/Dic.hpp"
 #include "test/fstreamFile.hpp"
 
 int main (void)
