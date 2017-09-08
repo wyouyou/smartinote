@@ -1,6 +1,9 @@
 
 
-**NOTE:** This is a command line tool to store/search/organize/review/... every signle notes you added.
+**NOTE:** This is a command line tool to store/search/organize/review/... every signle note you added any time.
+**Feature:** smart and scientific review algorithm to overcome [The Forgetting Curve](https://en.wikipedia.org/wiki/Forgetting_curve)
+
+
 
 [访问 Repo](https://github.com/JayeWang/dic)
 
@@ -8,47 +11,31 @@
 
 ## Comannds reference, the arg inside () means optional
 
-* rm index1 (index2 inde3...)
-    
-* rv st (number)
-    review number of notes scientificlly, review all the nodes 1,2,4,,7,11 days ago.
-* rv rd (number)
-    review number of notes randomly.
-* rv td (number)
-    review number of notes added today.
-* q/Q : break the current porcess
-    
-* clear: clear the console
 
-
-## if neither the command above is enter.
-
-serach mode and adding mode will be processing.
-
-For example:
-
-If you enter: XXX
-Notes corresponding to the key XXX will be printed out if there is;
-Asking for entering notes otherwise.
-
-... to be finished...
+Command | parameters | mode 
+:-------|:-------|:-------
+**rm index1 ** |  i0,i1,i3...| remove mutliple notes
+**rm last** | none | remove last in screen
+**rv rd** | a number |random review
+**rv st** | a number| smart review 
+**rv td** | a number| today review|
+**q/Q** | none | break process
+**clear** | none | clear console
+**other** | none | default serach update
 
 
 
-================
-
-cloc|github.com/AlDanial/cloc v 1.72  T=0.12 s (138.8 files/s, 20019.9 lines/s)
+===
+cloc|github.com/AlDanial/cloc v 1.72  T=0.13 s (135.4 files/s, 19235.2 lines/s)
 --- | ---
 
 Language|files|blank|comment|code
 :-------|-------:|-------:|-------:|-------:
-C++|8|320|173|954
-C/C++ Header|7|202|328|307
-Markdown|1|10|0|14
+C++|9|355|217|1027
+C/C++ Header|8|206|408|290
+Markdown|1|25|0|30
 --------|--------|--------|--------|--------
-SUM:|16|532|501|1275
-
-
+SUM:|18|586|625|1347
 
 
 

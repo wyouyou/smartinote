@@ -140,12 +140,17 @@ void UnixIO::geeklePrompt()
     // A nice prompt for geek ~
     
     simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
-    simpleIO::UnixIO::printInColor("G", Color::FG_RED);
+    simpleIO::UnixIO::printInColor("S", Color::FG_RED);
+    simpleIO::UnixIO::printInColor("m", Color::FG_YELLOW);
+    simpleIO::UnixIO::printInColor("a", Color::FG_LIGHT_Cyan);
+    simpleIO::UnixIO::printInColor("r", Color::FG_PINK);
+    simpleIO::UnixIO::printInColor("t", Color::FG_GREEN);
+    simpleIO::UnixIO::printInColor("i", Color::FG_LIGHT_Cyan);
+    simpleIO::UnixIO::printInColor("n", Color::FG_PINK);
+    simpleIO::UnixIO::printInColor("o", Color::FG_GREEN);
+    simpleIO::UnixIO::printInColor("t", Color::FG_RED);
     simpleIO::UnixIO::printInColor("e", Color::FG_YELLOW);
-    simpleIO::UnixIO::printInColor("e", Color::FG_GREEN);
-    simpleIO::UnixIO::printInColor("k", Color::FG_LIGHT_Cyan);
-    simpleIO::UnixIO::printInColor("l", Color::FG_PINK);
-    simpleIO::UnixIO::printInColor("e", Color::FG_GREEN);
+
     
 }
 
