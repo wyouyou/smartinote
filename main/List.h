@@ -36,6 +36,14 @@ public:
      * Pushing a new node from a copy of another node.
      */
     void pushFromNode(const int& i, const string& k, const string& v, const time_t& t, const Date& d,const short& familiar_Index,const double& famPercent);
+    
+    /**
+     * Pushing a new node from a copy of another node.
+     */
+    void push(const Node* arg)
+    {
+        // TO do 
+    }
     /**
      *
      */

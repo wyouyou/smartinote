@@ -79,8 +79,7 @@ public:
     
     /**
      * deleteActivity member function Deleting node manually.
-     * Deleting mode: by index, key.
-     *
+     * delete mutiple node based on the tokens of info
      */
     void deleteActivity(std::string info);
     

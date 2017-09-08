@@ -12,6 +12,45 @@ using namespace simpleIO;
 using namespace Color;
 
 
+
+
+void stdIO::justifyText(std::string& line, const int& theWidth)
+{
+    std::vector<std::string> tokens = String::getTokens(line);
+    
+    short diff = theWidth - line.size();
+    
+    // justify the diff width
+    for (int i = 0 ; i < diff && diff < theWidth && i < tokens.size(); i++)
+    {
+        tokens.at(i) += " ";
+    }
+    
+    // modify the line.
+    line = "";
+    
+    for (int i = 0 ; i < tokens.size(); i++)
+        line += " " + tokens.at(i);
+    
+}
+
+/*
+ * return true if all chars of the arg is numeric
+ * return false if any char of the arg is not numeric
+ * return false if the arg is empty
+ 
+ * Precondition: the string should be a single token with no space.
+ * If any string with token passed in, its copy will be trimed inside the function.
+ */
+
+bool String::isNumeric(const std::string& arg)
+{
+    std::string argCopy = arg;
+    
+    
+    
+    return true;
+}
 /*
  *
  */
@@ -20,24 +59,26 @@ std::string String::getToken(const std::string& line, const std::string& delimit
     std::string token;
     std::vector<std::string> tokens = getTokens(line, delimiter);
     
-    token = tokens.size() >= 1 ? tokens.at(1) : "";
+    token = tokens.size() >= 1 ? tokens.at(0) : "";
     return token;
 }
 
 
 std::vector<std::string> String::getTokens(const std::string& arg, const std::string& delimiter )
 {
+    //    string info = "  2455    65    33  r ";
+    
     std::string argCopy, temp;
     std::vector<std::string> tokens(0);
     argCopy = simpleIO::String::trim(arg);
     size_t posStart = 0;
     size_t posEnd  = argCopy.size()-1;
     
-    // getting tokens if posStart and there is still content at argCopy
+    // getting tokens if posStart and ther is still content at argCopy
     while (posStart < posEnd && argCopy.size() > 0)
     {
-        posStart = argCopy.find_first_not_of(delimiter);
-        posEnd = argCopy.find_first_of(delimiter);
+        posStart = argCopy.find_first_not_of(' ');
+        posEnd = argCopy.find_first_of(' ');
         if (posStart < argCopy.size() && posEnd < argCopy.size())
         {
             temp =  argCopy.substr(posStart, posEnd - posStart);
@@ -49,11 +90,12 @@ std::vector<std::string> String::getTokens(const std::string& arg, const std::st
             tokens.push_back(argCopy);
             break;
         }
+        
     }
+    
     return tokens;
     
 }
-
 
 std::string String::trim(const std::string& arg)
 {
@@ -72,9 +114,9 @@ std::string String::trim(const std::string& arg)
         size_t posStart = arg.find_first_not_of(' ');
         size_t posEnd = arg.find_last_not_of(' ');
         argCopy = arg.substr(posStart, posEnd-posStart+1);
-
+        
     }
-//    catch(std::string str)  // catch specific message.
+    //    catch(std::string str)  // catch specific message.
     catch(...) // catch general error messages
     {
         std::cout << "Empty string exception.";
@@ -88,7 +130,7 @@ void simpleIO::stdIO::printAline(const short& length)
     for (int i = 0; i< length; i++)
         std::cout << "-";
     std::cout << "\n";
-
+    
 }
 
 
@@ -104,10 +146,8 @@ void UnixIO::geeklePrompt()
     simpleIO::UnixIO::printInColor("k", Color::FG_LIGHT_Cyan);
     simpleIO::UnixIO::printInColor("l", Color::FG_PINK);
     simpleIO::UnixIO::printInColor("e", Color::FG_GREEN);
-
+    
 }
-
-
 
 
 void UnixIO::displayMessage(const std::string& message)
@@ -117,22 +157,54 @@ void UnixIO::displayMessage(const std::string& message)
 }
 
 
-void UnixIO::printInColor(const std::string& str,const int& width, Color::Code pCode,const std::string& optStr)
+void UnixIO::printInColor(const std::string& str,const int& theWidth, Color::Code pCode,const std::string& optStr)
 {
-    std::string strCopy = str + optStr;
+    std::string strCopy;
     
+    if (optStr!= "")
+        strCopy = str + optStr;
+    else
+        strCopy = str;
+    
+    // define color Modifier
     Color::Modifier color(pCode);
     Color::Modifier defFG(Color::FG_DEFAULT);
-
     std::cout << color;
     
-    for (int i = 0; i<strCopy.size(); i++)
+    std::vector<std::string> tokens = String::getTokens(strCopy);
+    
+    
+    int width = 0;
+    std::string token;
+    std::string line = "";
+    for (int i = 0; i < tokens.size() ; i++)
     {
-        if (i != 0 && i % width == 0) std::cout << "\n";
-        std::cout << strCopy[i];
+        token = tokens.at(i) + " ";
+        
+//        if (token.size() < theWidth)
+            width += token.size();
+        
+        if (width <= theWidth)
+            line += token;
+        else
+        {
+            if (line.size() > 0 )
+                stdIO::justifyText(line, theWidth);
+            // handle all chinese character.
+            else std::cout << strCopy;
+            
+            std::cout << "   "
+            << std::left <<  std::setw(theWidth)
+            << line << "\n";
+            
+            width = 0;
+            line = "";
+        }
     }
     
-
+    // print the last line which is definitly < theWidth
+    if (line != "")
+        std::cout << "    " << std::left <<  std::setw(theWidth) <<line;
     
     std::cout << defFG << "\n";
 }
@@ -145,10 +217,6 @@ void UnixIO::printInColor(const std::string& str, Color::Code pCode)
     std::cout << color << str << defFG;
 }
 
-
-
-
-/*----------------------------------------------------------------*/
 
 
 /**
@@ -188,7 +256,7 @@ std::string String::getLine(const std::string& prompt,Color::Code pCode) {
 
 
 void String::getLine(const std::string& prompt,
-             std::string& out,Color::Code pCode )
+                     std::string& out,Color::Code pCode )
 {
     std::string promptCopy = prompt;
     String::appendSpace(promptCopy);
@@ -196,8 +264,8 @@ void String::getLine(const std::string& prompt,
     
     UnixIO::printInColor(prompt, pCode);
     getline(std::cin, out);
-
-
+    
+    
 }
 
 

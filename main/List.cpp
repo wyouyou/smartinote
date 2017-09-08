@@ -242,7 +242,9 @@ bool List::remove_Last()
 
 void List::reviewRandomly(const short& num)
 {
-    Node* temp = top;
+    Node* currentPtr = get_top();
+    Node* previousPtr = nullptr;
+    
     int randomIndex;
     srand (static_cast<unsigned>(time(NULL)));
     
@@ -250,9 +252,9 @@ void List::reviewRandomly(const short& num)
     {
         randomIndex = simpleIO::Integer::randomIntegerBetween(1, Node::numOfNodes);
         
-        temp = find(randomIndex);
+        currentPtr = find(randomIndex);
         
-        if (temp == 0)
+        if (currentPtr == nullptr)
         {
             cout << "number of nodes: " << Node::numOfNodes << endl;
             cout << "Random max: " << Node::numOfNodes -1 << "random index: " << randomIndex << endl;
@@ -260,9 +262,19 @@ void List::reviewRandomly(const short& num)
             exit(2);
         }
         
-        temp->review();
-        autoRmoveCheck(temp);
-        temp = temp->get_next();
+        std::string reviewResult = currentPtr->review();
+        
+        //If the user think the last node should be deleted
+        if (reviewResult == "rm last" && previousPtr!= nullptr)
+            remove(previousPtr->get_index());
+        else if (reviewResult == "rm this" && currentPtr != nullptr)
+            remove(currentPtr->get_index());
+        else
+            autoRmoveCheck(currentPtr);
+        
+        // update ptrs state
+        previousPtr = currentPtr;
+        currentPtr = currentPtr->get_next();
     }
     
 }
@@ -290,6 +302,10 @@ void List::reviewScientificly(const short& num)
 
 void List::reviewToday(const short& num) const
 {
+    
+    List * tempList = new List();
+
+    
     Node * temp =  top;
     int i = 0;
     
@@ -299,7 +315,8 @@ void List::reviewToday(const short& num) const
             break;
         
         if (temp->isBornedToday())
-            temp->review();
+//            temp->review();
+            
         temp = temp->get_next();
         i++;
     }

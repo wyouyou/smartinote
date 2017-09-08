@@ -14,6 +14,7 @@
 #include "lib/io/simpleIo.hpp"
 //#include "io/simpleIo.cpp"
 
+
 #include "lib/time/TimeRemainder.hpp"
 //#include "time/TimeRemainder.cpp"
 
@@ -160,7 +161,7 @@ public:
     /**
      *
      */
-    bool review();
+    std::string review();
     
     /** 
      * console output functions

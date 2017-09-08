@@ -1,6 +1,7 @@
 #include "main/Dic.hpp"
 #include "test/fstreamFile.hpp"
 
+
 int main (void)
 {
     // Check compatibility of the InputFile

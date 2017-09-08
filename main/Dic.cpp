@@ -125,6 +125,7 @@ void Dic::userInteractive()
         
         if (key == "q" || key =="Q") break;
         else if (key == "clear") clear();
+        else if (key.empty()) clear();
         else if (target)
         {
             target->printNodeInfo(80, Color::FG_PINK);
@@ -136,7 +137,7 @@ void Dic::userInteractive()
             if (copy!=nullptr)
                 dic.remove(copy->get_key());
             else
-                break;
+                continue;
         }
         else if(key.substr(0,2) == "rv")
             review(key.substr(2));
@@ -147,16 +148,20 @@ void Dic::userInteractive()
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
         else if (!target)
         {
-            simpleIO::String::getLine(":", value);
-            if (value == "q" || value =="Q") continue;
-            else if (value.rfind("--q") != std::string::npos) continue;
-            else if (value == "clear") clear();
-            else
+            do
             {
-                dic.push(key, value, time(0));
-                copy = dic.find(key);
-                write_new_node_to_file(fout,dic, value);
-            }
+                simpleIO::String::getLine(":", value);
+                if (value == "q" || value =="Q") continue;
+                else if (value.rfind("--q") != std::string::npos) continue;
+                else if (value == "clear") clear();
+                else if (value.empty()) continue;
+                else
+                {
+                    dic.push(key, value, time(0));
+                    copy = dic.find(key);
+                    write_new_node_to_file(fout,dic, value);
+                }
+            }while(value.empty());
         }
         else simpleIO::String::dispalyFatalMessage(key);
     }
@@ -221,9 +226,9 @@ void Dic::review(const std::string& line)
         dic.reviewToday(numNodesUserWantToreview);
     else
         simpleIO::String::dispalyFatalMessage("Command ");
-        
-
-
+    
+    
+    
 }
 
 void Dic::reportHtmlFile(const string& location) const
@@ -237,32 +242,47 @@ void Dic::reportHtmlFile(const string& location) const
 void Dic::timeInfo() const
 {
     tr::TimeRemainder t1(9,25,2017,0,0,0,1, "距离Fall quater 2017 begin");
-    tr::TimeRemainder t2(8,17,2017,00,00,00,00, "距离上上一次...");
-    tr::TimeRemainder t3(8,28,2017,00,00,00,00, "距离上一次...");
+    tr::TimeRemainder t2(9,5,2017,00,00,00,00, "距离上一次...");
     
-    cout << t1 << endl << t2 << t3 << endl;
+    cout << t1 << endl << t2 << endl;
 }
 
+/*
+ * Parse tokens and convert them all to ints stored in a vector.
+ * remove multiple node based the indexs stored in the vector.
+ */
 void Dic::deleteActivity(string info)
 {
+    // remove the leading and tailing space
     info = simpleIO::String::trim(info);
     
+    // if there is no real content
     if(info.size() < 1) simpleIO::UnixIO::printInColor("Too few arguments");
     else{
         
-        vector<string> tokens = simpleIO::String::getTokensWhatTheHellTheOtherOneDoesNotWork(info);
-        
+        vector<string> tokens
+        = simpleIO::String::getTokens(info);
         vector<string> keys(0);
+        int index;
         
         for ( int i = 0; i < tokens.size(); i++)
         {
-            int index = stoi(tokens.at(i));
-            Node* ptr = dic.find(index);
-            if (ptr) keys.push_back((ptr->get_key()));
-            else cout << "Invalid index: " << index << endl;
+            // If the str is numeric, convert it to int
+            //  else continue
+    
+            if (simpleIO::String::isNumeric(tokens.at(i)))
+                    index = stoi(tokens.at(i));
+            else
+                continue;
             
+            // determine if the index is a within valid indexs
+            // if it is valid index, add to the index to keys vectors
+            Node* ptr = dic.find(index);
+            if (ptr != nullptr) keys.push_back((ptr->get_key()));
+            else cout << "Invalid index: " << index << endl;
         }
         
+        // remove node(s) based on the keys vector.
         for ( int i = 0; i < keys.size(); i++)
         {
             Node copy = * dic.find(keys.at(i));

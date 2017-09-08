@@ -63,9 +63,9 @@ void Node::init_date()
     date.seconds = timeInfo->tm_sec;
 }
 
-bool Node::review()
+std::string Node::review()
 {
-    bool reviewed = true;
+    std::string reviewResult = "reviewed";
     string remember;
     string prompt = "\n\n认识: " + this->key + " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识, 'D' or 'd' to delete:";
 //    simpleIO::UnixIO::printInColor(" ☞"
@@ -77,7 +77,7 @@ bool Node::review()
     if (remember[0] == 'Y'  or remember[0] == 'y')
     {
         familiar_index++;
-        printNodeInfo(80, Color::FG_LIGHT_Cyan);
+        printNodeInfo(80, Color::FG_PINK);
         
     }
     else if (remember[0] == 'N' or remember[0] == 'n')
@@ -86,9 +86,11 @@ bool Node::review()
         printNodeInfo(80, Color::FG_RED);
     }
     else if (remember == "clear" ) clear();
+    else if (remember == "rm last") return remember;
+    else if (remember == "rm this") return remember;
     else simpleIO::String::dispalyFatalMessage("command");
     
-    return reviewed;
+    return reviewResult;
 }
 
 
@@ -201,9 +203,24 @@ void Node::printNodeInfo(const int& width, Color::Code pCode) const
 //    printAline(width);
 //    printFamilarIndexInfo();
     
+    
+    std::string valueCopy = value;
+    
+//    size_t pos = copy.find("，");
+//    cout << "sizeOf ，：" << sizeof("，");
+//    cout << "sizeOf ，：" << sizeof(",");
+//    cout << "sizeOf ，：" << sizeof("字");
+
+
+//
+//    while (pos != string::nops) {
+//        copy.replace(pos, ',');
+//    }
+    
+    
 //    width = width < 80? width : 80;
-    simpleIO::stdIO::printAline(value.size() < 80 ? value.size() : width);
-    simpleIO::UnixIO::printInColor(value, width, pCode);
+//    simpleIO::stdIO::printAline(value.size() < 80 ? value.size() : width);
+    simpleIO::UnixIO::printInColor(valueCopy, width, pCode);
 
     
     

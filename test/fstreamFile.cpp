@@ -35,8 +35,9 @@ fstreamFile::~fstreamFile()
 
 void fstreamFile::alloc(std::ifstream& fin)
 {
+    // Calculate number of "valid line"s in the database file
     std::string temp;
-    while (!fin.eof())
+    while (fin >> temp)
     {
         getline(fin,temp);
         lineCount++;
@@ -51,7 +52,7 @@ void fstreamFile::alloc(std::ifstream& fin)
 
 void fstreamFile::init(std::ifstream& fin)
 {
-
+    std::cout << "Line count: " << lineCount << std::endl;
     for (int i = 0; i < lineCount; i++)
     {
         fin >> index[i];
@@ -86,19 +87,31 @@ bool fstreamFile::checkIndex()
     return ContinousIndex;
 }
 
+
 void fstreamFile::report() const
 {
-    if (ValidLine) return;
-    else if (!ContinousIndex)
+    
+    if(validFile)
+    {
+        return;
+    }
+    else  if (!ContinousIndex)
+     {
         std::cout << path << " file's "
         << " indexs is not continous"
         << std::endl << "Error line around: " << errorLine
         << std::endl;
+         exit(1);
+     }
     else if (!ValidLine)
-        std::cout << path << " file's "
+    {
+                std::cout << path << " file's "
         << " line is not valid for the driver program!"
         << std::endl << "Error line around: " << errorLine
         << std::endl;
+        exit(2);
+
+    }
     else
         std::cout << "Never got here!";
     

@@ -1,6 +1,6 @@
 
 
-**NOTE:** This is command line tool to store/search/organize/review/... every signle notes you added.
+**NOTE:** This is a command line tool to store/search/organize/review/... every signle notes you added.
 
 [访问 Repo](https://github.com/JayeWang/dic)
 

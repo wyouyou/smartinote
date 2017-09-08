@@ -45,6 +45,14 @@ public:
     bool ContinousIndex;
     bool ValidLine;
     std::vector<int> indexs;
+    /**
+     * If the input file meeting cetain requirements. 
+            Program continue;
+     * elif the input file has line with non continous index
+            exit program and prompt error line
+     * elif the input file does not meet the delimiters setting
+            eixt program and prompt the error line.
+     */
     void report() const;
 };
 
