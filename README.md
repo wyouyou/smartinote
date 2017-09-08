@@ -9,22 +9,23 @@ This is a command line tool to store/search/organize/review/... every signle not
 
 [访问 Repo](https://github.com/JayeWang/dic)
 
-# 命令列表 #
+# 命令列表 Command Table
 
-Command | parameters | mode 
-:-------|:-------|:-------
-**rm index1 ** |  i0, i1, i3...| remove mutliple notes
-**rm last** | none | remove showed note
-**rv rd** | num | num's random review
-**rv st** | num | num's smart review 
-**rv td** | num | today's review|
-**q/Q** | none | break current process
-**clear** | none | clear current console
-**other** | none | default serach/update
+Command | Parameter(s) | Mode | Usage scenario
+:-------|:-------|:------- |:-------
+**rm** |  i0, i1, i3...| remove mutliple notes | developer's remove mode to manage data 
+**rm last** | none | remove showed note | remove any note be seen if it is too easy 
+**rv rd** | num deafult:10  | num's random review |  review num of notes added anytime randomly 
+**rv st** | num deafult:10 | num's smart review | review num of notes added 1,2,4,7,11 ago randomly 
+**rv td** | num deafult:10 | today's review| review num of notes added today randomly 
+**q/Q** | none | break current process | go back to previous process, exit if in main process
+**clear** | none | clear current console | similiar ways: Command + L & Command + option + L
+**other** | none | default serach/update | search based on input, ask insertion if nothing matches 
+-------- | -----| --------------|--------------------------------------
 
 
 
-# 代码分析 #
+# 代码分析 Code Report
 cloc|github.com/AlDanial/cloc v 1.72  T=0.13 s (135.4 files/s, 19235.2 lines/s)
 --- | ---
 
