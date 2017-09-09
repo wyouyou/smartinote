@@ -23,6 +23,10 @@ Node::Node(string theKey, string theValue, Node*n, time_t t ): key(theKey), valu
     familiar_index = 0;
     init_date();
     familiar_percent = 0;
+    
+    // tag part
+//    tag = Tag(theInfo);
+    
 }
 
 /**
@@ -68,7 +72,7 @@ std::string Node::review()
     std::string reviewResult = "reviewed";
     string remember;
     string prompt = "\n\n认识: " + this->key + " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识, 'D' or 'd' to delete:";
-//    simpleIO::UnixIO::printInColor(" ☞"
+    //    simpleIO::UnixIO::printInColor(" ☞"
     
     simpleIO::UnixIO::printInColor("\n ☞ ", Color::FG_GREEN);
     
@@ -197,35 +201,35 @@ void Node::printFamilarIndexInfo() const
 void Node::printNodeInfo(const int& width, Color::Code pCode) const
 {
     //    clear();
-//    printAline(width);
-//    printIndexInfo();
+    //    printAline(width);
+    //    printIndexInfo();
     
-//    printAline(width);
-//    printFamilarIndexInfo();
+    //    printAline(width);
+    //    printFamilarIndexInfo();
     
     
     std::string valueCopy = value;
     
-//    size_t pos = copy.find("，");
-//    cout << "sizeOf ，：" << sizeof("，");
-//    cout << "sizeOf ，：" << sizeof(",");
-//    cout << "sizeOf ，：" << sizeof("字");
-
-
-//
-//    while (pos != string::nops) {
-//        copy.replace(pos, ',');
-//    }
+    //    size_t pos = copy.find("，");
+    //    cout << "sizeOf ，：" << sizeof("，");
+    //    cout << "sizeOf ，：" << sizeof(",");
+    //    cout << "sizeOf ，：" << sizeof("字");
     
     
-//    width = width < 80? width : 80;
-//    simpleIO::stdIO::printAline(value.size() < 80 ? value.size() : width);
+    //
+    //    while (pos != string::nops) {
+    //        copy.replace(pos, ',');
+    //    }
+    
+    
+    //    width = width < 80? width : 80;
+    //    simpleIO::stdIO::printAline(value.size() < 80 ? value.size() : width);
     simpleIO::UnixIO::printInColor(valueCopy, width, pCode);
-
     
     
-//    printAline(width);
-//    printTimeAdded();
+    
+    //    printAline(width);
+    //    printTimeAdded();
     //    printAline();
 }
 
@@ -301,7 +305,7 @@ bool Node::is124711DaysAgo() const
     // get array lengeth
     int len = sizeof(scentificDayDiff) / sizeof(int);
     
-//    cout << "dayDiff:" << dayDiff << endl;
+    //    cout << "dayDiff:" << dayDiff << endl;
     
     for (int i = 0; i < len; i++)
     {
@@ -312,10 +316,30 @@ bool Node::is124711DaysAgo() const
     return false;
 }
 
+
 ostream& operator<< (ostream& out, const Node& obj)
 {
     
-    out << obj.get_index() << "     " << obj.get_key() << "|" << "   " << obj.get_value() << "|"  << "    " << obj.get_timeAdded() << "|" << "    " << obj.get_familiar_index() <<  endl << endl;
+    //    2     踏平坎坷成大道|   Uneven roads are trodden down|    1503269819|    1
+    out << obj.get_index() << "     "
+    << obj.get_key()<< "|" << "   "
+    << obj.get_value() << "|"  << "    "
+    << obj.get_timeAdded() << "|" << "    "
+    << obj.get_familiar_index() <<  endl << endl;
+    
+//    
+//    // add vector tag data member
+//    out << obj.get_index() << "     "
+//    << obj.get_key()<< "|" << "   "
+//    << obj.get_value() << "|"  << "    "
+//    << obj.get_timeAdded() << "|" << "    "
+//    << obj.get_familiar_index();
+//    
+//    // to to: is it possible overload insertion operator for vector?
+//    
+    
+//    out <<  endl << endl;
+    
     return out;
 }
 

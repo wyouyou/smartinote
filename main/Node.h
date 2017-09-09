@@ -12,11 +12,9 @@
 #include <string>
 #include <fstream>
 #include "lib/io/simpleIo.hpp"
-//#include "io/simpleIo.cpp"
-
-
 #include "lib/time/TimeRemainder.hpp"
-//#include "time/TimeRemainder.cpp"
+#include "Tag.hpp"
+
 
 
 
@@ -52,6 +50,14 @@ struct Date{
 };
 
 
+/*
+ Notes for adding a data member:
+ 
+ add data member declaration inside class declration
+ 
+ add accessor function for this data member.
+ 
+ */
 
 
 /**
@@ -66,17 +72,20 @@ class Node
     string key;
     string value;
     time_t timeAdded;
+    
     /**
      * date is assigned whenever timeAdded is assigned.
      * date get chance to be assigned value for any args only
-     * if copying/cloning node happens
+     * if copying/cloning node happens.
      */
     Date date;
+    
     /**
      * familiar_index = Times user have commited that they have known key
      *
      */
     short familiar_index;
+    
     /**
      * familiar_percent = familiar_index / 21;
      * familiar_percent is assigned whenever familiar_index is assigned.
@@ -84,7 +93,15 @@ class Node
      * if copying/cloning node happens
      */
     double familiar_percent;
+    
+    
+    Tag tag;
+    
     Node* next; //self-referential data structure.
+    
+    
+    
+    
     
 public:
     

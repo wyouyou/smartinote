@@ -80,6 +80,8 @@ void Dic::retriveDataFromFile(ifstream& fin)
              */
             timeAdded = (time_t)atoll(str_timeAdded.c_str());
             
+            
+            
             dic.pushFromFile( index, key, value, timeAdded, familiar_index);
         }
         
@@ -107,14 +109,14 @@ void Dic::userInteractive()
 {
     
     string key = "word or a phrase", value = "no-explaination";
-    fstream fout;
+    //    fstream fout;
     Node * copy = nullptr;
-    fout.open(FileLocation.c_str(),ios_base::app);
-    if(!fout)
-    {
-        printf("Unable to open file at line number %d in file %s\n", __LINE__, __FILE__);
-        exit(2);
-    }
+    //    fout.open(FileLocation.c_str(),ios_base::app);
+    //    if(!fout)
+    //    {
+    //        printf("Unable to open file at line number %d in file %s\n", __LINE__, __FILE__);
+    //        exit(2);
+    //    }
     while (1)
     {
         // 请求一个单词，必须是正确的全拼写。
@@ -137,36 +139,28 @@ void Dic::userInteractive()
             if (copy!=nullptr)
                 dic.remove(copy->get_key());
             else
+            {
+                std::cout << "I am lost! :(" << std::endl;
                 continue;
+            }
         }
         else if(key.substr(0,2) == "rv")
             review(key.substr(2));
         else if (key.substr(0,2) == "rm")
             deleteActivity(key.substr(2));
+        else if (key.substr(0,3) == "tag")
+            groupActiviy(key.substr(3));
         else if (key == "time")
             timeInfo();
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
         else if (!target)
-        {
-            do
-            {
-                simpleIO::String::getLine(":", value);
-                if (value == "q" || value =="Q") continue;
-                else if (value.rfind("--q") != std::string::npos) continue;
-                else if (value == "clear") clear();
-                else if (value.empty()) continue;
-                else
-                {
-                    dic.push(key, value, time(0));
-                    copy = dic.find(key);
-                    write_new_node_to_file(fout,dic, value);
-                }
-            }while(value.empty());
-        }
+            singleActivity(key, copy);
+        
         else simpleIO::String::dispalyFatalMessage(key);
     }
-    fout.close();
 }
+
+
 
 void Dic::makeArgReverse(List& dicCopy) const
 {
@@ -247,6 +241,53 @@ void Dic::timeInfo() const
     cout << t1 << endl << t2 << endl;
 }
 
+
+/**
+ * IF the info is "", run as main prcess
+ * If the info has content, run as sub main process
+ *
+ */
+void Dic::groupActiviy(std::string info)
+{
+   // to do 
+}
+
+/**
+ * Asking for inputing a value for the key arg.
+ */
+void Dic::singleActivity(const string& key, Node*& lastNode)
+{
+    string value = "no-explaination";
+    fstream fout;
+    //    Node * lastNode = nullptr;
+    fout.open(FileLocation.c_str(),ios_base::app);
+    if(!fout)
+    {
+        printf("Unable to open file at line number %d in file %s\n", __LINE__, __FILE__);
+        exit(2);
+    }
+    
+    // do while loop handle enter key accidently entered
+    do
+    {
+        simpleIO::String::getLine(":", value);
+        if (value == "q" || value =="Q") continue;
+        else if (value.rfind("--q") != std::string::npos) continue;
+        else if (value == "clear") clear();
+        else if (value.empty()) continue;
+        else
+        {
+            dic.push(key, value, time(0));
+            lastNode = dic.find(key);
+            write_new_node_to_file(fout,dic, value);
+        }
+    }while(value.empty());
+    
+    fout.close();
+    
+}
+
+
 /*
  * Parse tokens and convert them all to ints stored in a vector.
  * remove multiple node based the indexs stored in the vector.
@@ -269,9 +310,9 @@ void Dic::deleteActivity(string info)
         {
             // If the str is numeric, convert it to int
             //  else continue
-    
+            
             if (simpleIO::String::isNumeric(tokens.at(i)))
-                    index = stoi(tokens.at(i));
+                index = stoi(tokens.at(i));
             else
                 continue;
             

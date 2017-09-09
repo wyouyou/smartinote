@@ -242,7 +242,9 @@ bool List::remove_Last()
 
 void List::reviewRandomly(const short& num)
 {
+    // hold any valid node address with valid index
     Node* currentPtr = get_top();
+    // keep track of the last node, useage: when the user think the node just reviewed is too easy, or if the user hate it...
     Node* previousPtr = nullptr;
     
     int randomIndex;
@@ -263,63 +265,99 @@ void List::reviewRandomly(const short& num)
         }
         
         std::string reviewResult = currentPtr->review();
-        
-        //If the user think the last node should be deleted
-        if (reviewResult == "rm last" && previousPtr!= nullptr)
-            remove(previousPtr->get_index());
-        else if (reviewResult == "rm this" && currentPtr != nullptr)
-            remove(currentPtr->get_index());
-        else
-            autoRmoveCheck(currentPtr);
-        
-        // update ptrs state
-        previousPtr = currentPtr;
-        currentPtr = currentPtr->get_next();
+        reviewFollowUp(reviewResult, currentPtr, previousPtr);
+
     }
     
 }
+
+
+void List::reviewFollowUp(const string& reviewResult,Node*& currentPtr, Node*& previousPtr)
+{
+    
+    //If the user think the last node should be deleted
+    if (reviewResult == "rm last" && previousPtr!= nullptr)
+        remove(previousPtr->get_index());
+    
+    // Note: the first note can not be removed
+    else if (reviewResult == "rm last" && previousPtr == nullptr)
+        std::cout << "The first note can not be removed out!\n";
+    
+    else if (reviewResult == "rm this" && currentPtr != nullptr)
+        remove(currentPtr->get_index());
+    else
+        autoRmoveCheck(currentPtr);
+    
+    // update ptrs state
+    previousPtr = currentPtr;
+    currentPtr = currentPtr->get_next();
+    
+}
+
 
 void List::reviewScientificly(const short& num)
 {
     
-    Node * temp =  top;
+    std::string reviewResult;
+    Node * currentPtr =  top;
+    // keep track of the last node, useage: when the user think the node just reviewed is too easy, or if the user hate it...
+    Node* previousPtr = nullptr;
+
+    
     int i = 0;
     
-    while (temp!=0)
+    while (currentPtr!=0)
     {
         if (i == num)
             break;
         
-        if (temp->is124711DaysAgo())
+        if (currentPtr->is124711DaysAgo())
         {
-            temp->review();
+            reviewResult = currentPtr->review();
+            
+            reviewFollowUp(reviewResult, currentPtr, previousPtr);
             i++;
         }
-        temp = temp->get_next();
+        
     }
     
 }
 
-void List::reviewToday(const short& num) const
+void List::reviewToday(const short& num)
 {
+ 
+    // to do  use a new list collection to add randomnize
+//    List * tempList = new List();
     
-    List * tempList = new List();
-
+    // keep track of the last node, useage: when the user think the node just reviewed is too easy, or if the user hate it...
+    std::string reviewResult;
+    Node* previousPtr = nullptr;
+    Node * currentPtr =  top;
     
-    Node * temp =  top;
+    bool reviewed = false;
+    
     int i = 0;
     
-    while (temp!=0)
+    while (currentPtr!= nullptr)
     {
         if (i == num)
             break;
         
-        if (temp->isBornedToday())
-//            temp->review();
+        // if the note is borned today, review it
+        if (currentPtr->isBornedToday())
+        {
             
-        temp = temp->get_next();
-        i++;
+            reviewResult = currentPtr->review();
+            reviewed = true;
+            reviewFollowUp(reviewResult, currentPtr, previousPtr);
+            i++;
+        }
+        // If not borned tody, advance the currentPtr
+        else
+            currentPtr = currentPtr->get_next();
     }
+    
+    cout <<(reviewed? "That is all for this turn.\n" : "Nothing to review for today\n");
 }
 
 ostream& operator<< (ostream& out , const List& object)
@@ -367,7 +405,7 @@ void List::rm_message(Node* node) const
     cout << "   ";
     simpleIO::UnixIO::printInColor("➠  ", Color::FG_RED);
     cout  << node->get_key();
-    simpleIO::UnixIO::printInColor(" is removed\n", Color::FG_YELLOW);
+    simpleIO::UnixIO::printInColor(" is removed :) \n", Color::FG_YELLOW);
     
 }
 

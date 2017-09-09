@@ -27,16 +27,15 @@ Command | Parameter(s) | Mode | Usage scenario
 
 # 代码分析 Code Report
 cloc|github.com/AlDanial/cloc v 1.72  T=0.13 s (135.4 files/s, 19235.2 lines/s)
+cloc|github.com/AlDanial/cloc v 1.72  T=0.15 s (132.8 files/s, 18560.9 lines/s)
 --- | ---
 
 Language|files|blank|comment|code
 :-------|-------:|-------:|-------:|-------:
-C++|9|355|217|1027
-C/C++ Header|8|206|408|290
-Markdown|1|25|0|30
+C++|10|404|271|1103
+C/C++ Header|9|247|411|318
+Markdown|1|17|0|25
 --------|--------|--------|--------|--------
-SUM:|18|586|625|1347
-
-
+SUM:|20|668|682|1446
 
 

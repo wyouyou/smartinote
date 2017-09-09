@@ -13,7 +13,6 @@ using namespace Color;
 
 
 
-
 void stdIO::justifyText(std::string& line, const int& theWidth)
 {
     std::vector<std::string> tokens = String::getTokens(line);
@@ -77,8 +76,9 @@ std::vector<std::string> String::getTokens(const std::string& arg, const std::st
     // getting tokens if posStart and ther is still content at argCopy
     while (posStart < posEnd && argCopy.size() > 0)
     {
-        posStart = argCopy.find_first_not_of(' ');
-        posEnd = argCopy.find_first_of(' ');
+        posStart = argCopy.find_first_not_of(delimiter);
+        posEnd = argCopy.find_first_of(delimiter);
+        
         if (posStart < argCopy.size() && posEnd < argCopy.size())
         {
             temp =  argCopy.substr(posStart, posEnd - posStart);

@@ -15,10 +15,18 @@ class List
     Node* top;
     /**
      * If the familiar_index = 21 delete the node.
-     * And print a message. 
+     * And print a message.
      */
     void autoRmoveCheck(Node* theNode);
-
+    
+    /**
+     * handle the case where user  think the node just reviewed is too easy, or if the user hate it...
+     * so the note just reviewed should go to hell, no copy.
+     * Also advance the currenrPtr to the next level
+     */
+    void reviewFollowUp(const string& reviewResult,Node*& currentPtr, Node*& previousPtr);
+    
+    
 public:
     
     List();
@@ -42,7 +50,7 @@ public:
      */
     void push(const Node* arg)
     {
-        // TO do 
+        // TO do
     }
     /**
      *
@@ -76,7 +84,7 @@ public:
     /**
      * return the address of the node with the same index as arg.
      * return 0 if not found.
-     */ 
+     */
     Node* find(const int& index) const;
     
     /**
@@ -107,7 +115,7 @@ public:
      * review today's nodes
      */
     
-    void reviewToday(const short& num) const;
+    void reviewToday(const short& num) ;
     
     /**
      * reportHtmlFile

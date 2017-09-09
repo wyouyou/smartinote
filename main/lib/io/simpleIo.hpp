@@ -14,6 +14,8 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
+#include <iterator>
 
 namespace CONST{
     
@@ -24,9 +26,6 @@ namespace CONST{
     const char HTML_OUT_LOCATION [] = "/Applications/selfmade-product/dic-master/data/dic.html";
     
     const std::string DATABASE_COPY_LOCATION = "/Applications/selfmade-product/dic-master/data/dicCopy.md";
-
-    
-    
 }
 
 
@@ -70,6 +69,7 @@ namespace Color {
         }
     };
 }
+
 
 
 namespace simpleIO{
@@ -130,39 +130,6 @@ namespace simpleIO{
         static bool isNumeric(const std::string&);
         
         
-        
-//        static std::vector<std::string> getTokensWhatTheHellTheOtherOneDoesNotWork(const std::string& arg)
-//        {
-//            //    string info = "  2455    65    33  r ";
-//            
-//            std::string argCopy, temp;
-//            std::vector<std::string> tokens(0);
-//            argCopy = simpleIO::String::trim(arg);
-//            size_t posStart = 0;
-//            size_t posEnd  = argCopy.size()-1;
-//            
-//            // getting tokens if posStart and ther is still content at argCopy
-//            while (posStart < posEnd && argCopy.size() > 0)
-//            {
-//                posStart = argCopy.find_first_not_of(' ');
-//                posEnd = argCopy.find_first_of(' ');
-//                if (posStart < argCopy.size() && posEnd < argCopy.size())
-//                {
-//                    temp =  argCopy.substr(posStart, posEnd - posStart);
-//                    argCopy = simpleIO::String::trim(argCopy.substr(posEnd));
-//                    tokens.push_back(temp);
-//                }
-//                else // the last tokens
-//                {
-//                    tokens.push_back(argCopy);
-//                    break;
-//                }
-//                
-//            }
-//            
-//            return tokens;
-//            
-//        }
         /**
          * return a vector of tokens tokenized,delimited by
          * the second argument, default is whitespace.

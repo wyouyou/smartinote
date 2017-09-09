@@ -77,6 +77,19 @@ public:
      */
     void makeArgReverse(List& dicCopy) const ;
     
+    
+    /**
+     * A single note insertion
+     */
+    
+    void singleActivity(const string& key,Node*& node);
+    
+    /**
+     * groupActivity is a sub dic process with a set of specific tag
+     * multiple notes insertion
+     */
+    void groupActiviy(std::string info);
+    
     /**
      * deleteActivity member function Deleting node manually.
      * delete mutiple node based on the tokens of info
