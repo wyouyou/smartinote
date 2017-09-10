@@ -82,6 +82,7 @@ namespace simpleIO{
         
     public:
         
+        
         /**
          * Print str in the color specified by the client.
          * Optional optStr is used to add extra info to console
@@ -126,6 +127,9 @@ namespace simpleIO{
     class stdIO
     {
     public:
+        
+        static bool isEnterKeyPressed(const std::string& str);
+
         static void printAline(const short& length);
         /**
          * Modify the string with the width specific.

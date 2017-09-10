@@ -12,6 +12,17 @@ using namespace simpleIO;
 using namespace Color;
 
 
+/**
+ * return true if the enter key get pressed.
+ */
+
+bool simpleIO::stdIO::isEnterKeyPressed(const std::string& str)
+{
+    if (str.empty())
+        return true;
+    else
+        return false;
+}
 
 
 std::string stdIO::getSpaces(const int& num)
@@ -162,7 +173,7 @@ std::string String::trim(const std::string& arg)
     //    catch(std::string str)  // catch specific message.
     catch(...) // catch general error messages
     {
-        std::cout << "Empty string exception.";
+//        std::cout << "Empty string exception.";
     }
     return argCopy;
 }

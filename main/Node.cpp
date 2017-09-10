@@ -71,6 +71,7 @@ std::string Node::review()
 {
     std::string reviewResult = "reviewed";
     string remember;
+    do{
     string prompt = "\n\n认识: " + this->key + " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识, 'D' or 'd' to delete:";
     //    simpleIO::UnixIO::printInColor(" ☞"
     
@@ -93,7 +94,15 @@ std::string Node::review()
     else if (remember == "rm last") return remember;
     else if (remember == "rm this") return remember;
     else if (remember == "q") return remember;
+    else if (simpleIO::stdIO::isEnterKeyPressed(remember))
+    {
+        clear();
+        continue;
+
+    }
     else simpleIO::String::dispalyFatalMessage("command");
+    }
+    while (simpleIO::stdIO::isEnterKeyPressed(remember));
     
     return reviewResult;
 }
@@ -229,13 +238,7 @@ void Node::printNodeInfo(const int& width, Color::Code pCode) const
         cout << endl;
     }
     
-//    simpleIO::UnixIO::printInColor(valueCopy, width, pCode);
     
-    
-    
-    //    printAline(width);
-    //    printTimeAdded();
-    //    printAline();
 }
 
 

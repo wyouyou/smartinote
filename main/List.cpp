@@ -323,6 +323,7 @@ void List::reviewScientificly(const short& num)
         {
             reviewed = true;
             reviewResult = currentPtr->review();
+            if (reviewResult == "q") break;
             reviewFollowUp(reviewResult, currentPtr, previousPtr);
             i++;
         }
@@ -363,6 +364,7 @@ void List::reviewToday(const short& num)
         {
             
             reviewResult = currentPtr->review();
+            if (reviewResult == "q") break;
             reviewed = true;
             reviewFollowUp(reviewResult, currentPtr, previousPtr);
             i++;

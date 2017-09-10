@@ -48,7 +48,7 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& ite
     L.get_top()->printNodeInfo(CONST::PRINT_WIDTH);
     //    cout << "\"" << item  << "\" is added to the database......\n";
 //    simpleIO::UnixIO::printInColor(item, UnixIO::printWidth, Color::FG_PINK, " is added to the database :)\n");
-    simpleIO::UnixIO::printInColor("     is added to database!", Color::FG_PINK);
+    simpleIO::UnixIO::printInColor("     is added.😊\n", Color::FG_PINK);
 
 }
 
@@ -126,12 +126,13 @@ void Dic::userInteractive()
         // 请求一个单词，必须是正确的全拼写。
         simpleIO::UnixIO::smartinotePrompt();
         simpleIO::String::getLine(": ", key);
+        key = simpleIO::String::trim(key);
         // List member function 的返回值作为搜索结果
         Node* target = dic.find(key);
         
         if (key == "q" || key =="Q") break;
         else if (key == "clear") clear();
-        else if (key.empty()) clear();
+        else if (simpleIO::stdIO::isEnterKeyPressed(key)) continue;
         else if (target)
         {
             target->printNodeInfo(CONST::PRINT_WIDTH);
@@ -277,7 +278,8 @@ void Dic::singleActivity(const string& key, Node*& lastNode)
         if (value == "q" || value =="Q") continue;
         else if (value.rfind("--q") != std::string::npos) continue;
         else if (value == "clear") clear();
-        else if (value.empty()) continue;
+        else if (simpleIO::stdIO::isEnterKeyPressed(value))
+            continue;
         else
         {
             dic.push(key, value, time(0));
