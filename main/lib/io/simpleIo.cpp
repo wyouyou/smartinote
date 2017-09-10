@@ -13,6 +13,7 @@ using namespace Color;
 
 
 
+
 std::string stdIO::getSpaces(const int& num)
 {
     
@@ -45,10 +46,10 @@ void stdIO::justifyText(std::string& line, const int& theWidth)
 }
 
 /*
- * return true if all chars of the arg is numeric
  * return false if any char of the arg is not numeric
  * return false if the arg is empty
- 
+ * return true if all chars of the arg is numeric
+
  * Precondition: the string should be a single token with no space.
  * If any string with token passed in, its copy will be trimed inside the function.
  */
@@ -56,10 +57,25 @@ void stdIO::justifyText(std::string& line, const int& theWidth)
 bool String::isNumeric(const std::string& arg)
 {
     std::string argCopy = arg;
+    const int asciiMin = 48;
+    const int asciiMax = 57;
+    bool isNum = true;
+    
+    if (argCopy == "")
+        return false;
     
     
     
-    return true;
+    for (int i = 0 ; i< argCopy.size(); i++)
+    {
+        int ascii = argCopy[i];
+        if (ascii >= asciiMin && ascii <= asciiMax)
+            isNum = true;
+        else
+            return false;
+    }
+    
+    return isNum;
 }
 /*
  *
@@ -162,7 +178,7 @@ void simpleIO::stdIO::printAline(const short& length)
 
 
 
-void UnixIO::geeklePrompt()
+void UnixIO::smartinotePrompt()
 {
     // A nice prompt for geek ~
     
@@ -184,7 +200,8 @@ void UnixIO::geeklePrompt()
 
 void UnixIO::displayMessage(const std::string& message)
 {
-    simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
+    std::cout << "   ";
+    simpleIO::UnixIO::printInColor("➠  ", Color::FG_RED);
     std::cout << message;
 }
 
@@ -329,7 +346,9 @@ int simpleIO::Integer::randomIntegerBetween(const int &min, const int &max)
 
 void String::dispalyFatalMessage(const std::string& commandInfo)
 {
-    std::cout << "fatal: " << commandInfo << " is not found.\n";
+    std::cout << "    ";
+    simpleIO::UnixIO::printInColor("➠  fatal ", Color::FG_RED);
+    std::cout << commandInfo  << " is not found" << std::endl;
 }
 
 

@@ -19,6 +19,8 @@
 
 namespace CONST{
     
+    const int PRINT_WIDTH = 80;
+    
     const int NUM_NODES_TO_REVIEW = 10;
     
     const std::string DATABASE_LOCATION = "/Applications/selfmade-product/dic-master/data/dic.md";
@@ -77,6 +79,7 @@ namespace simpleIO{
     
     class UnixIO
     {
+        
     public:
         
         /**
@@ -115,7 +118,7 @@ namespace simpleIO{
         
 //        static void printInColor(const std::string& str, Color::Code pCode);
 
-        static void geeklePrompt();
+        static void smartinotePrompt();
         static void displayMessage(const std::string& message);
         
     };

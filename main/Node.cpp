@@ -81,17 +81,18 @@ std::string Node::review()
     if (remember[0] == 'Y'  or remember[0] == 'y')
     {
         familiar_index++;
-        printNodeInfo(80, Color::FG_PINK);
+        printNodeInfo(CONST::PRINT_WIDTH, Color::FG_PINK);
         
     }
     else if (remember[0] == 'N' or remember[0] == 'n')
     {
         familiar_index--;
-        printNodeInfo(80, Color::FG_RED);
+        printNodeInfo(CONST::PRINT_WIDTH, Color::FG_RED);
     }
     else if (remember == "clear" ) clear();
     else if (remember == "rm last") return remember;
     else if (remember == "rm this") return remember;
+    else if (remember == "q") return remember;
     else simpleIO::String::dispalyFatalMessage("command");
     
     return reviewResult;
@@ -222,8 +223,7 @@ void Node::printNodeInfo(const int& width, Color::Code pCode) const
     {
 //        std::cout << tokens.at(i) << endl;
         
-        
-        std::string intial = " - ";
+        std::string intial = "   - ";
         simpleIO::UnixIO::printInColor(intial, Color::FG_LIGHT_Cyan);
         simpleIO::UnixIO::printInColor((int)intial.size(), tokens.at(i), width,pCode);
         cout << endl;

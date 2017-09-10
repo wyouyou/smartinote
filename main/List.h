@@ -26,6 +26,8 @@ class List
      */
     void reviewFollowUp(const string& reviewResult,Node*& currentPtr, Node*& previousPtr);
     
+    void reviewMessage(const bool& reviewed);
+    
     
 public:
     

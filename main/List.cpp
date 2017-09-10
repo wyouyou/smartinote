@@ -116,7 +116,8 @@ bool List::remove(const string& key)
     keepIndexContinous(temp1->get_next());
     rm_message(temp2);
     delete temp2;
-    --NumOfNodes;
+    NumOfNodes--;
+    Node::numOfNodes--;
     
     return true;
 }
@@ -157,7 +158,9 @@ bool List::remove(const int& index)
     rm_message(temp2);
     
     delete temp2;
-    --NumOfNodes;
+    NumOfNodes--;
+    Node::numOfNodes--;
+
     
     return true;
 }
@@ -246,6 +249,8 @@ void List::reviewRandomly(const short& num)
     Node* currentPtr = get_top();
     // keep track of the last node, useage: when the user think the node just reviewed is too easy, or if the user hate it...
     Node* previousPtr = nullptr;
+    bool reviewed = false;
+
     
     int randomIndex;
     srand (static_cast<unsigned>(time(NULL)));
@@ -265,10 +270,12 @@ void List::reviewRandomly(const short& num)
         }
         
         std::string reviewResult = currentPtr->review();
+        if (reviewResult == "q") break;
         reviewFollowUp(reviewResult, currentPtr, previousPtr);
-
+        reviewed = true;
     }
     
+    reviewMessage(reviewed);
 }
 
 
@@ -325,7 +332,8 @@ void List::reviewScientificly(const short& num)
 
     }
     
-    cout <<(reviewed? "That is all for this turn.\n" : "Nothing to review at this moment.\n");
+    reviewMessage(reviewed);
+    
 
     
 }
@@ -364,8 +372,21 @@ void List::reviewToday(const short& num)
             currentPtr = currentPtr->get_next();
     }
     
-    cout <<(reviewed? "That is all for this turn.\n" : "Nothing to review for today\n");
+    reviewMessage(reviewed);
+    
 }
+
+
+void List::reviewMessage(const bool& reviewed)
+{
+    string message;
+    message = (reviewed? "That is all for this turn." : "Nothing to review at this moment.");
+    cout << endl;
+    simpleIO::UnixIO::displayMessage(message);
+    cout << endl;
+
+}
+
 
 ostream& operator<< (ostream& out , const List& object)
 {

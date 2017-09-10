@@ -45,11 +45,10 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& ite
 {
     fout << * (L.get_top());
     
-    L.get_top()->printNodeInfo(80);
+    L.get_top()->printNodeInfo(CONST::PRINT_WIDTH);
     //    cout << "\"" << item  << "\" is added to the database......\n";
-//    simpleIO::UnixIO::printInColor(item, 80, Color::FG_PINK, " is added to the database :)\n");
-    simpleIO::UnixIO::printInColor("", 80, Color::FG_PINK,
-                                " is added.:) \n");
+//    simpleIO::UnixIO::printInColor(item, UnixIO::printWidth, Color::FG_PINK, " is added to the database :)\n");
+    simpleIO::UnixIO::printInColor("     is added to database!", Color::FG_PINK);
 
 }
 
@@ -125,7 +124,7 @@ void Dic::userInteractive()
     while (1)
     {
         // 请求一个单词，必须是正确的全拼写。
-        simpleIO::UnixIO::geeklePrompt();
+        simpleIO::UnixIO::smartinotePrompt();
         simpleIO::String::getLine(": ", key);
         // List member function 的返回值作为搜索结果
         Node* target = dic.find(key);
@@ -135,7 +134,7 @@ void Dic::userInteractive()
         else if (key.empty()) clear();
         else if (target)
         {
-            target->printNodeInfo(80, Color::FG_PINK);
+            target->printNodeInfo(CONST::PRINT_WIDTH);
             copy = target;
         }
         // rm means rmove the last added node, useful when the last input accidently entered sth wrong but node has been added.
@@ -160,7 +159,6 @@ void Dic::userInteractive()
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
         else if (!target)
             singleActivity(key, copy);
-        
         else simpleIO::String::dispalyFatalMessage(key);
     }
 }
@@ -320,19 +318,26 @@ void Dic::deleteActivity(string info)
                 index = stoi(tokens.at(i));
             else
                 continue;
+
+        
             
             // determine if the index is a within valid indexs
             // if it is valid index, add to the index to keys vectors
             Node* ptr = dic.find(index);
-            if (ptr != nullptr) keys.push_back((ptr->get_key()));
-            else cout << "Invalid index: " << index << endl;
+            // if ptr is null, means the index in out of range
+            if (ptr != nullptr)
+                keys.push_back((ptr->get_key()));
+            
         }
         
         // remove node(s) based on the keys vector.
         for ( int i = 0; i < keys.size(); i++)
         {
-            Node copy = * dic.find(keys.at(i));
-            dic.remove(keys.at(i));
+//            Node copy = * dic.find(keys.at(i));
+            Node * ptr = dic.find(keys.at(i));
+            // if ptr is null means indexs has duplicates
+            if (ptr != nullptr)
+                dic.remove(keys.at(i));
             
         }
         
