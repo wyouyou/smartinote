@@ -302,6 +302,7 @@ void List::reviewScientificly(const short& num)
     Node * currentPtr =  top;
     // keep track of the last node, useage: when the user think the node just reviewed is too easy, or if the user hate it...
     Node* previousPtr = nullptr;
+    bool reviewed = false;
 
     
     int i = 0;
@@ -313,13 +314,19 @@ void List::reviewScientificly(const short& num)
         
         if (currentPtr->is124711DaysAgo())
         {
+            reviewed = true;
             reviewResult = currentPtr->review();
-            
             reviewFollowUp(reviewResult, currentPtr, previousPtr);
             i++;
         }
-        
+        // If not , advance the currentPtr
+        else
+            currentPtr = currentPtr->get_next();
+
     }
+    
+    cout <<(reviewed? "That is all for this turn.\n" : "Nothing to review at this moment.\n");
+
     
 }
 

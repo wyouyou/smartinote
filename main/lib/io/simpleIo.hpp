@@ -83,9 +83,38 @@ namespace simpleIO{
          * Print str in the color specified by the client.
          * Optional optStr is used to add extra info to console
          * Issue: Only support ASCII coding. 
+         *
          */
-        static void printInColor(const std::string& str,const int& width, Color::Code pCode = Color::BG_DEFAULT, const std::string& optStr = "");
-        static void printInColor(const std::string& str, Color::Code pCode = Color::BG_DEFAULT);
+        static void printInColor(const std::string& str,
+                                 const int& width,
+                                 Color::Code pCode = Color::BG_DEFAULT,
+                                 const std::string& optStr = "");
+        /**
+         * Another version of printInColor
+         * Handle the case : where the prompt symbol destroy the 
+         * alignment.
+         * simpleIO::UnixIO::printInColor("   ◉ ", Color::FG_LIGHT_Cyan);
+         * simpleIO::UnixIO::printInColor(tokens.at(i), width, pCode);
+         */
+        static void printInColor(const int& intilWidth,
+                                 const std::string& str,
+                                 const int& width,
+                                 Color::Code pCode = Color::BG_DEFAULT,
+                                 const std::string& optStr = "");
+
+        
+        /**
+         * Print exactly what the arg str is with specified color.
+         */
+        static void printInColor(const std::string& str,
+                                 Color::Code pCode );
+        
+        static void printInWidth(const int& intialDiff,
+                          const int& theWidth,
+                          std::vector<std::string> tokens);
+        
+//        static void printInColor(const std::string& str, Color::Code pCode);
+
         static void geeklePrompt();
         static void displayMessage(const std::string& message);
         
@@ -100,6 +129,7 @@ namespace simpleIO{
          * Justfiy the text width in order to format console
          */
         static void justifyText(std::string& str, const int& theWidth);
+        static std::string getSpaces(const int& num);
 
     };
     

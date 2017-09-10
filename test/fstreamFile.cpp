@@ -50,6 +50,7 @@ void fstreamFile::alloc(std::ifstream& fin)
     
 }
 
+
 void fstreamFile::init(std::ifstream& fin)
 {
     std::cout << "Line count: " << lineCount << std::endl;
@@ -66,17 +67,18 @@ bool fstreamFile::checkLine()
     // 09/01: To be done when list member is complete.
     ValidLine = 1;
     
-    return true;;
+    return true;
 }
 
-
+// determine whether all the index 是以1为公差的等差数列
 bool fstreamFile::checkIndex()
 {
-    ContinousIndex = 1;
+    
+    ContinousIndex = true;
     int diff;
     for (int i = 0; i< lineCount-1; i++)
     {
-        diff = index[i] - index[i+1];
+        diff = index[i+1] - index[i];
         if (diff < 0) diff = -diff;
         if (diff!= 1)
         {

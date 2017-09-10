@@ -44,8 +44,13 @@ void Dic::readOneElement(string& element, ifstream& fin, const string& tag)
 void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& item)
 {
     fout << * (L.get_top());
+    
+    L.get_top()->printNodeInfo(80);
     //    cout << "\"" << item  << "\" is added to the database......\n";
-    simpleIO::UnixIO::printInColor(item, 80, Color::FG_PINK, "is added to the dataabse...");
+//    simpleIO::UnixIO::printInColor(item, 80, Color::FG_PINK, " is added to the database :)\n");
+    simpleIO::UnixIO::printInColor("", 80, Color::FG_PINK,
+                                " is added.:) \n");
+
 }
 
 
@@ -249,7 +254,7 @@ void Dic::timeInfo() const
  */
 void Dic::groupActiviy(std::string info)
 {
-   // to do 
+   // to do
 }
 
 /**
@@ -298,7 +303,7 @@ void Dic::deleteActivity(string info)
     info = simpleIO::String::trim(info);
     
     // if there is no real content
-    if(info.size() < 1) simpleIO::UnixIO::printInColor("Too few arguments");
+    if(info.size() < 1) simpleIO::UnixIO::printInColor("Too few arguments", Color::BG_RED);
     else{
         
         vector<string> tokens

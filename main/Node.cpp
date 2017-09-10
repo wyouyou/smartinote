@@ -200,12 +200,7 @@ void Node::printFamilarIndexInfo() const
  */
 void Node::printNodeInfo(const int& width, Color::Code pCode) const
 {
-    //    clear();
-    //    printAline(width);
-    //    printIndexInfo();
-    
-    //    printAline(width);
-    //    printFamilarIndexInfo();
+
     
     
     std::string valueCopy = value;
@@ -215,16 +210,26 @@ void Node::printNodeInfo(const int& width, Color::Code pCode) const
     //    cout << "sizeOf ，：" << sizeof(",");
     //    cout << "sizeOf ，：" << sizeof("字");
     
+    // Todo 汉字的 adjustment widht issue
     
-    //
-    //    while (pos != string::nops) {
-    //        copy.replace(pos, ',');
-    //    }
+    /*
+     * #9 print value in ordered list based delimiter '#'
+     */
     
+    vector<string> tokens = simpleIO::String::getTokens(valueCopy, "#");
     
-    //    width = width < 80? width : 80;
-    //    simpleIO::stdIO::printAline(value.size() < 80 ? value.size() : width);
-    simpleIO::UnixIO::printInColor(valueCopy, width, pCode);
+    for (unsigned short i = 0; i < tokens.size(); i++)
+    {
+//        std::cout << tokens.at(i) << endl;
+        
+        
+        std::string intial = " - ";
+        simpleIO::UnixIO::printInColor(intial, Color::FG_LIGHT_Cyan);
+        simpleIO::UnixIO::printInColor((int)intial.size(), tokens.at(i), width,pCode);
+        cout << endl;
+    }
+    
+//    simpleIO::UnixIO::printInColor(valueCopy, width, pCode);
     
     
     
@@ -300,7 +305,7 @@ bool Node::is124711DaysAgo() const
         return false;
     
     int dayDiff = now.day_in_the_year - this->get_date().day_in_the_year;
-    int scentificDayDiff[] = {1, 2, 4 , 7, 11};
+    int scentificDayDiff[] = {1, 2, 4 , 7, 11, 16};
     
     // get array lengeth
     int len = sizeof(scentificDayDiff) / sizeof(int);
@@ -309,7 +314,6 @@ bool Node::is124711DaysAgo() const
     
     for (int i = 0; i < len; i++)
     {
-        
         if (dayDiff == scentificDayDiff[i])
             return true;
     }
