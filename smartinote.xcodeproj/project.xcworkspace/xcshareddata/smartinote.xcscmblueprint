@@ -1,0 +1,35 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DF9149463045F433BFB8858FE9B49BCB70878901",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "DF9149463045F433BFB8858FE9B49BCB70878901" : 9223372036854775807,
+    "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7925C6AC-26F7-474E-8CA2-DA70FD305EFF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "DF9149463045F433BFB8858FE9B49BCB70878901" : "..\/..\/..\/Applications\/selfmade-product\/dic-master\/dic",
+    "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4" : "..\/..\/..\/Applications\/selfmade-product\/dic-master"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "smartinote",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "smartinote.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JayeWang\/dicNdata.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:JayeWang\/smartinote.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF9149463045F433BFB8858FE9B49BCB70878901"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JayeWang\/dic.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF9149463045F433BFB8858FE9B49BCB70878901"
+    }
+  ]
+}
