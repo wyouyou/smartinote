@@ -19,7 +19,7 @@
 
 namespace CONST{
     
-    const int PRINT_WIDTH = 80;
+    const int PRINT_WIDTH = 75;
     
     const int NUM_NODES_TO_REVIEW = 10;
     
@@ -36,7 +36,6 @@ namespace CONST{
  */
 namespace Color {
     enum Code {
-        
 //        Foreground (text)
         FG_RED      = 31,
         FG_GREEN    = 32,
@@ -57,8 +56,9 @@ namespace Color {
         BG_GREEN    = 42,
         BG_BLUE     = 44,
         BG_DEFAULT  = 49
-        
     };
+    
+    
     
     class Modifier {
         Code code;

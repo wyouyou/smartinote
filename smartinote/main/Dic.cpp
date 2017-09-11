@@ -49,6 +49,10 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& ite
     //    cout << "\"" << item  << "\" is added to the database......\n";
 //    simpleIO::UnixIO::printInColor(item, UnixIO::printWidth, Color::FG_PINK, " is added to the database :)\n");
     simpleIO::UnixIO::printInColor("     is added.😊\n", Color::FG_PINK);
+    
+    // instant synchronization whenever note is added.
+    copyDatabaseToArg(CONST::DATABASE_LOCATION.c_str());
+    reportHtmlFile(CONST::HTML_OUT_LOCATION);
 
 }
 

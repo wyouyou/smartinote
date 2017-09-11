@@ -1,6 +1,8 @@
 dic
-
+.DS_Store
 *.gch
 *.xcuserstate
 *.xcuserstate
 smartinote/.DS_Store
+*.xcuserstate
+*.xcuserstate

@@ -17,10 +17,8 @@ int main (void)
 
     // User interaction
     myDictionary.userInteractive();
-    
     // update the database
     myDictionary.copyDatabaseToArg(CONST::DATABASE_LOCATION.c_str());
-    
     // update formatted file
     myDictionary.reportHtmlFile(CONST::HTML_OUT_LOCATION);
     cout << "program is done....." << endl;

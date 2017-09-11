@@ -211,8 +211,6 @@ void Node::printFamilarIndexInfo() const
 void Node::printNodeInfo(const int& width, Color::Code pCode) const
 {
 
-    
-    
     std::string valueCopy = value;
     
     //    size_t pos = copy.find("，");

@@ -1,16 +1,22 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DF9149463045F433BFB8858FE9B49BCB70878901",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DF9149463045F433BFB8858FE9B49BCB70878901+++E102186",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "DF9149463045F433BFB8858FE9B49BCB70878901" : 9223372036854775807,
-    "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4" : 9223372036854775807
+    "DF9149463045F433BFB8858FE9B49BCB70878901+++71D4106" : 9223372036854775807,
+    "FF1C66B77681E0FDD37435D6E41570FC28D6C715+++1F2E26A" : 9223372036854775807,
+    "DF9149463045F433BFB8858FE9B49BCB70878901+++E102186" : 9223372036854775807,
+    "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4+++AD69BA3" : 9223372036854775807,
+    "DF9149463045F433BFB8858FE9B49BCB70878901+++20DB765" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7925C6AC-26F7-474E-8CA2-DA70FD305EFF",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "DF9149463045F433BFB8858FE9B49BCB70878901" : "..\/..\/..\/Applications\/selfmade-product\/dic-master\/dic",
-    "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4" : "..\/..\/..\/Applications\/selfmade-product\/dic-master"
+    "DF9149463045F433BFB8858FE9B49BCB70878901+++71D4106" : "..\/..\/..\/Applications\/selfmade-product\/dic-master\/dic",
+    "FF1C66B77681E0FDD37435D6E41570FC28D6C715+++1F2E26A" : "",
+    "DF9149463045F433BFB8858FE9B49BCB70878901+++E102186" : "smartinote\/",
+    "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4+++AD69BA3" : "..\/..\/..\/Applications\/selfmade-product\/dic-master",
+    "DF9149463045F433BFB8858FE9B49BCB70878901+++20DB765" : "..\/..\/..\/Applications\/selfmade-product\/dic-master\/dic"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "smartinote",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -19,17 +25,27 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JayeWang\/dicNdata.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "573B2E13E2A4542CFDA1107BCCB20D1498E8DCD4+++AD69BA3"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:JayeWang\/smartinote.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF9149463045F433BFB8858FE9B49BCB70878901"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF9149463045F433BFB8858FE9B49BCB70878901+++20DB765"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JayeWang\/dic.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF9149463045F433BFB8858FE9B49BCB70878901"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF9149463045F433BFB8858FE9B49BCB70878901+++71D4106"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:JayeWang\/smartinote.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DF9149463045F433BFB8858FE9B49BCB70878901+++E102186"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JayeWang\/Github.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FF1C66B77681E0FDD37435D6E41570FC28D6C715+++1F2E26A"
     }
   ]
 }

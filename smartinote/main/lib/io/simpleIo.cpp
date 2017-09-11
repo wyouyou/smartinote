@@ -38,6 +38,11 @@ std::string stdIO::getSpaces(const int& num)
 
 void stdIO::justifyText(std::string& line, const int& theWidth)
 {
+    
+    // 09/11/17 It turned out the effect does not looks buautiful, stop
+//    using at at the moment
+    return;
+    
     std::vector<std::string> tokens = String::getTokens(line);
     
     short diff = theWidth - line.size() ;
