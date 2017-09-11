@@ -243,8 +243,14 @@ void UnixIO::printInWidth(const int& intialDiff,
             if (line.size() > 0 && line.size() < theWidth )
                 stdIO::justifyText(line, theWidth);
             // handle all chinese character.
-            else std::cout << strCopy;
-            
+            // 宽字符的中文，在这里需要手动break
+            // othwise infinite loop
+            else
+            {
+                std::cout << strCopy;
+                break;
+
+            }
             
             // The first line with front symbol
             if (theFirstLine)

@@ -130,14 +130,16 @@ void Dic::userInteractive()
         // List member function 的返回值作为搜索结果
         Node* target = dic.find(key);
         
-        if (key == "q" || key =="Q") break;
-        else if (key == "clear") clear();
-        else if (simpleIO::stdIO::isEnterKeyPressed(key)) continue;
-        else if (target)
+        // 如果找到，输出释义
+        if (target)
         {
-            target->printNodeInfo(CONST::PRINT_WIDTH);
+            target->printNodeInfo(CONST::PRINT_WIDTH, Color::FG_PINK);
             copy = target;
         }
+        else if (key == "q" || key =="Q") break;
+        else if (key == "clear") clear();
+        else if (simpleIO::stdIO::isEnterKeyPressed(key)) continue;
+
         // rm means rmove the last added node, useful when the last input accidently entered sth wrong but node has been added.
         else if (key == "rm last")
         {

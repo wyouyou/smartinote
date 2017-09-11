@@ -231,10 +231,19 @@ void Node::printNodeInfo(const int& width, Color::Code pCode) const
     for (unsigned short i = 0; i < tokens.size(); i++)
     {
 //        std::cout << tokens.at(i) << endl;
+        Color::Code printColor;
+
+        
+        if ((i +1)%2 != 0)
+            printColor = pCode;
+        else
+            printColor = Color::FG_DEFAULT;
+        
+        
         
         std::string intial = "   - ";
         simpleIO::UnixIO::printInColor(intial, Color::FG_LIGHT_Cyan);
-        simpleIO::UnixIO::printInColor((int)intial.size(), tokens.at(i), width,pCode);
+        simpleIO::UnixIO::printInColor((int)intial.size(), tokens.at(i), width,printColor);
         cout << endl;
     }
     
