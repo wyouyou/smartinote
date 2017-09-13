@@ -71,7 +71,8 @@ std::string Node::review()
 {
     std::string reviewResult = "reviewed";
     string remember;
-    do{
+    do
+    {
     string prompt = "\n\n认识: " + this->key + " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识, 'D' or 'd' to delete:";
     //    simpleIO::UnixIO::printInColor(" ☞"
     
@@ -98,11 +99,12 @@ std::string Node::review()
     {
         clear();
         continue;
-
     }
+    else if (remember.substr(0,3) == "rst" || remember.substr(0,3) == "app")
+        return remember;
     else simpleIO::String::dispalyFatalMessage("command");
-    }
-    while (simpleIO::stdIO::isEnterKeyPressed(remember));
+        
+    }while (simpleIO::stdIO::isEnterKeyPressed(remember));
     
     return reviewResult;
 }
@@ -152,6 +154,48 @@ void Node::set_next(Node *ptr)
 {
     next = ptr;
 }
+bool Node::set_value(const string& theValue)
+{
+    if (theValue != "")
+    {
+        value = theValue;
+        return true;
+    }
+    
+    return false;
+}
+bool Node::append_value(const string& toBeAppend)
+{
+    if (toBeAppend != "")
+    {
+        value += toBeAppend;
+        return true;
+    }
+    return false;
+
+}
+
+void Node::valueUpdating(const string& newStuff,
+                            const string& choice)
+{
+    // reset
+    if (choice == "rst")
+        this->set_value(newStuff);
+    // append
+    if (choice == "app")
+        this->append_value(newStuff);
+    else
+        std::cout << "semantic issue: " << __LINE__ << __FILE__ <<endl;
+    
+    string message = "The new value now is : ";
+    simpleIO::UnixIO::displayMessage(message);
+    cout << endl;
+    this->printNodeInfo(CONST::PRINT_WIDTH, Color::FG_PINK);
+    
+}
+
+
+
 void Node::add_value(string value)
 {
     value = value + ", " + value;

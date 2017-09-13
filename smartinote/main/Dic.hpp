@@ -19,11 +19,10 @@
 class Dic
 {
 private:
-    
-    
+
     List dic;
     string FileLocation;
-    
+
     /**
      * Retrive all nodes from local file:
      *
@@ -35,6 +34,7 @@ private:
      * Tag describe what element is read. Ex: key, value, timeAdded....
      */
     void readOneElement(string& element, ifstream& fin, const string& tag);
+    
     /**
      *
      * Append mode. If the file already exists, its contents are preserved
@@ -66,7 +66,7 @@ public:
     /**
      *
      */
-    void review(const std::string& line);
+    void reviewActivity(const std::string& line);
     /**
      *
      */
@@ -77,11 +77,17 @@ public:
      */
     void makeArgReverse(List& dicCopy) const ;
     
+    /**
+     * print nodets found after search
+     * update previousNode ptr
+     */
+    void printActivity(Node*& previousNode, Node* target);
+    
+
     
     /**
      * A single note insertion
      */
-    
     void singleActivity(const string& key,Node*& node);
     
     /**
@@ -94,17 +100,10 @@ public:
      * deleteActivity member function Deleting node manually.
      * delete mutiple node based on the tokens of info
      */
-    void deleteActivity(std::string info);
+    void deleteActivity(const Node* previousPtr, std::string info);
     
-    void timeInfo() const;
+    void timeActivity() const;
 
-    
-    
-    
-    
-    
-    
-    
 };
 
 #endif /* Dic_hpp */

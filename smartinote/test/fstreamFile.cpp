@@ -8,7 +8,6 @@
 
 #include "fstreamFile.hpp"
 
-
 fstreamFile::fstreamFile(const std::string& location): path(location), lineCount(0)
 {
     std::ifstream fin(path.c_str());
@@ -53,7 +52,13 @@ void fstreamFile::alloc(std::ifstream& fin)
 
 void fstreamFile::init(std::ifstream& fin)
 {
-    std::cout << "Line count: " << lineCount << std::endl;
+    
+    std::string strLineCount = std::to_string(lineCount);
+    std::string message = "- Notes count: " + strLineCount;
+    std:: cout << std::endl << message << std::endl;
+    
+
+    
     for (int i = 0; i < lineCount; i++)
     {
         fin >> index[i];

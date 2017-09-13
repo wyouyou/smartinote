@@ -92,7 +92,9 @@ bool List::remove(const string& key)
 {
     if(!find(key))
     {
-        cerr << key << " is not in the List" << endl;
+//        cerr << key << " is not in the List" << endl;
+        simpleIO::UnixIO::displayMessage(" is not in the List");
+        cout << endl;
         return false;
     }
     
@@ -285,6 +287,9 @@ void List::reviewFollowUp(const string& reviewResult,Node*& currentPtr, Node*& p
     //If the user think the last node should be deleted
     if (reviewResult == "rm last" && previousPtr!= nullptr)
         remove(previousPtr->get_index());
+    // Reset or append vlaue.
+    else if (previousPtr!=nullptr && (reviewResult.substr(0,3) == "rst" || reviewResult.substr(0,3)=="app"))
+        previousPtr->valueUpdating(reviewResult.substr(3), reviewResult.substr(0,3));
     
     // Note: the first note can not be removed
     else if (reviewResult == "rm last" && previousPtr == nullptr)
@@ -324,6 +329,7 @@ void List::reviewScientificly(const short& num)
             reviewed = true;
             reviewResult = currentPtr->review();
             if (reviewResult == "q") break;
+            
             reviewFollowUp(reviewResult, currentPtr, previousPtr);
             i++;
         }

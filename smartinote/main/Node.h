@@ -18,6 +18,7 @@
 
 
 
+
 #define clear() printf("\033[H\033[J")
 
 using namespace std;
@@ -167,6 +168,10 @@ public:
     Date get_date() const;
     Node* get_next() const;
     void set_next(Node* ptr);
+    bool set_value(const string& theValue);
+    bool append_value(const string& toBeAppend);
+    void valueUpdating(const string& newStuff,
+                       const string& choice);
     
     void decrementIndex();
     void incrementIndex();

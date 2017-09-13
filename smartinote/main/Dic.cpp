@@ -11,35 +11,6 @@
 
 
 
-void Dic::readOneElement(string& element, ifstream& fin, const string& tag)
-{
-    
-    string buffer;
-    fin >> buffer;
-    
-    size_t pos_end_of_the_element = buffer.find_first_of('|');
-    
-    //If it is not single word but a phrase
-    // Or If the explanation is not short enough so that the temp is not a complete a explanation   ex: xx xx|
-    if (pos_end_of_the_element == string::npos) // npos means no found
-    {
-        getline(fin, element, '|'); // delimeter '|' excludeable
-        
-        element = buffer + element;
-    }
-    
-    // If it is a single word right before the dilimeter '|', remove
-    // the delimeter '|'
-    // Or If the explanation is short enough: ex: xx|
-    else element = buffer.substr(0, pos_end_of_the_element);
-    /*Debug Code*/
-    
-    /************************Debug Code********************************/
-    //    cout << "The " << tag  << " is : " << "\"" << element  << "\"" << endl;
-    /******************************************************************/
-    
-}
-
 
 void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& item)
 {
@@ -55,8 +26,6 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& ite
     reportHtmlFile(CONST::HTML_OUT_LOCATION);
 
 }
-
-
 
 void Dic::retriveDataFromFile(ifstream& fin)
 {
@@ -97,6 +66,35 @@ void Dic::retriveDataFromFile(ifstream& fin)
     
 }
 
+void Dic::readOneElement(string& element, ifstream& fin, const string& tag)
+{
+    
+    string buffer;
+    fin >> buffer;
+    
+    size_t pos_end_of_the_element = buffer.find_first_of('|');
+    
+    //If it is not single word but a phrase
+    // Or If the explanation is not short enough so that the temp is not a complete a explanation   ex: xx xx|
+    if (pos_end_of_the_element == string::npos) // npos means no found
+    {
+        getline(fin, element, '|'); // delimeter '|' excludeable
+        
+        element = buffer + element;
+    }
+    
+    // If it is a single word right before the dilimeter '|', remove
+    // the delimeter '|'
+    // Or If the explanation is short enough: ex: xx|
+    else element = buffer.substr(0, pos_end_of_the_element);
+    /*Debug Code*/
+    
+    /************************Debug Code********************************/
+    //    cout << "The " << tag  << " is : " << "\"" << element  << "\"" << endl;
+    /******************************************************************/
+    
+}
+
 Dic::Dic(const string& DATABASE_LOCATION): FileLocation(DATABASE_LOCATION)
 {
     
@@ -116,57 +114,48 @@ Dic::Dic(const string& DATABASE_LOCATION): FileLocation(DATABASE_LOCATION)
 void Dic::userInteractive()
 {
     
-    string key = "word or a phrase", value = "no-explaination";
-    //    fstream fout;
-    Node * copy = nullptr;
-    //    fout.open(FileLocation.c_str(),ios_base::app);
-    //    if(!fout)
-    //    {
-    //        printf("Unable to open file at line number %d in file %s\n", __LINE__, __FILE__);
-    //        exit(2);
-    //    }
+    string input = "word or a phrase", value = "no-explaination";
+    Node * previousPtr = nullptr;
+    
+    // input tokens
+    string first2chars;
+    string first3chars;
+
     while (1)
     {
         // 请求一个单词，必须是正确的全拼写。
         simpleIO::UnixIO::smartinotePrompt();
-        simpleIO::String::getLine(": ", key);
-        key = simpleIO::String::trim(key);
-        // List member function 的返回值作为搜索结果
-        Node* target = dic.find(key);
+        simpleIO::String::getLine(": ", input);
+        input = simpleIO::String::trim(input);
         
+        first2chars = input.substr(0,2);
+        first3chars = input.substr(0,3);
+        
+        // List member function 的返回值作为搜索结果
+        Node* target = dic.find(input);
         // 如果找到，输出释义
         if (target)
-        {
-            target->printNodeInfo(CONST::PRINT_WIDTH, Color::FG_PINK);
-            copy = target;
-        }
-        else if (key == "q" || key =="Q") break;
-        else if (key == "clear") clear();
-        else if (simpleIO::stdIO::isEnterKeyPressed(key)) continue;
-
-        // rm means rmove the last added node, useful when the last input accidently entered sth wrong but node has been added.
-        else if (key == "rm last")
-        {
-            if (copy!=nullptr)
-                dic.remove(copy->get_key());
-            else
-            {
-                std::cout << "I am lost! :(" << std::endl;
-                continue;
-            }
-        }
-        else if(key.substr(0,2) == "rv")
-            review(key.substr(2));
-        else if (key.substr(0,2) == "rm")
-            deleteActivity(key.substr(2));
-        else if (key.substr(0,3) == "tag")
-            groupActiviy(key.substr(3));
-        else if (key == "time")
-            timeInfo();
+            printActivity(previousPtr, target);
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
+        else if (previousPtr!=nullptr && (first3chars == "rst"||first3chars =="app"))
+            previousPtr->valueUpdating(input.substr(3), first3chars);
+        else if (input == "q" || input =="Q")
+            break;
+        else if (input == "clear")
+            clear();
+        else if (simpleIO::stdIO::isEnterKeyPressed(input))
+            continue;
+        else if(first2chars == "rv")
+            reviewActivity(input.substr(2));
+        else if (first2chars == "rm")
+            deleteActivity(previousPtr,input.substr(2));
+        else if (first3chars == "tag")
+            groupActiviy(input.substr(3));
+        else if (first2chars == "tm")
+            timeActivity();
         else if (!target)
-            singleActivity(key, copy);
-        else simpleIO::String::dispalyFatalMessage(key);
+            singleActivity(input, previousPtr);
+        else simpleIO::String::dispalyFatalMessage(input);
     }
 }
 
@@ -211,7 +200,7 @@ void Dic::copyDatabaseToArg(const char arg[]) const
 /*
  line format: rd/st/td number
  */
-void Dic::review(const std::string& line)
+void Dic::reviewActivity(const std::string& line)
 {
     std::string lineCopy = line;
     std::vector<std::string> tokens = simpleIO::String::getTokens(lineCopy);
@@ -231,8 +220,6 @@ void Dic::review(const std::string& line)
     else
         simpleIO::String::dispalyFatalMessage("Command ");
     
-    
-    
 }
 
 void Dic::reportHtmlFile(const string& location) const
@@ -243,7 +230,7 @@ void Dic::reportHtmlFile(const string& location) const
 }
 
 
-void Dic::timeInfo() const
+void Dic::timeActivity() const
 {
     tr::TimeRemainder t1(9,25,2017,0,0,0,1, "距离Fall quater 2017 begin");
     tr::TimeRemainder t2(9,5,2017,00,00,00,00, "距离上一次...");
@@ -261,6 +248,17 @@ void Dic::groupActiviy(std::string info)
 {
    // to do
 }
+
+
+
+void Dic::printActivity(Node*& previousNode, Node* target)
+{
+    target->printNodeInfo(CONST::PRINT_WIDTH, Color::FG_PINK);
+    previousNode = target;
+
+}
+
+
 
 /**
  * Asking for inputing a value for the key arg.
@@ -303,15 +301,25 @@ void Dic::singleActivity(const string& key, Node*& lastNode)
  * Parse tokens and convert them all to ints stored in a vector.
  * remove multiple node based the indexs stored in the vector.
  */
-void Dic::deleteActivity(string info)
+void Dic::deleteActivity(const Node* previousPtr, string info)
 {
     // remove the leading and tailing space
     info = simpleIO::String::trim(info);
+
+    // rmove the last added node, useful when the last input accidently entered sth wrong but node has been added.
+    if (info == "last")
+    {
+        if (previousPtr!=nullptr)
+            dic.remove(previousPtr->get_key());
+        else
+            simpleIO::UnixIO::displayMessage("The node is alreay removed or does not exist.");
+        
+    }
+
     
     // if there is no real content
     if(info.size() < 1) simpleIO::UnixIO::printInColor("Too few arguments", Color::BG_RED);
     else{
-        
         vector<string> tokens
         = simpleIO::String::getTokens(info);
         vector<string> keys(0);
@@ -321,21 +329,16 @@ void Dic::deleteActivity(string info)
         {
             // If the str is numeric, convert it to int
             //  else continue
-            
             if (simpleIO::String::isNumeric(tokens.at(i)))
                 index = stoi(tokens.at(i));
             else
                 continue;
-
-        
-            
             // determine if the index is a within valid indexs
             // if it is valid index, add to the index to keys vectors
             Node* ptr = dic.find(index);
             // if ptr is null, means the index in out of range
             if (ptr != nullptr)
                 keys.push_back((ptr->get_key()));
-            
         }
         
         // remove node(s) based on the keys vector.
@@ -346,7 +349,6 @@ void Dic::deleteActivity(string info)
             // if ptr is null means indexs has duplicates
             if (ptr != nullptr)
                 dic.remove(keys.at(i));
-            
         }
         
     }

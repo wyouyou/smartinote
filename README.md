@@ -9,12 +9,13 @@ This is a command line tool to store/search/organize/review/... every signle not
 
 [访问 Repo](https://github.com/JayeWang/dic)
 
-# 命令列表 Command Table
+# Command Table
 
 Command | Parameter(s) | Mode | Usage scenario
 :-------|:-------|:------- |:-------
 **rm** |  i0, i1, i3...| remove mutliple notes | developer's remove mode to manage data 
-**rm last** | none | remove showed note | remove any note be seen if it is too easy 
+**rm last** | none | remove last note | remove last note be seen if it is too easy 
+**rm last** | none | remove current note | remove current note be seen if it is too easy 
 **rv rd** | num deafult:10  | num's random review |  review num of notes added anytime randomly 
 **rv st** | num deafult:10 | num's smart review | review num of notes added 1,2,4,7,11 ago randomly 
 **rv td** | num deafult:10 | today's review| review num of notes added today randomly 
@@ -25,15 +26,14 @@ Command | Parameter(s) | Mode | Usage scenario
 
 
 
-# 代码分析 Code Report
-cloc|github.com/AlDanial/cloc v 1.72  T=0.15 s (129.7 files/s, 19341.7 lines/s)
+# Code Report
+cloc|github.com/AlDanial/cloc v 1.72  T=0.20 s (100.2 files/s, 15157.5 lines/s)
 --- | ---
 
 Language|files|blank|comment|code
 :-------|-------:|-------:|-------:|-------:
-C++|10|447|287|1197
-C/C++ Header|9|255|423|333
-Markdown|1|13|0|28
+C++|10|451|293|1227
+C/C++ Header|9|258|423|334
+Markdown|1|12|0|28
 --------|--------|--------|--------|--------
-SUM:|20|715|710|1558
-
+SUM:|20|721|716|1589

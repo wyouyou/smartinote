@@ -21,8 +21,8 @@ int main (void)
     myDictionary.copyDatabaseToArg(CONST::DATABASE_LOCATION.c_str());
     // update formatted file
     myDictionary.reportHtmlFile(CONST::HTML_OUT_LOCATION);
-    cout << "program is done....." << endl;
-
+    
+    simpleIO::UnixIO::displayMessage("Program is done...");
 }
 
 
