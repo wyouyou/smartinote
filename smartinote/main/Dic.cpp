@@ -123,6 +123,10 @@ void Dic::userInteractive()
     {
         // 请求一个单词，必须是正确的全拼写。
         simpleIO::UnixIO::smartinotePrompt();
+        std:: cout << "(";
+        tr::TimeRemainder::printCurrentTime();
+        std::cout << ")";
+
         simpleIO::String::getLine(": ", input);
         input = simpleIO::String::trim(input);
         

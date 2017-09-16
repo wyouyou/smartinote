@@ -56,6 +56,14 @@ tr::TimeRemainder::TimeRemainder(const int& month, const int& day_of_month,
                         - minutesRemainder*SECOND_PER_MINUTE;
 }
 
+std::string tr::TimeRemainder::getCurrentTime() const
+{
+    std::string currentTime;
+    
+    
+    return currentTime;
+}
+
 void tr::TimeRemainder::printCurrentTime()
 {
     time_t now = time(0);
@@ -72,7 +80,7 @@ void tr::TimeRemainder::printCurrentTime()
     << ' ' << std::setw(2) << std::setfill('0')<< timeInfo->tm_hour % 12
     << ':' << std::setw(2) << std::setfill('0')<< timeInfo->tm_min
     << ':' << std::setw(2) << std::setfill('0')<< timeInfo->tm_sec
-    << (timeInfo->tm_hour >= 12 ? " PM" : " AM") << std::endl << std::endl;
+    << (timeInfo->tm_hour >= 12 ? " PM" : " AM");
     
     std::cout << std::setfill(' ');
 }

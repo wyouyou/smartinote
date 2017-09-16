@@ -101,6 +101,7 @@ public:
     int getMinutesRemainder() const;
     int getSecondsRemainder() const;
     std::string toString() const;
+    std::string getCurrentTime() const;
     
     
 };
