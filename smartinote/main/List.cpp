@@ -252,6 +252,7 @@ void List::reviewRandomly(const short& num)
     // keep track of the last node, useage: when the user think the node just reviewed is too easy, or if the user hate it...
     Node* previousPtr = nullptr;
     bool reviewed = false;
+    
 
     
     int randomIndex;
@@ -441,7 +442,7 @@ void List::rm_message(Node* node) const
     cout << "   ";
     simpleIO::UnixIO::printInColor("➠  ", Color::FG_RED);
     cout  << node->get_key();
-    simpleIO::UnixIO::printInColor(" is removed :) \n", Color::FG_YELLOW);
+    simpleIO::UnixIO::printInColor("   is removed :) \n", Color::FG_YELLOW);
     
 }
 

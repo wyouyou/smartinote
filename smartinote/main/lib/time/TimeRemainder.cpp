@@ -56,7 +56,7 @@ tr::TimeRemainder::TimeRemainder(const int& month, const int& day_of_month,
                         - minutesRemainder*SECOND_PER_MINUTE;
 }
 
-void tr::TimeRemainder::printCurrentTime() const
+void tr::TimeRemainder::printCurrentTime()
 {
     time_t now = time(0);
     
@@ -64,7 +64,7 @@ void tr::TimeRemainder::printCurrentTime() const
     //version of C language style.
     tm* timeInfo = localtime(&now);
     
-    std::cout << "The current time is "
+    std::cout << ""
     << std::setw(2)<< std::setfill('0') <<timeInfo->tm_mon + 1
     << '/' <<  std::setw(2)<< std::setfill('0')<< timeInfo->tm_mday
     << '/' << std::setw(2) << std::setfill('0')<<  timeInfo->tm_year % 100
@@ -73,6 +73,8 @@ void tr::TimeRemainder::printCurrentTime() const
     << ':' << std::setw(2) << std::setfill('0')<< timeInfo->tm_min
     << ':' << std::setw(2) << std::setfill('0')<< timeInfo->tm_sec
     << (timeInfo->tm_hour >= 12 ? " PM" : " AM") << std::endl << std::endl;
+    
+    std::cout << std::setfill(' ');
 }
 
 void abs(int& a)
@@ -119,18 +121,18 @@ std::string tr::TimeRemainder::toString() const
 
 void tr::TimeRemainder::printTimeDiffInfo() const
 {
-    std::cout << this->message << ": "
-    << abs(this->daysRemainder)<< " days "
-    << abs(this->hoursRemainder) << " hours "
-    << abs(this->minutesRemainder) << " minutes "
-    << abs(this->secondsRemainder) << " seconds" << std::endl;
+    int width = 3;
+    std::cout << std::setw(width)<< this->message << ": "
+    << std::setw(width) << abs(this->daysRemainder)<< " ds "
+    << std::setw(width) <<abs(this->hoursRemainder) << " hs "
+    << std::setw(width) <<abs(this->minutesRemainder) << " ms "
+    << std::setw(width) <<abs(this->secondsRemainder) << " ss" << std::endl;
     
 }
 
 std::ostream& operator<< (std::ostream
                           & print, const tr::TimeRemainder& _tr)
 {
-    
     
     print << _tr.toString() << ": "
     << abs(_tr.getDaysRemainder())<< " days "

@@ -64,6 +64,10 @@ protected:
     std::string message;
     
 public:
+    /**
+     * Print the current time
+     */
+    static void printCurrentTime();
     static const int SECONDS_PER_DAY = 24 * 60 * 60;
     static const int SECONDS_PER_HOUR = 60 * 60;
     static const int SECOND_PER_MINUTE = 60;
@@ -74,21 +78,18 @@ public:
      * Call like this: TimeRemainder(9,25,2017,0,0,0,1);
      
      */
-    TimeRemainder(const int& month, const int& day_of_month,
-                  const int& year,  const int& hour,
-                  const int& minutes, const int & seconds,
+    TimeRemainder(const int& month,
+                  const int& day_of_month,
+                  const int& year,
+                  const int& hour,
+                  const int& minutes,
+                  const int & seconds,
                   const int& isDaySavingTime,
                   const std::string& message
                   );
     
-    /**
-     * Print the current time
-     */
-    void printCurrentTime() const;
-    
     void printTimeDiffInfo() const;
 
-    
     
     /**
      * Accessor functions

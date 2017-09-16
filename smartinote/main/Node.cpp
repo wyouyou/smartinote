@@ -178,14 +178,18 @@ bool Node::append_value(const string& toBeAppend)
 void Node::valueUpdating(const string& newStuff,
                             const string& choice)
 {
+    
+    cout << "choice is : " << choice << endl;
     // reset
     if (choice == "rst")
         this->set_value(newStuff);
     // append
-    if (choice == "app")
+    else if (choice == "app")
         this->append_value(newStuff);
     else
         std::cout << "semantic issue: " << __LINE__ << __FILE__ <<endl;
+    
+    
     
     string message = "The new value now is : ";
     simpleIO::UnixIO::displayMessage(message);

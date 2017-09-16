@@ -102,7 +102,7 @@ public:
      */
     void deleteActivity(const Node* previousPtr, std::string info);
     
-    void timeActivity() const;
+    void timeActivity(const string& info) const;
 
 };
 

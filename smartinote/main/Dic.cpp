@@ -19,7 +19,7 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& ite
     L.get_top()->printNodeInfo(CONST::PRINT_WIDTH);
     //    cout << "\"" << item  << "\" is added to the database......\n";
 //    simpleIO::UnixIO::printInColor(item, UnixIO::printWidth, Color::FG_PINK, " is added to the database :)\n");
-    simpleIO::UnixIO::printInColor("     is added.😊\n", Color::FG_PINK);
+    simpleIO::UnixIO::printInColor("    ...\n", Color::FG_PINK);
     
     // instant synchronization whenever note is added.
     copyDatabaseToArg(CONST::DATABASE_LOCATION.c_str());
@@ -56,9 +56,7 @@ void Dic::retriveDataFromFile(ifstream& fin)
              long type.
              */
             timeAdded = (time_t)atoll(str_timeAdded.c_str());
-            
-            
-            
+        
             dic.pushFromFile( index, key, value, timeAdded, familiar_index);
         }
         
@@ -152,7 +150,7 @@ void Dic::userInteractive()
         else if (first3chars == "tag")
             groupActiviy(input.substr(3));
         else if (first2chars == "tm")
-            timeActivity();
+            timeActivity(input.substr(2));
         else if (!target)
             singleActivity(input, previousPtr);
         else simpleIO::String::dispalyFatalMessage(input);
@@ -206,8 +204,7 @@ void Dic::reviewActivity(const std::string& line)
     std::vector<std::string> tokens = simpleIO::String::getTokens(lineCopy);
     size_t length = tokens.size();
     
-    int numNodesUserWantToreview = length >= 2? stoi(tokens.at(1)) : CONST::NUM_NODES_TO_REVIEW;
-    
+    int numNodesUserWantToreview = length >= 2? stoi(tokens.at(1)) : Node::numOfNodes;
     
     if (length < 1)
         simpleIO::UnixIO::displayMessage("Fatal: rd/sc/rd is not entered");
@@ -230,12 +227,26 @@ void Dic::reportHtmlFile(const string& location) const
 }
 
 
-void Dic::timeActivity() const
+void Dic::timeActivity(const string& info) const
 {
-    tr::TimeRemainder t1(9,25,2017,0,0,0,1, "距离Fall quater 2017 begin");
-    tr::TimeRemainder t2(9,5,2017,00,00,00,00, "距离上一次...");
+    string infoCoy = simpleIO::String::trim(info);
+    vector<string> tokens = simpleIO::String::getTokens(infoCoy);
     
-    cout << t1 << endl << t2 << endl;
+    // to do
+    
+//    if (tokens.at(0) == "add")
+    
+    
+    tr::TimeRemainder t1(9,25,2017,0,0,0,1, "爱秋");
+    tr::TimeRemainder t2(9,14,2017,18,49,00,1, "偏执");
+    
+    
+    t1.printTimeDiffInfo();
+    t2.printTimeDiffInfo();
+    
+    tr::TimeRemainder::printCurrentTime();
+    
+//    cout << t1 << endl << t2 << endl;
 }
 
 
@@ -316,7 +327,6 @@ void Dic::deleteActivity(const Node* previousPtr, string info)
         
     }
 
-    
     // if there is no real content
     if(info.size() < 1) simpleIO::UnixIO::printInColor("Too few arguments", Color::BG_RED);
     else{
