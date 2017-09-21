@@ -56,6 +56,7 @@ tr::TimeRemainder::TimeRemainder(const int& month, const int& day_of_month,
                         - minutesRemainder*SECOND_PER_MINUTE;
 }
 
+
 std::string tr::TimeRemainder::getCurrentTime() const
 {
     std::string currentTime;

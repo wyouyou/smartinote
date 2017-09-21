@@ -242,7 +242,7 @@ void Dic::timeActivity(const string& info) const
     
     
     tr::TimeRemainder t1(9,25,2017,0,0,0,1, "爱秋");
-    tr::TimeRemainder t2(9,14,2017,18,49,00,1, "偏执");
+    tr::TimeRemainder t2(9,19,2017,18,49,00,1, "偏执");
     
     
     t1.printTimeDiffInfo();
