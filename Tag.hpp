@@ -10,7 +10,7 @@
 #define Tag_hpp
 
 #include <stdio.h>
-#include "lib/io/simpleIo.hpp"
+#include "io/simpleIo.hpp"
 #include <iostream>
 #include <vector>
 

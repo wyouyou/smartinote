@@ -1,12 +1,12 @@
-#include "main/Dic.hpp"
-#include "test/fstreamFile.hpp"
+#include "Dic.hpp"
+//#include "test/fstreamFile.hpp"
 
 
 int main (void)
 {
     // Check compatibility of the InputFile
-    fstreamFile checkFile(CONST::DATABASE_LOCATION);
-    checkFile.report();
+//    fstreamFile checkFile(CONST::DATABASE_LOCATION);
+//    checkFile.report();
     
     
     // G e e k l e programCore

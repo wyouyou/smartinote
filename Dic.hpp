@@ -10,7 +10,7 @@
 #define Dic_hpp
 
 #include "List.h"
-#include "lib/time/TimeRemainder.hpp"
+#include "time/TimeRemainder.hpp"
 //#include "time/TimeRemainder.cpp"
 
 

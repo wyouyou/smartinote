@@ -11,8 +11,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "lib/io/simpleIo.hpp"
-#include "lib/time/TimeRemainder.hpp"
+#include "io/simpleIo.hpp"
+#include "time/TimeRemainder.hpp"
 #include "Tag.hpp"
 
 

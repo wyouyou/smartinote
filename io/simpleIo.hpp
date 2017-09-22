@@ -204,8 +204,6 @@ namespace all{
 
     };
     
-//    void printInColor(const std::string& s,const int& width, Color::Code pCode);
-    
     class Integer{
     public:
         /*
@@ -214,7 +212,6 @@ namespace all{
          *
          * return a number between min and max, Inclusive.
          */
-
         static int randomIntegerBetween(const int& min, const int& max);
         
     };
