@@ -15,7 +15,9 @@ Tag::Tag()
 
 Tag::Tag(const std::string& theInfo): info(theInfo)
 {
-    subInfos = simpleIO::String::getTokens(theInfo, "-");
+    
+    
+    subInfos = simpleIO::getTokens(theInfo, "-");
 }
 
 
@@ -28,7 +30,7 @@ void Tag::update(const std::string& theInfo)
     if (theInfo.size() == 0)
         return;
     
-    std::vector<std::string> tempInfos =simpleIO::String::getTokens(theInfo, "-");
+    std::vector<std::string> tempInfos =simpleIO::getTokens(theInfo, "-");
 
     // adding each element of the tempInfos to subInfos if the element does not exist in the subInfos
     // ...use set_union

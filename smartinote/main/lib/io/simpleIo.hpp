@@ -1,5 +1,5 @@
 //
-//  simpleIo.hpp
+//  all.hpp
 //  dic
 //
 //  Created by Jaye Wang on 8/21/17.
@@ -28,6 +28,8 @@ namespace CONST{
     const char HTML_OUT_LOCATION [] = "/Users/zhouwang/Github/smartinote-data/dic.html";
     
     const std::string DATABASE_COPY_LOCATION = "/Users/zhouwang/Github/smartinote-data/dicCopy.md";
+    
+    const bool SIPPORT_COLOR = true;
 }
 
 
@@ -36,7 +38,7 @@ namespace CONST{
  */
 namespace Color {
     enum Code {
-//        Foreground (text)
+        //        Foreground (text)
         FG_RED      = 31,
         FG_GREEN    = 32,
         FG_DEFAULT  = 39,
@@ -48,8 +50,8 @@ namespace Color {
         FG_PURPLE = 94,
         
         
-
-//        Background
+        
+        //        Background
         BG_LIGHT_GREEN = 102,
         BG_LIGHT_BLUE = 104,
         BG_RED      = 41,
@@ -57,8 +59,8 @@ namespace Color {
         BG_BLUE     = 44,
         BG_DEFAULT  = 49
     };
-    
-    
+
+
     
     class Modifier {
         Code code;
@@ -74,12 +76,75 @@ namespace Color {
 
 
 
-namespace simpleIO{
+class simpleIO{
+    
+public:
+    /**
+     * return true if the str passed in is numeric
+     * return false otherwise
+     */
+    static bool isNumeric(const std::string&);
     
     
+    /**
+     * return a vector of tokens tokenized,delimited by
+     * the second argument, default is whitespace.
+     *
+     */
+    static std::vector<std::string> getTokens(const std::string& arg, const std::string& delimiter = " ");
+    
+    /**
+     * return the first token of the argment string delimited by
+     * the second argument, default is whitespace.
+     */
+    
+    static std::string getToken(const std::string& line, const std::string& delimiter = " ");
+    
+    /**
+     * return a copy of arg but with leading and trailing whitespace removed.
+     */
+    static std::string trim(const std::string& arg);
+    
+    static void appendSpace(std::string& prompt);
+    
+    /**
+     * Function: getLine
+     * Usage: string line = simpleIo::String::getLine(prompt);
+     * -------------------------------------
+     * Reads a line of text from cin and returns that line
+     * as a string.  The newline character that terminates the input is
+     * not stored as part of the return value.
+     */
+    static std::string getLine(const std::string& prompt, Color::Code = Color::BG_DEFAULT);
+    
+    
+    /**
+     * Alternate version of getLine that accepts a prompt and fills a given output
+     * variable with its result.
+     */
+    static void getLine(const std::string& prompt,
+                        std::string& out,Color::Code = Color::BG_DEFAULT);
+    
+    
+    /**
+     * Display fatal message with info specified by the arg: commandInfo.
+     *
+     * Usage simpleIo::String::dispalyFatalMessage(arg);
+     */
+    static void dispalyFatalMessage(const std::string& commandInfo);
+    
+};
+
+
+
+
+//class stdIO
+
+
+
+namespace all{
     class UnixIO
     {
-        
     public:
         
         
@@ -97,8 +162,8 @@ namespace simpleIO{
          * Another version of printInColor
          * Handle the case : where the prompt symbol destroy the 
          * alignment.
-         * simpleIO::UnixIO::printInColor("   ◉ ", Color::FG_LIGHT_Cyan);
-         * simpleIO::UnixIO::printInColor(tokens.at(i), width, pCode);
+         * all::UnixIO::printInColor("   ◉ ", Color::FG_LIGHT_Cyan);
+         * all::UnixIO::printInColor(tokens.at(i), width, pCode);
          */
         static void printInColor(const int& intilWidth,
                                  const std::string& str,
@@ -129,7 +194,6 @@ namespace simpleIO{
     public:
         
         static bool isEnterKeyPressed(const std::string& str);
-
         static void printAline(const short& length);
         /**
          * Modify the string with the width specific.
@@ -153,72 +217,8 @@ namespace simpleIO{
 
         static int randomIntegerBetween(const int& min, const int& max);
         
-        
     };
     
-    class String{
-        
-    public:
-        
-        /**
-         * return true if the str passed in is numeric
-         * return false otherwise
-         */
-        static bool isNumeric(const std::string&);
-        
-        
-        /**
-         * return a vector of tokens tokenized,delimited by
-         * the second argument, default is whitespace.
-         *
-         */
-        static std::vector<std::string> getTokens(const std::string& arg, const std::string& delimiter = " ");
-        
-        /**
-         * return the first token of the argment string delimited by
-         * the second argument, default is whitespace.
-         */
-        
-        static std::string getToken(const std::string& line, const std::string& delimiter = " ");
-        
-        /**
-         * return a copy of arg but with leading and trailing whitespace removed.
-         */
-        static std::string trim(const std::string& arg);
-        
-        static void appendSpace(std::string& prompt);
-        
-        /**
-         * Function: getLine
-         * Usage: string line = simpleIo::String::getLine(prompt);
-         * -------------------------------------
-         * Reads a line of text from cin and returns that line
-         * as a string.  The newline character that terminates the input is
-         * not stored as part of the return value.
-         */
-        static std::string getLine(const std::string& prompt, Color::Code = Color::BG_DEFAULT);
-        
-        
-        /**
-         * Alternate version of getLine that accepts a prompt and fills a given output
-         * variable with its result.
-         */
-        static void getLine(const std::string& prompt,
-                               std::string& out,Color::Code = Color::BG_DEFAULT);
-        
-        
-        /**
-         * Display fatal message with info specified by the arg: commandInfo.
-         *
-         * Usage simpleIo::String::dispalyFatalMessage(arg);
-         */
-        static void dispalyFatalMessage(const std::string& commandInfo);
-    
-        
-        
-
-        
-    };
     
 }
 

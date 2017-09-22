@@ -22,7 +22,7 @@ int main (void)
     // update formatted file
     myDictionary.reportHtmlFile(CONST::HTML_OUT_LOCATION);
     
-    simpleIO::UnixIO::displayMessage("Program is done...");
+    all::UnixIO::displayMessage("Program is done...");
 }
 
 

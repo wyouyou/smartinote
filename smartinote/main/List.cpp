@@ -93,7 +93,7 @@ bool List::remove(const string& key)
     if(!find(key))
     {
 //        cerr << key << " is not in the List" << endl;
-        simpleIO::UnixIO::displayMessage(" is not in the List");
+        all::UnixIO::displayMessage(" is not in the List");
         cout << endl;
         return false;
     }
@@ -260,7 +260,7 @@ void List::reviewRandomly(const short& num)
     
     for (int i = 0 ; i< num; i++)
     {
-        randomIndex = simpleIO::Integer::randomIntegerBetween(1, Node::numOfNodes);
+        randomIndex = all::Integer::randomIntegerBetween(1, Node::numOfNodes);
         
         currentPtr = find(randomIndex);
         
@@ -391,7 +391,7 @@ void List::reviewMessage(const bool& reviewed)
     string message;
     message = (reviewed? "That is all for this turn." : "Nothing to review at this moment.");
     cout << endl;
-    simpleIO::UnixIO::displayMessage(message);
+    all::UnixIO::displayMessage(message);
     cout << endl;
 
 }
@@ -440,9 +440,9 @@ void List::report2HtmlFile(const string& location) const
 void List::rm_message(Node* node) const
 {
     cout << "   ";
-    simpleIO::UnixIO::printInColor("➠  ", Color::FG_RED);
+    all::UnixIO::printInColor("➠  ", Color::FG_RED);
     cout  << node->get_key();
-    simpleIO::UnixIO::printInColor("   is removed :) \n", Color::FG_YELLOW);
+    all::UnixIO::printInColor("   is removed :) \n", Color::FG_YELLOW);
     
 }
 

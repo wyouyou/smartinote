@@ -74,11 +74,11 @@ std::string Node::review()
     do
     {
     string prompt = "\n\n认识: " + this->key + " 吗？Press 'Y' or 'y', press 'N' or 'n' 如果不认识, 'D' or 'd' to delete:";
-    //    simpleIO::UnixIO::printInColor(" ☞"
+    //    all::UnixIO::printInColor(" ☞"
     
-    simpleIO::UnixIO::printInColor("\n ☞ ", Color::FG_GREEN);
+    all::UnixIO::printInColor("\n ☞ ", Color::FG_GREEN);
     
-    remember = simpleIO::String::getLine(this->key+ ": ");
+    remember = simpleIO::getLine(this->key+ ": ");
     
     if (remember[0] == 'Y'  or remember[0] == 'y')
     {
@@ -95,16 +95,16 @@ std::string Node::review()
     else if (remember == "rm last") return remember;
     else if (remember == "rm this") return remember;
     else if (remember == "q") return remember;
-    else if (simpleIO::stdIO::isEnterKeyPressed(remember))
+    else if (all::stdIO::isEnterKeyPressed(remember))
     {
         clear();
         continue;
     }
     else if (remember.substr(0,3) == "rst" || remember.substr(0,4) == "app ")
         return remember;
-    else simpleIO::String::dispalyFatalMessage("command");
+    else simpleIO::dispalyFatalMessage("command");
         
-    }while (simpleIO::stdIO::isEnterKeyPressed(remember));
+    }while (all::stdIO::isEnterKeyPressed(remember));
     
     return reviewResult;
 }
@@ -192,7 +192,7 @@ void Node::valueUpdating(const string& newStuff,
     
     
     string message = "The new value now is : ";
-    simpleIO::UnixIO::displayMessage(message);
+    all::UnixIO::displayMessage(message);
     cout << endl;
     this->printNodeInfo(CONST::PRINT_WIDTH, Color::FG_PINK);
     
@@ -272,7 +272,7 @@ void Node::printNodeInfo(const int& width, Color::Code pCode) const
      * #9 print value in ordered list based delimiter '#'
      */
     
-    vector<string> tokens = simpleIO::String::getTokens(valueCopy, "#");
+    vector<string> tokens = simpleIO::getTokens(valueCopy, "#");
     
     for (unsigned short i = 0; i < tokens.size(); i++)
     {
@@ -288,8 +288,8 @@ void Node::printNodeInfo(const int& width, Color::Code pCode) const
         
         
         std::string intial = "   - ";
-        simpleIO::UnixIO::printInColor(intial, Color::FG_LIGHT_Cyan);
-        simpleIO::UnixIO::printInColor((int)intial.size(), tokens.at(i), width,printColor);
+        all::UnixIO::printInColor(intial, Color::FG_LIGHT_Cyan);
+        all::UnixIO::printInColor((int)intial.size(), tokens.at(i), width,printColor);
         cout << endl;
     }
     

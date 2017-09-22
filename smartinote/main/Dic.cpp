@@ -18,8 +18,8 @@ void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& ite
     
     L.get_top()->printNodeInfo(CONST::PRINT_WIDTH);
     //    cout << "\"" << item  << "\" is added to the database......\n";
-//    simpleIO::UnixIO::printInColor(item, UnixIO::printWidth, Color::FG_PINK, " is added to the database :)\n");
-    simpleIO::UnixIO::printInColor("    ...\n", Color::FG_PINK);
+//    all::UnixIO::printInColor(item, UnixIO::printWidth, Color::FG_PINK, " is added to the database :)\n");
+    all::UnixIO::printInColor("    ...\n", Color::FG_PINK);
     
     // instant synchronization whenever note is added.
     copyDatabaseToArg(CONST::DATABASE_LOCATION.c_str());
@@ -122,15 +122,15 @@ void Dic::userInteractive()
     while (1)
     {
         // 请求一个单词，必须是正确的全拼写。
-        simpleIO::UnixIO::smartinotePrompt();
+        all::UnixIO::smartinotePrompt();
         std:: cout << "(";
         tr::TimeRemainder::printCurrentTime();
         std::cout << ")";
 
-        simpleIO::String::getLine(": ", input);
+        simpleIO::getLine(": ", input);
         
         string first4chars = input.substr(0,4);
-        input = simpleIO::String::trim(input);
+        input = simpleIO::trim(input);
         
         first2chars = input.substr(0,2);
         first3chars = input.substr(0,3);
@@ -147,7 +147,7 @@ void Dic::userInteractive()
             break;
         else if (input == "clear")
             clear();
-        else if (simpleIO::stdIO::isEnterKeyPressed(input))
+        else if (all::stdIO::isEnterKeyPressed(input))
             continue;
         else if(first2chars == "rv")
             reviewActivity(input.substr(2));
@@ -159,7 +159,7 @@ void Dic::userInteractive()
             timeActivity(input.substr(2));
         else if (!target)
             singleActivity(input, previousPtr);
-        else simpleIO::String::dispalyFatalMessage(input);
+        else simpleIO::dispalyFatalMessage(input);
     }
 }
 
@@ -207,13 +207,13 @@ void Dic::copyDatabaseToArg(const char arg[]) const
 void Dic::reviewActivity(const std::string& line)
 {
     std::string lineCopy = line;
-    std::vector<std::string> tokens = simpleIO::String::getTokens(lineCopy);
+    std::vector<std::string> tokens = simpleIO::getTokens(lineCopy);
     size_t length = tokens.size();
     
     int numNodesUserWantToreview = length >= 2? stoi(tokens.at(1)) : Node::numOfNodes;
     
     if (length < 1)
-        simpleIO::UnixIO::displayMessage("Fatal: rd/sc/rd is not entered");
+        all::UnixIO::displayMessage("Fatal: rd/sc/rd is not entered");
     else if (tokens.at(0) == "rd")
         dic.reviewRandomly(numNodesUserWantToreview);
     else if (tokens.at(0) == "st")
@@ -221,7 +221,7 @@ void Dic::reviewActivity(const std::string& line)
     else if (tokens.at(0) == "td")
         dic.reviewToday(numNodesUserWantToreview);
     else
-        simpleIO::String::dispalyFatalMessage("Command ");
+        simpleIO::dispalyFatalMessage("Command ");
     
 }
 
@@ -235,8 +235,8 @@ void Dic::reportHtmlFile(const string& location) const
 
 void Dic::timeActivity(const string& info) const
 {
-    string infoCoy = simpleIO::String::trim(info);
-    vector<string> tokens = simpleIO::String::getTokens(infoCoy);
+    string infoCoy = simpleIO::trim(info);
+    vector<string> tokens = simpleIO::getTokens(infoCoy);
     
     // to do
     
@@ -295,11 +295,11 @@ void Dic::singleActivity(const string& key, Node*& lastNode)
     // do while loop handle enter key accidently entered
     do
     {
-        simpleIO::String::getLine(":", value);
+        simpleIO::getLine(":", value);
         if (value == "q" || value =="Q") continue;
         else if (value.rfind("--q") != std::string::npos) continue;
         else if (value == "clear") clear();
-        else if (simpleIO::stdIO::isEnterKeyPressed(value))
+        else if (all::stdIO::isEnterKeyPressed(value))
             continue;
         else
         {
@@ -321,7 +321,7 @@ void Dic::singleActivity(const string& key, Node*& lastNode)
 void Dic::deleteActivity(const Node* previousPtr, string info)
 {
     // remove the leading and tailing space
-    info = simpleIO::String::trim(info);
+    info = simpleIO::trim(info);
 
     // rmove the last added node, useful when the last input accidently entered sth wrong but node has been added.
     if (info == "last")
@@ -329,15 +329,15 @@ void Dic::deleteActivity(const Node* previousPtr, string info)
         if (previousPtr!=nullptr)
             dic.remove(previousPtr->get_key());
         else
-            simpleIO::UnixIO::displayMessage("The node is alreay removed or does not exist.");
+            all::UnixIO::displayMessage("The node is alreay removed or does not exist.");
         
     }
 
     // if there is no real content
-    if(info.size() < 1) simpleIO::UnixIO::printInColor("Too few arguments", Color::BG_RED);
+    if(info.size() < 1) all::UnixIO::printInColor("Too few arguments", Color::BG_RED);
     else{
         vector<string> tokens
-        = simpleIO::String::getTokens(info);
+        = simpleIO::getTokens(info);
         vector<string> keys(0);
         int index;
         
@@ -345,7 +345,7 @@ void Dic::deleteActivity(const Node* previousPtr, string info)
         {
             // If the str is numeric, convert it to int
             //  else continue
-            if (simpleIO::String::isNumeric(tokens.at(i)))
+            if (simpleIO::isNumeric(tokens.at(i)))
                 index = stoi(tokens.at(i));
             else
                 continue;

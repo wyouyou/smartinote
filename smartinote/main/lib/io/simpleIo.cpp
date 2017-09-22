@@ -1,5 +1,5 @@
 //
-//  simpleIo.cpp
+//  all.cpp
 //  dic
 //
 //  Created by Jaye Wang on 8/21/17.
@@ -8,7 +8,7 @@
 
 #include "simpleIo.hpp"
 
-using namespace simpleIO;
+using namespace all;
 using namespace Color;
 
 
@@ -16,7 +16,7 @@ using namespace Color;
  * return true if the enter key get pressed.
  */
 
-bool simpleIO::stdIO::isEnterKeyPressed(const std::string& str)
+bool all::stdIO::isEnterKeyPressed(const std::string& str)
 {
     if (str.empty())
         return true;
@@ -43,7 +43,7 @@ void stdIO::justifyText(std::string& line, const int& theWidth)
 //    using at at the moment
     return;
     
-    std::vector<std::string> tokens = String::getTokens(line);
+    std::vector<std::string> tokens = simpleIO::getTokens(line);
     
     short diff = theWidth - line.size() ;
     
@@ -70,7 +70,7 @@ void stdIO::justifyText(std::string& line, const int& theWidth)
  * If any string with token passed in, its copy will be trimed inside the function.
  */
 
-bool String::isNumeric(const std::string& arg)
+bool simpleIO::isNumeric(const std::string& arg)
 {
     std::string argCopy = arg;
     const int asciiMin = 48;
@@ -96,7 +96,7 @@ bool String::isNumeric(const std::string& arg)
 /*
  *
  */
-std::string String::getToken(const std::string& line, const std::string& delimiter )
+std::string simpleIO::getToken(const std::string& line, const std::string& delimiter )
 {
     std::string token;
     std::vector<std::string> tokens = getTokens(line, delimiter);
@@ -106,23 +106,23 @@ std::string String::getToken(const std::string& line, const std::string& delimit
 }
 
 
-std::vector<std::string> String::getTokens(const std::string& arg, const std::string& delimiter )
+std::vector<std::string> simpleIO::getTokens(const std::string& arg, const std::string& delimiter )
 {
     //    string info = "  2455    65    33  r ";
     std::string argCopy, temp;
     std::vector<std::string> tokens(0);
-    argCopy = simpleIO::String::trim(arg);
+    argCopy = simpleIO::trim(arg);
     
     
     // handle some input whose first char is delimeter
     // delete the first char and continue
     if (argCopy.find_first_of(delimiter) == 0)
-        argCopy = simpleIO::String::trim(argCopy.substr(1));
+        argCopy = simpleIO::trim(argCopy.substr(1));
     
     // handle some input whose last char is delimeter
     // delete the last char and continue
     if (argCopy.find_last_of(delimiter) == argCopy.size()- 1)
-        argCopy = simpleIO::String::trim(argCopy.substr(0, argCopy.size()-1));
+        argCopy = simpleIO::trim(argCopy.substr(0, argCopy.size()-1));
     
     size_t posStart = 0;
     size_t posEnd  = argCopy.size() -1;
@@ -139,7 +139,7 @@ std::vector<std::string> String::getTokens(const std::string& arg, const std::st
         if (posStart < argCopy.size() -1 && posEnd < argCopy.size() -1)
         {
             temp =  argCopy.substr(posStart, posEnd - posStart);
-            argCopy = simpleIO::String::trim(argCopy.substr(posEnd+1));
+            argCopy = simpleIO::trim(argCopy.substr(posEnd+1));
             tokens.push_back(temp);
         }
         
@@ -156,7 +156,7 @@ std::vector<std::string> String::getTokens(const std::string& arg, const std::st
     
 }
 
-std::string String::trim(const std::string& arg)
+std::string simpleIO::trim(const std::string& arg)
 {
     /*
      @ 08/31  Added exception handling when only the Enter key get passed / empty string:
@@ -184,7 +184,7 @@ std::string String::trim(const std::string& arg)
 }
 
 
-void simpleIO::stdIO::printAline(const short& length)
+void all::stdIO::printAline(const short& length)
 {
     for (int i = 0; i< length; i++)
         std::cout << "-";
@@ -198,17 +198,17 @@ void UnixIO::smartinotePrompt()
 {
     // A nice prompt for geek ~
     
-    simpleIO::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
-    simpleIO::UnixIO::printInColor("S", Color::FG_RED);
-    simpleIO::UnixIO::printInColor("m", Color::FG_YELLOW);
-    simpleIO::UnixIO::printInColor("a", Color::FG_LIGHT_Cyan);
-    simpleIO::UnixIO::printInColor("r", Color::FG_PINK);
-    simpleIO::UnixIO::printInColor("t", Color::FG_GREEN);
-    simpleIO::UnixIO::printInColor("i", Color::FG_LIGHT_Cyan);
-    simpleIO::UnixIO::printInColor("n", Color::FG_PINK);
-    simpleIO::UnixIO::printInColor("o", Color::FG_GREEN);
-    simpleIO::UnixIO::printInColor("t", Color::FG_RED);
-    simpleIO::UnixIO::printInColor("e", Color::FG_YELLOW);
+    all::UnixIO::printInColor("\n➜ ", Color::FG_GREEN);
+    all::UnixIO::printInColor("S", Color::FG_RED);
+    all::UnixIO::printInColor("m", Color::FG_YELLOW);
+    all::UnixIO::printInColor("a", Color::FG_LIGHT_Cyan);
+    all::UnixIO::printInColor("r", Color::FG_PINK);
+    all::UnixIO::printInColor("t", Color::FG_GREEN);
+    all::UnixIO::printInColor("i", Color::FG_LIGHT_Cyan);
+    all::UnixIO::printInColor("n", Color::FG_PINK);
+    all::UnixIO::printInColor("o", Color::FG_GREEN);
+    all::UnixIO::printInColor("t", Color::FG_RED);
+    all::UnixIO::printInColor("e", Color::FG_YELLOW);
     
     
 }
@@ -217,7 +217,7 @@ void UnixIO::smartinotePrompt()
 void UnixIO::displayMessage(const std::string& message)
 {
     std::cout << "   ";
-    simpleIO::UnixIO::printInColor("➠  ", Color::FG_RED);
+    all::UnixIO::printInColor("➠  ", Color::FG_RED);
     std::cout << message;
 }
 
@@ -304,7 +304,7 @@ void UnixIO::printInColor(const std::string& str,
     Color::Modifier defFG(Color::FG_DEFAULT);
     std::cout << color;
     
-    std::vector<std::string> tokens = String::getTokens(strCopy);
+    std::vector<std::string> tokens = simpleIO::getTokens(strCopy);
     
     
     UnixIO::printInWidth(0, theWidth, tokens);
@@ -333,7 +333,7 @@ void UnixIO::printInColor(const int& intilWidth,
     Color::Modifier defFG(Color::FG_DEFAULT);
     std::cout << color;
     
-    std::vector<std::string> tokens = String::getTokens(strCopy);
+    std::vector<std::string> tokens = simpleIO::getTokens(strCopy);
     
     
     
@@ -358,7 +358,7 @@ void UnixIO::printInColor(const std::string& str, Color::Code pCode)
  * v1 = rand() % 100;         // v1 in the range 0 to 99
  * v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
  */
-int simpleIO::Integer::randomIntegerBetween(const int &min, const int &max)
+int all::Integer::randomIntegerBetween(const int &min, const int &max)
 {
     return rand()% (max - min + 1) + min;
 }
@@ -366,10 +366,10 @@ int simpleIO::Integer::randomIntegerBetween(const int &min, const int &max)
 
 /*****************************************************************/
 
-void String::dispalyFatalMessage(const std::string& commandInfo)
+void simpleIO::dispalyFatalMessage(const std::string& commandInfo)
 {
     std::cout << "    ";
-    simpleIO::UnixIO::printInColor("➠  fatal ", Color::FG_RED);
+    all::UnixIO::printInColor("➠  fatal ", Color::FG_RED);
     std::cout << commandInfo  << " is not found" << std::endl;
 }
 
@@ -384,18 +384,18 @@ void String::dispalyFatalMessage(const std::string& commandInfo)
  * that the process of reading integers, floating-point numbers, and
  * strings remains as consistent as possible.
  */
-std::string String::getLine(const std::string& prompt,Color::Code pCode) {
+std::string simpleIO::getLine(const std::string& prompt,Color::Code pCode) {
     std::string line;
     getLine(prompt, line, pCode);
     return line;
 }
 
 
-void String::getLine(const std::string& prompt,
+void simpleIO::getLine(const std::string& prompt,
                      std::string& out,Color::Code pCode )
 {
     std::string promptCopy = prompt;
-    String::appendSpace(promptCopy);
+    simpleIO::appendSpace(promptCopy);
     
     
     UnixIO::printInColor(prompt, pCode);
@@ -405,7 +405,7 @@ void String::getLine(const std::string& prompt,
 }
 
 
-void String::appendSpace(std::string& prompt)
+void simpleIO::appendSpace(std::string& prompt)
 {
     if (!prompt.empty() && !isspace(prompt[prompt.length() - 1])) {
         prompt += ' ';
