@@ -128,6 +128,8 @@ void Dic::userInteractive()
         std::cout << ")";
 
         simpleIO::String::getLine(": ", input);
+        
+        string first4chars = input.substr(0,4);
         input = simpleIO::String::trim(input);
         
         first2chars = input.substr(0,2);
@@ -139,7 +141,7 @@ void Dic::userInteractive()
         if (target)
             printActivity(previousPtr, target);
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
-        else if (previousPtr!=nullptr && (first3chars == "rst"||first3chars =="app"))
+        else if (previousPtr!=nullptr && (first3chars == "rst"||first4chars =="app "))
             previousPtr->valueUpdating(input.substr(3), first3chars);
         else if (input == "q" || input =="Q")
             break;

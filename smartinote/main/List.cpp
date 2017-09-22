@@ -289,7 +289,7 @@ void List::reviewFollowUp(const string& reviewResult,Node*& currentPtr, Node*& p
     if (reviewResult == "rm last" && previousPtr!= nullptr)
         remove(previousPtr->get_index());
     // Reset or append vlaue.
-    else if (previousPtr!=nullptr && (reviewResult.substr(0,3) == "rst" || reviewResult.substr(0,3)=="app"))
+    else if (previousPtr!=nullptr && (reviewResult.substr(0,3) == "rst" || reviewResult.substr(0,4)=="app "))
         previousPtr->valueUpdating(reviewResult.substr(3), reviewResult.substr(0,3));
     
     // Note: the first note can not be removed

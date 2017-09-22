@@ -100,7 +100,7 @@ std::string Node::review()
         clear();
         continue;
     }
-    else if (remember.substr(0,3) == "rst" || remember.substr(0,3) == "app")
+    else if (remember.substr(0,3) == "rst" || remember.substr(0,4) == "app ")
         return remember;
     else simpleIO::String::dispalyFatalMessage("command");
         
@@ -184,7 +184,7 @@ void Node::valueUpdating(const string& newStuff,
     if (choice == "rst")
         this->set_value(newStuff);
     // append
-    else if (choice == "app")
+    else if (choice == "app ")
         this->append_value(newStuff);
     else
         std::cout << "semantic issue: " << __LINE__ << __FILE__ <<endl;
