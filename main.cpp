@@ -1,4 +1,4 @@
-#include "Smartinote.hpp"
+#include "smartinote/Smartinote.hpp"
 #include "test/FstreamFile.hpp"
 
 
@@ -7,9 +7,6 @@ int main (void)
     // Check compatibility of the InputFile
     FstreamFile checkFile(CONST::DATABASE_LOCATION);
     checkFile.report();
-    
-    
-    // G e e k l e programCore
     
     //备份数据
     Dic myDictionary(CONST::DATABASE_LOCATION);
