@@ -260,7 +260,7 @@ void List::reviewRandomly(const short& num)
     
     for (int i = 0 ; i< num; i++)
     {
-        randomIndex = all::Integer::randomIntegerBetween(1, Node::numOfNodes);
+        randomIndex = random::randomIntegerBetween(1, Node::numOfNodes);
         
         currentPtr = find(randomIndex);
         

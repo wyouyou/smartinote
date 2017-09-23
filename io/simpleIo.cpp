@@ -40,7 +40,7 @@ void stdIO::justifyText(std::string& line, const int& theWidth)
 {
     
     // 09/11/17 It turned out the effect does not looks buautiful, stop
-//    using at at the moment
+    //    using at at the moment
     return;
     
     std::vector<std::string> tokens = simpleIO::getTokens(line);
@@ -65,7 +65,7 @@ void stdIO::justifyText(std::string& line, const int& theWidth)
  * return false if any char of the arg is not numeric
  * return false if the arg is empty
  * return true if all chars of the arg is numeric
-
+ 
  * Precondition: the string should be a single token with no space.
  * If any string with token passed in, its copy will be trimed inside the function.
  */
@@ -178,7 +178,7 @@ std::string simpleIO::trim(const std::string& arg)
     //    catch(std::string str)  // catch specific message.
     catch(...) // catch general error messages
     {
-//        std::cout << "Empty string exception.";
+        //        std::cout << "Empty string exception.";
     }
     return argCopy;
 }
@@ -254,7 +254,7 @@ void UnixIO::printInWidth(const int& intialDiff,
             {
                 std::cout << strCopy;
                 break;
-
+                
             }
             
             // The first line with front symbol
@@ -353,17 +353,6 @@ void UnixIO::printInColor(const std::string& str, Color::Code pCode)
 
 
 
-/**
- * This is how rand() works:
- * v1 = rand() % 100;         // v1 in the range 0 to 99
- * v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
- */
-int all::Integer::randomIntegerBetween(const int &min, const int &max)
-{
-    return rand()% (max - min + 1) + min;
-}
-
-
 /*****************************************************************/
 
 void simpleIO::dispalyFatalMessage(const std::string& commandInfo)
@@ -392,7 +381,7 @@ std::string simpleIO::getLine(const std::string& prompt,Color::Code pCode) {
 
 
 void simpleIO::getLine(const std::string& prompt,
-                     std::string& out,Color::Code pCode )
+                       std::string& out,Color::Code pCode )
 {
     std::string promptCopy = prompt;
     simpleIO::appendSpace(promptCopy);
@@ -411,7 +400,6 @@ void simpleIO::appendSpace(std::string& prompt)
         prompt += ' ';
     }
 }
-
 
 
 

@@ -203,20 +203,7 @@ namespace all{
         static std::string getSpaces(const int& num);
 
     };
-    
-    class Integer{
-    public:
-        /*
-         * Function: randomIntegerBetween
-         * Usage: int n = randomIntegerBetween(min, max);
-         *
-         * return a number between min and max, Inclusive.
-         */
-        static int randomIntegerBetween(const int& min, const int& max);
         
-    };
-    
-    
 }
 
 #endif /* simpleIo_hpp */

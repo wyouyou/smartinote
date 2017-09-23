@@ -2,10 +2,9 @@
  * File: Node.cpp
  */
 
-#include "Node.h"
+#include "Note.h"
 
 int Node::numOfNodes = 0;
-
 void Node::decrementNumOfNodes() { numOfNodes--;}
 
 /**

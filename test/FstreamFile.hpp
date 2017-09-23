@@ -1,5 +1,5 @@
 //
-//  fstreamFile.hpp
+//  FstreamFile.hpp
 //  dic
 //
 //  Created by Jaye Wang on 8/29/17.
@@ -17,11 +17,11 @@
 
 namespace test
 {
-    class fstreamFile;
-
+    class FstreamFile;
+    
 }
 
-class fstreamFile{
+class FstreamFile{
     
 private:
     int errorLine;
@@ -35,24 +35,24 @@ private:
      */
     void alloc(std::ifstream& fin);
     void init(std::ifstream& fin);
-
+    
     
 public:
     
-    fstreamFile(const std::string&);
-    ~fstreamFile();
+    FstreamFile(const std::string&);
+    ~FstreamFile();
     std::string path;
     bool validFile;
     bool ContinousIndex;
     bool ValidLine;
     std::vector<int> indexs;
     /**
-     * If the input file meeting cetain requirements. 
-            Program continue;
+     * If the input file meeting cetain requirements.
+     Program continue;
      * elif the input file has line with non continous index
-            exit program and prompt error line
+     exit program and prompt error line
      * elif the input file does not meet the delimiters setting
-            eixt program and prompt the error line.
+     eixt program and prompt the error line.
      */
     void report() const;
 };
@@ -66,3 +66,4 @@ public:
 
 
 #endif /* fstreamFile_hpp */
+

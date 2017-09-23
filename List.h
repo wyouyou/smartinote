@@ -6,8 +6,7 @@
 #ifndef List_h
 #define List_h
 
-#include "Node.h"
-
+#include "Note.h"
 
 class List
 {
@@ -27,8 +26,6 @@ class List
     void reviewFollowUp(const string& reviewResult,Node*& currentPtr, Node*& previousPtr);
     
     void reviewMessage(const bool& reviewed);
-    
-    
 public:
     
     List();
@@ -58,19 +55,23 @@ public:
      *
      */
     void add_value(string value, Node* target);
+    
     /**
      *
      */
     string pop();
     
     Node* get_top() const;
+    
     /**
      * Remove node with the same key as the arg.
      */
-    
     int getNumOfNodes() const;
-    bool remove(const string& key);
     
+    /**
+     * remove element associated with same key as arg.
+     */
+    bool remove(const string& key);
     
     /**
      * Remove node with the same index as the arg.
@@ -90,7 +91,7 @@ public:
     Node* find(const int& index) const;
     
     /**
-     *
+     * remove the last element in the list
      */
     bool remove_Last();
     
@@ -112,11 +113,9 @@ public:
      */
     void reviewScientificly(const short& num);
     
-    
     /**
      * review today's nodes
      */
-    
     void reviewToday(const short& num) ;
     
     /**
@@ -133,12 +132,11 @@ public:
      * Usage: called whenever remove funtions get called.
      */
     void keepIndexContinous(Node* );
+    
     /**
      * prompt after any node get removed.
      */
     void rm_message(Node* ) const;
-    
-    
     
 };
 

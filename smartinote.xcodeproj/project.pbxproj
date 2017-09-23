@@ -8,15 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		D91E3FF91F75CF8C0065C856 /* List.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FE81F75CF8A0065C856 /* List.cpp */; };
-		D91E3FFA1F75CF8C0065C856 /* Dic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FEB1F75CF8A0065C856 /* Dic.cpp */; };
 		D91E3FFB1F75CF8C0065C856 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FEC1F75CF8A0065C856 /* main.cpp */; };
 		D91E3FFC1F75CF8C0065C856 /* Tag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FED1F75CF8B0065C856 /* Tag.cpp */; };
 		D91E3FFD1F75CF8C0065C856 /* simpleIo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FEF1F75CF8B0065C856 /* simpleIo.cpp */; };
 		D91E3FFE1F75CF8C0065C856 /* Encryption.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FF01F75CF8B0065C856 /* Encryption.cpp */; };
-		D91E3FFF1F75CF8C0065C856 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FF11F75CF8B0065C856 /* Node.cpp */; };
 		D91E40001F75CF8C0065C856 /* TimeRemainder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FF31F75CF8B0065C856 /* TimeRemainder.cpp */; };
-		D91E40011F75CF8C0065C856 /* fstreamFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FF71F75CF8C0065C856 /* fstreamFile.cpp */; };
 		D91E40021F75CF8C0065C856 /* UnixIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E3FF81F75CF8C0065C856 /* UnixIO.cpp */; };
+		D91E40051F75D13A0065C856 /* smartinote.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E40041F75D13A0065C856 /* smartinote.cpp */; };
+		D91E40071F75D18B0065C856 /* Note.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E40061F75D18B0065C856 /* Note.cpp */; };
+		D91E40151F75D7550065C856 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E40131F75D7550065C856 /* random.cpp */; };
+		D91E401A1F75DB060065C856 /* FstreamFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E40181F75DB060065C856 /* FstreamFile.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,25 +33,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D91E3FE61F75CF8A0065C856 /* Dic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Dic.hpp; sourceTree = "<group>"; };
-		D91E3FE71F75CF8A0065C856 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		D91E3FE81F75CF8A0065C856 /* List.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = List.cpp; sourceTree = "<group>"; };
 		D91E3FE91F75CF8A0065C856 /* simpleIo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = simpleIo.hpp; path = io/simpleIo.hpp; sourceTree = "<group>"; };
 		D91E3FEA1F75CF8A0065C856 /* TimeRemainder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TimeRemainder.hpp; path = time/TimeRemainder.hpp; sourceTree = "<group>"; };
-		D91E3FEB1F75CF8A0065C856 /* Dic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dic.cpp; sourceTree = "<group>"; };
 		D91E3FEC1F75CF8A0065C856 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D91E3FED1F75CF8B0065C856 /* Tag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tag.cpp; sourceTree = "<group>"; };
 		D91E3FEE1F75CF8B0065C856 /* UnixIO.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UnixIO.hpp; path = io/UnixIO.hpp; sourceTree = "<group>"; };
 		D91E3FEF1F75CF8B0065C856 /* simpleIo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = simpleIo.cpp; path = io/simpleIo.cpp; sourceTree = "<group>"; };
 		D91E3FF01F75CF8B0065C856 /* Encryption.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Encryption.cpp; path = io/Encryption.cpp; sourceTree = "<group>"; };
-		D91E3FF11F75CF8B0065C856 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		D91E3FF21F75CF8B0065C856 /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
 		D91E3FF31F75CF8B0065C856 /* TimeRemainder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeRemainder.cpp; path = time/TimeRemainder.cpp; sourceTree = "<group>"; };
 		D91E3FF41F75CF8B0065C856 /* Encryption.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Encryption.hpp; path = io/Encryption.hpp; sourceTree = "<group>"; };
-		D91E3FF51F75CF8C0065C856 /* fstreamFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fstreamFile.hpp; path = test/fstreamFile.hpp; sourceTree = "<group>"; };
 		D91E3FF61F75CF8C0065C856 /* Tag.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Tag.hpp; sourceTree = "<group>"; };
-		D91E3FF71F75CF8C0065C856 /* fstreamFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fstreamFile.cpp; path = test/fstreamFile.cpp; sourceTree = "<group>"; };
 		D91E3FF81F75CF8C0065C856 /* UnixIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UnixIO.cpp; path = io/UnixIO.cpp; sourceTree = "<group>"; };
+		D91E40031F75D13A0065C856 /* smartinote.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = smartinote.hpp; sourceTree = "<group>"; };
+		D91E40041F75D13A0065C856 /* smartinote.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = smartinote.cpp; sourceTree = "<group>"; };
+		D91E40061F75D18B0065C856 /* Note.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Note.cpp; sourceTree = "<group>"; };
+		D91E40081F75D1910065C856 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		D91E40131F75D7550065C856 /* random.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = random.cpp; sourceTree = "<group>"; };
+		D91E40141F75D7550065C856 /* random.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = random.hpp; sourceTree = "<group>"; };
+		D91E40181F75DB060065C856 /* FstreamFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FstreamFile.cpp; sourceTree = "<group>"; };
+		D91E40191F75DB060065C856 /* FstreamFile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FstreamFile.hpp; sourceTree = "<group>"; };
 		D96C48991F66341E0079EDBC /* smartinote */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = smartinote; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -65,20 +68,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D91E40121F75D73A0065C856 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				D91E40131F75D7550065C856 /* random.cpp */,
+				D91E40141F75D7550065C856 /* random.hpp */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		D91E40171F75DAE00065C856 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				D91E40181F75DB060065C856 /* FstreamFile.cpp */,
+				D91E40191F75DB060065C856 /* FstreamFile.hpp */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		D91E401B1F75DBF90065C856 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		D96C48901F66341E0079EDBC = {
 			isa = PBXGroup;
 			children = (
-				D91E3FEB1F75CF8A0065C856 /* Dic.cpp */,
-				D91E3FE61F75CF8A0065C856 /* Dic.hpp */,
+				D91E401B1F75DBF90065C856 /* New Group */,
+				D91E40171F75DAE00065C856 /* test */,
+				D91E40121F75D73A0065C856 /* util */,
+				D91E40081F75D1910065C856 /* Note.h */,
+				D91E40061F75D18B0065C856 /* Note.cpp */,
+				D91E40041F75D13A0065C856 /* smartinote.cpp */,
+				D91E40031F75D13A0065C856 /* smartinote.hpp */,
 				D91E3FF01F75CF8B0065C856 /* Encryption.cpp */,
 				D91E3FF41F75CF8B0065C856 /* Encryption.hpp */,
-				D91E3FF71F75CF8C0065C856 /* fstreamFile.cpp */,
-				D91E3FF51F75CF8C0065C856 /* fstreamFile.hpp */,
 				D91E3FE81F75CF8A0065C856 /* List.cpp */,
 				D91E3FF21F75CF8B0065C856 /* List.h */,
 				D91E3FEC1F75CF8A0065C856 /* main.cpp */,
-				D91E3FF11F75CF8B0065C856 /* Node.cpp */,
-				D91E3FE71F75CF8A0065C856 /* Node.h */,
 				D91E3FEF1F75CF8B0065C856 /* simpleIo.cpp */,
 				D91E3FE91F75CF8A0065C856 /* simpleIo.hpp */,
 				D91E3FED1F75CF8B0065C856 /* Tag.cpp */,
@@ -157,15 +186,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D91E40001F75CF8C0065C856 /* TimeRemainder.cpp in Sources */,
+				D91E40151F75D7550065C856 /* random.cpp in Sources */,
 				D91E3FFC1F75CF8C0065C856 /* Tag.cpp in Sources */,
-				D91E3FFF1F75CF8C0065C856 /* Node.cpp in Sources */,
-				D91E3FFA1F75CF8C0065C856 /* Dic.cpp in Sources */,
-				D91E40011F75CF8C0065C856 /* fstreamFile.cpp in Sources */,
+				D91E401A1F75DB060065C856 /* FstreamFile.cpp in Sources */,
 				D91E40021F75CF8C0065C856 /* UnixIO.cpp in Sources */,
+				D91E40051F75D13A0065C856 /* smartinote.cpp in Sources */,
 				D91E3FFE1F75CF8C0065C856 /* Encryption.cpp in Sources */,
 				D91E3FFD1F75CF8C0065C856 /* simpleIo.cpp in Sources */,
 				D91E3FF91F75CF8C0065C856 /* List.cpp in Sources */,
 				D91E3FFB1F75CF8C0065C856 /* main.cpp in Sources */,
+				D91E40071F75D18B0065C856 /* Note.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

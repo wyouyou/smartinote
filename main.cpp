@@ -1,12 +1,12 @@
-#include "Dic.hpp"
-//#include "test/fstreamFile.hpp"
+#include "Smartinote.hpp"
+#include "test/FstreamFile.hpp"
 
 
 int main (void)
 {
     // Check compatibility of the InputFile
-//    fstreamFile checkFile(CONST::DATABASE_LOCATION);
-//    checkFile.report();
+    FstreamFile checkFile(CONST::DATABASE_LOCATION);
+    checkFile.report();
     
     
     // G e e k l e programCore

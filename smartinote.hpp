@@ -1,6 +1,5 @@
 //
-//  Dic.hpp
-//  dic
+//  Smartinote.hpp
 //
 //  Created by Jaye Wang on 8/9/17.
 //  Copyright © 2017 JayeWang. All rights reserved.
@@ -12,9 +11,6 @@
 #include "List.h"
 #include "time/TimeRemainder.hpp"
 //#include "time/TimeRemainder.cpp"
-
-
-
 
 class Dic
 {

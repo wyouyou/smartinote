@@ -8,7 +8,6 @@
 
 #include "Tag.hpp"
 
-
 Tag::Tag()
 {
 }
@@ -19,7 +18,6 @@ Tag::Tag(const std::string& theInfo): info(theInfo)
     
     subInfos = simpleIO::getTokens(theInfo, "-");
 }
-
 
 /*
  * Tokenize the theInfo
@@ -43,7 +41,6 @@ void Tag::update(const std::string& theInfo)
                    std::back_inserter(subInfos));
 }
 
-
 std::vector<std::string> Tag::getSubInfos() const
 {
     return subInfos;
@@ -54,7 +51,6 @@ short Tag::getNumSubInfos() const
 {
     return numSubInfos;
 }
-
 
 bool Tag::isEmpty() const
 {
@@ -75,4 +71,3 @@ void Tag::printTrace() const
         std::cout << std::endl;
     }
 }
-

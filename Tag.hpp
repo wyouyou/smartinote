@@ -26,11 +26,7 @@ private:
     // number of subInfos
     short numSubInfos;
     
-    
-    
-    
 public:
-    
     Tag();
     Tag(const std::string& info);
     
@@ -40,24 +36,16 @@ public:
      */
     void update(const std::string& );
     
-    
     // Accessors
-    
     std::vector<std::string> getSubInfos() const;
     short getNumSubInfos() const;
-    
-    
+
     bool isEmpty() const;
     
     /**
      * Print the infoTrace from general to specific.
      */
     void printTrace() const;
-    
-    
-    
-    
-    
     
 };
 

@@ -1,14 +1,14 @@
 //
-//  fstreamFile.cpp
+//  FstreamFile.cpp
 //  dic
 //
 //  Created by Jaye Wang on 8/29/17.
 //  Copyright © 2017 JayeWang. All rights reserved.
 //
 
-#include "fstreamFile.hpp"
+#include "FstreamFile.hpp"
 
-fstreamFile::fstreamFile(const std::string& location): path(location), lineCount(0)
+FstreamFile::FstreamFile(const std::string& location): path(location), lineCount(0)
 {
     std::ifstream fin(path.c_str());
     if (fin.fail())
@@ -26,13 +26,13 @@ fstreamFile::fstreamFile(const std::string& location): path(location), lineCount
 }
 
 
-fstreamFile::~fstreamFile()
+FstreamFile::~FstreamFile()
 {
     delete [] index;
     delete [] line;
 }
 
-void fstreamFile::alloc(std::ifstream& fin)
+void FstreamFile::alloc(std::ifstream& fin)
 {
     // Calculate number of "valid line"s in the database file
     std::string temp;
@@ -50,14 +50,14 @@ void fstreamFile::alloc(std::ifstream& fin)
 }
 
 
-void fstreamFile::init(std::ifstream& fin)
+void FstreamFile::init(std::ifstream& fin)
 {
     
     std::string strLineCount = std::to_string(lineCount);
     std::string message = "- Notes count: " + strLineCount;
     std:: cout << std::endl << message << std::endl;
     
-
+    
     
     for (int i = 0; i < lineCount; i++)
     {
@@ -67,7 +67,7 @@ void fstreamFile::init(std::ifstream& fin)
     fin.close();
 }
 
-bool fstreamFile::checkLine()
+bool FstreamFile::checkLine()
 {
     // 09/01: To be done when list member is complete.
     ValidLine = 1;
@@ -76,7 +76,7 @@ bool fstreamFile::checkLine()
 }
 
 // determine whether all the index 是以1为公差的等差数列
-bool fstreamFile::checkIndex()
+bool FstreamFile::checkIndex()
 {
     
     ContinousIndex = true;
@@ -95,7 +95,7 @@ bool fstreamFile::checkIndex()
 }
 
 
-void fstreamFile::report() const
+void FstreamFile::report() const
 {
     
     if(validFile)
@@ -103,23 +103,24 @@ void fstreamFile::report() const
         return;
     }
     else  if (!ContinousIndex)
-     {
+    {
         std::cout << path << " file's "
         << " indexs is not continous"
         << std::endl << "Error line around: " << errorLine
         << std::endl;
-         exit(1);
-     }
+        exit(1);
+    }
     else if (!ValidLine)
     {
-                std::cout << path << " file's "
+        std::cout << path << " file's "
         << " line is not valid for the driver program!"
         << std::endl << "Error line around: " << errorLine
         << std::endl;
         exit(2);
-
+        
     }
     else
         std::cout << "Never got here!";
     
 }
+

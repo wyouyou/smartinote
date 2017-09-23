@@ -14,16 +14,11 @@
 #include "io/simpleIo.hpp"
 #include "time/TimeRemainder.hpp"
 #include "Tag.hpp"
-
-
-
-
+#include "util/random.hpp"
 
 #define clear() printf("\033[H\033[J")
 
 using namespace std;
-
-
 
 struct Date{
     int year2digits; //
@@ -53,11 +48,8 @@ struct Date{
 
 /*
  Notes for adding a data member:
- 
  add data member declaration inside class declration
- 
  add accessor function for this data member.
- 
  */
 
 
@@ -222,14 +214,6 @@ public:
     bool isBornedToday() const;
     
     bool is124711DaysAgo() const;
-    
-    
-    
-    
-
-    
-    
-    
 };
 
 

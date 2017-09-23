@@ -1,15 +1,11 @@
 
-//  Dic.cpp
-//  dic
+//  Smartinote.hpp
 //
 //  Created by Jaye Wang on 8/9/17.
 //  Copyright © 2017 JayeWang. All rights reserved.
 //
 
-#include "Dic.hpp"
-
-
-
+#include "Smartinote.hpp"
 
 
 void Dic::write_new_node_to_file(fstream& fout, const List& L, const string& item)
