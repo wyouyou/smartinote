@@ -11,10 +11,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "io/simpleIo.hpp"
-#include "time/TimeRemainder.hpp"
+#include "../io/simpleIo.hpp"
+#include "../time/TimeRemainder.hpp"
 #include "Tag.hpp"
-#include "util/random.hpp"
+#include "../util/random.hpp"
 
 #define clear() printf("\033[H\033[J")
 
