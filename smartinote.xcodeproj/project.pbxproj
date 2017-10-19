@@ -14,6 +14,7 @@
 		D91E402F1F76FF520065C856 /* List.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E402B1F76FF510065C856 /* List.cpp */; };
 		D91E40301F76FF520065C856 /* Note.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E402D1F76FF520065C856 /* Note.cpp */; };
 		D91E40331F76FFC90065C856 /* Tag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E40321F76FFC90065C856 /* Tag.cpp */; };
+		D97F5DAD1F98655B0093EFE7 /* StackADT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D97F5DAC1F98655B0093EFE7 /* StackADT.cpp */; };
 		D9E5ADF21F77041200F064E2 /* UnixIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9E5ADEC1F77041100F064E2 /* UnixIO.cpp */; };
 		D9E5ADF31F77041200F064E2 /* Encryption.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9E5ADF01F77041200F064E2 /* Encryption.cpp */; };
 		D9E5ADF41F77041200F064E2 /* simpleIo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9E5ADF11F77041200F064E2 /* simpleIo.cpp */; };
@@ -47,6 +48,8 @@
 		D91E40311F76FFC90065C856 /* Tag.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Tag.hpp; sourceTree = "<group>"; };
 		D91E40321F76FFC90065C856 /* Tag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tag.cpp; sourceTree = "<group>"; };
 		D96C48991F66341E0079EDBC /* smartinote */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = smartinote; sourceTree = BUILT_PRODUCTS_DIR; };
+		D97F5DAB1F98655B0093EFE7 /* StackADT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StackADT.hpp; sourceTree = "<group>"; };
+		D97F5DAC1F98655B0093EFE7 /* StackADT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StackADT.cpp; sourceTree = "<group>"; };
 		D9E5ADEC1F77041100F064E2 /* UnixIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnixIO.cpp; sourceTree = "<group>"; };
 		D9E5ADED1F77041100F064E2 /* Encryption.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Encryption.hpp; sourceTree = "<group>"; };
 		D9E5ADEE1F77041100F064E2 /* simpleIo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simpleIo.hpp; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 		D96C48901F66341E0079EDBC = {
 			isa = PBXGroup;
 			children = (
+				D97F5DAA1F98653F0093EFE7 /* collections */,
 				D9E5ADEB1F7703F800F064E2 /* io */,
 				D91E40121F75D73A0065C856 /* util */,
 				D91E40171F75DAE00065C856 /* test */,
@@ -120,6 +124,15 @@
 				D96C48991F66341E0079EDBC /* smartinote */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D97F5DAA1F98653F0093EFE7 /* collections */ = {
+			isa = PBXGroup;
+			children = (
+				D97F5DAC1F98655B0093EFE7 /* StackADT.cpp */,
+				D97F5DAB1F98655B0093EFE7 /* StackADT.hpp */,
+			);
+			path = collections;
 			sourceTree = "<group>";
 		};
 		D9E5ADEB1F7703F800F064E2 /* io */ = {
@@ -205,6 +218,7 @@
 				D91E402F1F76FF520065C856 /* List.cpp in Sources */,
 				D91E40331F76FFC90065C856 /* Tag.cpp in Sources */,
 				D9E5ADF91F7704C000F064E2 /* TimeRemainder.cpp in Sources */,
+				D97F5DAD1F98655B0093EFE7 /* StackADT.cpp in Sources */,
 				D91E40151F75D7550065C856 /* random.cpp in Sources */,
 				D91E401A1F75DB060065C856 /* FstreamFile.cpp in Sources */,
 				D9E5ADF41F77041200F064E2 /* simpleIo.cpp in Sources */,
