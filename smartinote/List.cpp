@@ -290,7 +290,7 @@ void List::reviewFollowUp(const string& reviewResult,Node*& currentPtr, Node*& p
         remove(previousPtr->get_index());
     // Reset or append vlaue.
     else if (previousPtr!=nullptr && (reviewResult.substr(0,3) == "rst" || reviewResult.substr(0,4)=="app "))
-        previousPtr->valueUpdating(reviewResult.substr(3), reviewResult.substr(0,3));
+        previousPtr->valueUpdating(reviewResult.substr(3), reviewResult.substr(0,4));
     
     // Note: the first note can not be removed
     else if (reviewResult == "rm last" && previousPtr == nullptr)
@@ -442,6 +442,9 @@ void List::rm_message(Node* node) const
     cout << "   ";
     all::UnixIO::printInColor("➠  ", Color::FG_RED);
     cout  << node->get_key();
+    cout << endl;
+    all::UnixIO::printInColor("➠  ", Color::FG_RED);
+    cout  << node->get_value();
     all::UnixIO::printInColor("   is removed :) \n", Color::FG_YELLOW);
     
 }

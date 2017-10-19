@@ -138,7 +138,7 @@ void Dic::userInteractive()
             printActivity(previousPtr, target);
         // 如果没有找到，请求输入解释，并且加入List 和 dic file
         else if (previousPtr!=nullptr && (first3chars == "rst"||first4chars =="app "))
-            previousPtr->valueUpdating(input.substr(3), first3chars);
+            previousPtr->valueUpdating(input.substr(3), first4chars);
         else if (input == "q" || input =="Q")
             break;
         else if (input == "clear")

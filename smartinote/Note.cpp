@@ -178,7 +178,6 @@ void Node::valueUpdating(const string& newStuff,
                             const string& choice)
 {
     
-    cout << "choice is : " << choice << endl;
     // reset
     if (choice == "rst")
         this->set_value(newStuff);

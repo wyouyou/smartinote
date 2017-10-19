@@ -80,8 +80,6 @@ bool simpleIO::isNumeric(const std::string& arg)
     if (argCopy == "")
         return false;
     
-    
-    
     for (int i = 0 ; i< argCopy.size(); i++)
     {
         int ascii = argCopy[i];
@@ -112,7 +110,6 @@ std::vector<std::string> simpleIO::getTokens(const std::string& arg, const std::
     std::string argCopy, temp;
     std::vector<std::string> tokens(0);
     argCopy = simpleIO::trim(arg);
-    
     
     // handle some input whose first char is delimeter
     // delete the first char and continue
@@ -379,20 +376,15 @@ std::string simpleIO::getLine(const std::string& prompt,Color::Code pCode) {
     return line;
 }
 
-
 void simpleIO::getLine(const std::string& prompt,
                        std::string& out,Color::Code pCode )
 {
     std::string promptCopy = prompt;
     simpleIO::appendSpace(promptCopy);
-    
-    
     UnixIO::printInColor(prompt, pCode);
     getline(std::cin, out);
     
-    
 }
-
 
 void simpleIO::appendSpace(std::string& prompt)
 {
