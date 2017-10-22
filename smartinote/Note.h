@@ -90,7 +90,7 @@ class Node
     
     Tag tag;
     
-    Node* next; //self-referential data structure.
+    Node* prev; //self-referential data structure.
     
     
     

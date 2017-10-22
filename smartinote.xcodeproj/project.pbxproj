@@ -100,9 +100,9 @@
 				D91E402B1F76FF510065C856 /* List.cpp */,
 				D91E402C1F76FF520065C856 /* List.h */,
 				D91E402D1F76FF520065C856 /* Note.cpp */,
+				D91E402A1F76FF510065C856 /* Smartinote.hpp */,
 				D91E40281F76FF510065C856 /* Note.h */,
 				D91E40291F76FF510065C856 /* smartinote.cpp */,
-				D91E402A1F76FF510065C856 /* Smartinote.hpp */,
 			);
 			path = smartinote;
 			sourceTree = "<group>";

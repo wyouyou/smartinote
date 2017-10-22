@@ -21,7 +21,7 @@ class List
     /**
      * handle the case where user  think the node just reviewed is too easy, or if the user hate it...
      * so the note just reviewed should go to hell, no copy.
-     * Also advance the currenrPtr to the next level
+     * Also advance the currenrPtr to the prev level
      */
     void reviewFollowUp(const string& reviewResult,Node*& currentPtr, Node*& previousPtr);
     
