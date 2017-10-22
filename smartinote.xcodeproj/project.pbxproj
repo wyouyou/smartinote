@@ -15,7 +15,6 @@
 		D91E40301F76FF520065C856 /* Note.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E402D1F76FF520065C856 /* Note.cpp */; };
 		D91E40331F76FFC90065C856 /* Tag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D91E40321F76FFC90065C856 /* Tag.cpp */; };
 		D97F5DAD1F98655B0093EFE7 /* StackADT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D97F5DAC1F98655B0093EFE7 /* StackADT.cpp */; };
-		D97F5DB21F9868540093EFE7 /* QueueADT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D97F5DB01F9868540093EFE7 /* QueueADT.cpp */; };
 		D9E5ADF21F77041200F064E2 /* UnixIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9E5ADEC1F77041100F064E2 /* UnixIO.cpp */; };
 		D9E5ADF31F77041200F064E2 /* Encryption.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9E5ADF01F77041200F064E2 /* Encryption.cpp */; };
 		D9E5ADF41F77041200F064E2 /* simpleIo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9E5ADF11F77041200F064E2 /* simpleIo.cpp */; };
@@ -51,8 +50,6 @@
 		D96C48991F66341E0079EDBC /* smartinote */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = smartinote; sourceTree = BUILT_PRODUCTS_DIR; };
 		D97F5DAB1F98655B0093EFE7 /* StackADT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StackADT.hpp; sourceTree = "<group>"; };
 		D97F5DAC1F98655B0093EFE7 /* StackADT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StackADT.cpp; sourceTree = "<group>"; };
-		D97F5DB01F9868540093EFE7 /* QueueADT.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QueueADT.cpp; sourceTree = "<group>"; };
-		D97F5DB11F9868540093EFE7 /* QueueADT.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = QueueADT.hpp; sourceTree = "<group>"; };
 		D9E5ADEC1F77041100F064E2 /* UnixIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnixIO.cpp; sourceTree = "<group>"; };
 		D9E5ADED1F77041100F064E2 /* Encryption.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Encryption.hpp; sourceTree = "<group>"; };
 		D9E5ADEE1F77041100F064E2 /* simpleIo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simpleIo.hpp; sourceTree = "<group>"; };
@@ -134,8 +131,6 @@
 			children = (
 				D97F5DAC1F98655B0093EFE7 /* StackADT.cpp */,
 				D97F5DAB1F98655B0093EFE7 /* StackADT.hpp */,
-				D97F5DB01F9868540093EFE7 /* QueueADT.cpp */,
-				D97F5DB11F9868540093EFE7 /* QueueADT.hpp */,
 			);
 			path = collections;
 			sourceTree = "<group>";
@@ -228,7 +223,6 @@
 				D91E401A1F75DB060065C856 /* FstreamFile.cpp in Sources */,
 				D9E5ADF41F77041200F064E2 /* simpleIo.cpp in Sources */,
 				D91E402E1F76FF520065C856 /* smartinote.cpp in Sources */,
-				D97F5DB21F9868540093EFE7 /* QueueADT.cpp in Sources */,
 				D91E3FFB1F75CF8C0065C856 /* main.cpp in Sources */,
 				D9E5ADF21F77041200F064E2 /* UnixIO.cpp in Sources */,
 				D91E40301F76FF520065C856 /* Note.cpp in Sources */,
