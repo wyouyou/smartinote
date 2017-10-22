@@ -21,7 +21,7 @@ private:
     struct QueueNode
     {
         T value;          // Value in the node
-        QueueNode *next;  // Pointer to next node
+        QueueNode *prev;  // Pointer to prev node
     };
     
     QueueNode *front;    // Pointer to the queue front

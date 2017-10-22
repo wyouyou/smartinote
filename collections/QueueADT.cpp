@@ -21,7 +21,7 @@ Queue<T>::~Queue()
     // Traverse the list deleting each node.
     while (currNode) //while (currNode != NULL)
     {
-        nextNode = currNode->next;
+        nextNode = currNode->prev;
         delete currNode;
         currNode = nextNode;
     }
@@ -62,11 +62,11 @@ bool Queue<T>::isEmpty()
  IF(!allocated)
  return false
  END IF
- newNode->next = NULL
+ newNode->prev = NULL
  IF(queue is empty)
  front = newNode
  ELSE
- rear->next = newNode
+ rear->prev = newNode
  END IF
  count++
  rear = newNode
@@ -85,12 +85,12 @@ bool Queue<T>::enqueue(T item)
     newNode->value = item;
     
     // Update links and counter
-    newNode->next = NULL;
+    newNode->prev = NULL;
     
     if( front == NULL )        // insert to an empty queue
         front = newNode;
     else
-        rear->next = newNode;
+        rear->prev = newNode;
     
     count++;
     rear = newNode;
@@ -119,7 +119,7 @@ bool Queue<T>::dequeue(T &item)
     
     if( count == 1 )
         rear = NULL;
-    front = front->next;
+    front = front->prev;
     
     count--;
     delete pDel;

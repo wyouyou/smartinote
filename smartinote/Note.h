@@ -86,15 +86,10 @@ class Node
      * if copying/cloning node happens
      */
     double familiar_percent;
-    
-    
+   
     Tag tag;
     
-    Node* next; //self-referential data structure.
-    
-    
-    
-    
+    Node* prev; //self-referential data structure.
     
 public:
     

@@ -26,7 +26,7 @@ private:
     struct StackNode
     {
         T value;          // Value in the node
-        StackNode *next;  // Pointer to next node
+        StackNode *prev;  // Pointer to prev node
     };
     
     StackNode *top;     // Pointer to the stack top
