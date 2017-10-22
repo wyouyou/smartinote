@@ -16,7 +16,7 @@ void Node::decrementNumOfNodes() { numOfNodes--;}
  * date is intialized based on timeAdded (the time when the node was born)
  * familiar_percent is intialized based on familiar_index, 0 in this case.
  */
-Node::Node(string theKey, string theValue, Node*n, time_t t ): key(theKey), value(theValue),prev(n), timeAdded(t)
+Node::Node(string theKey, string theValue, Node*n, time_t t ): key(theKey), value(theValue),next(n), timeAdded(t)
 {
     index = ++numOfNodes;
     familiar_index = 0;
@@ -37,7 +37,7 @@ Node::Node(string theKey, string theValue, Node*n, time_t t ): key(theKey), valu
  * date is intialized based on timeAdded read from file.
  * familiar_percent is intialized based on familiar_index.
  */
-Node::Node(const int& i, const string& k, const string& v, const time_t& t,const short& familiar_Index, Node* n): index(i), key(k),value(v),timeAdded(t),familiar_index(familiar_Index),prev(n)
+Node::Node(const int& i, const string& k, const string& v, const time_t& t,const short& familiar_Index, Node* n): index(i), key(k),value(v),timeAdded(t),familiar_index(familiar_Index),next(n)
 {
     ++numOfNodes;
     init_date();
@@ -48,7 +48,7 @@ Node::Node(const int& i, const string& k, const string& v, const time_t& t,const
  * copying/cloning node form another node...
  * every data member is intialized by the args.
  */
-Node::Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d ,const short& familiar_Index, const double& famPercent, Node* n): index(i), key(k),value(v),timeAdded(t), date(d),familiar_index(familiar_Index),familiar_percent(famPercent), prev(n)
+Node::Node(const int& i, const string& k, const string& v, const time_t& t, const Date& d ,const short& familiar_Index, const double& famPercent, Node* n): index(i), key(k),value(v),timeAdded(t), date(d),familiar_index(familiar_Index),familiar_percent(famPercent), next(n)
 {
 }
 
@@ -131,7 +131,7 @@ string Node::get_value() const
 
 Node* Node::get_next() const
 {
-    return prev;
+    return next;
 }
 
 time_t Node::get_timeAdded() const
@@ -151,7 +151,7 @@ double Node::get_familiar_percent() const
 
 void Node::set_next(Node *ptr)
 {
-    prev = ptr;
+    next = ptr;
 }
 bool Node::set_value(const string& theValue)
 {

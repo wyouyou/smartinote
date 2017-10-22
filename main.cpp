@@ -4,7 +4,6 @@
 
 int main (void)
 {
-    
     // Check compatibility of the InputFile
     FstreamFile checkFile(CONST::DATABASE_LOCATION);
     checkFile.report();

@@ -14,7 +14,7 @@
 template <class T>
 Stack<T>::~Stack()
 {
-    StackNode * Curr, prev;
+    StackNode * Curr, next;
     
     // Curr start at the top of the stack
     Curr = top;
@@ -22,9 +22,9 @@ Stack<T>::~Stack()
     // Traverse the list deleting each node
     while (Curr)
     {
-        prev = Curr->prev;
+        next = Curr->next;
         delete Curr;
-        Curr = prev;
+        Curr = next;
     }
 }
 
@@ -42,7 +42,7 @@ bool Stack<T>::push(T item)
         return false;
     
     // update 2 links, and update the counter
-    newN->prev = top;
+    newN->next = top;
     top = newN;
     count++;
     
@@ -65,7 +65,7 @@ bool Stack<T>::pop(T &item)
     item = top->value;
 
     StackNode *deletePtr = top;
-    top = top->prev;
+    top = top->next;
     delete deletePtr;
     count--;
     
