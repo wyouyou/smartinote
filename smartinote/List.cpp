@@ -9,6 +9,7 @@
 
 List::List():top(0), NumOfNodes(0){
     
+    
 }
 
 List::~List()
