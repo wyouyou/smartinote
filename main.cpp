@@ -22,6 +22,7 @@ int main (void)
     all::UnixIO::displayMessage("Program is done...");
 }
 
+// g++ -std=c++11 main.cpp collections/*.cpp io/*.cpp smartinote/*.cpp test/*.cpp time/*.cpp util/*.cpp -o dic
 
 
 
