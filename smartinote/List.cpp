@@ -26,7 +26,7 @@ List::~List()
 
 void List::autoRmoveCheck(Node* theNode)
 {
-    if (theNode->get_familiar_index() >=  21)
+    if (theNode->get_familiar_index() >=  7)
     {
         remove(theNode->get_key());
         if (find(theNode->get_key())== 0)
